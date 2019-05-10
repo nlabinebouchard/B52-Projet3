@@ -1,3 +1,0 @@
-include "SOParameters.h"
-
-// USELESS
