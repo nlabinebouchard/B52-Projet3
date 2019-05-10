@@ -5,8 +5,21 @@
 class ShapeOptimizer
 {
 public:
-	ShapeOptimizer();
-	~ShapeOptimizer();
+	ShapeOptimizer() = delete;
+	~ShapeOptimizer() = delete;
+
+	struct SOParameters
+	{
+
+		size_t width;
+		size_t height;
+		size_t obstacleCount;
+
+	};
+
+	void setup();
+
+	void run();
 };
 
 #endif // SHAPEOPTIMIZER.H

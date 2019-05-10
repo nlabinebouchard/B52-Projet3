@@ -3,9 +3,7 @@
 
 class SOParameters
 {
-public:
-	SOParameters();
-	~SOParameters();
+		// useless
 };
 
 #endif // SOPARAMETERS.H

@@ -1,12 +1,9 @@
 #include "ShapeOptimizer.h"
 
-
-
-ShapeOptimizer::ShapeOptimizer()
+void ShapeOptimizer::setup()
 {
 }
 
-
-ShapeOptimizer::~ShapeOptimizer()
+void ShapeOptimizer::run()
 {
 }
