@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CANEVAS.H
+#define CANEVAS.H
 
 class Canevas
 {
@@ -10,3 +11,5 @@ public:
 
 
 };
+
+#endif // CANEVAS.H

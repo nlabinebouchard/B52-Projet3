@@ -1,6 +1,5 @@
-#pragma once
-
-
+#ifndef ORTHORECTSOLUTION.H
+#define ORTHORECTSOLUTION.H
 
 class OrthoRectSolution
 
@@ -15,3 +14,5 @@ public:
 
 
 };
+
+#endif // ORTHORECTSOLUTION.H

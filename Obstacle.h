@@ -1,4 +1,6 @@
-#pragma once
+#ifndef OBSTACLE.H
+#define OBSTACLE.H
+
 
 class Obstacle
 {
@@ -10,3 +12,5 @@ public:
 
 
 };
+
+#endif // OBSTACLE.H

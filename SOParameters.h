@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SOPARAMETERS.H
+#define SOPARAMETERS.H
+
 class SOParameters
 {
 public:
@@ -6,3 +8,4 @@ public:
 	~SOParameters();
 };
 
+#endif // SOPARAMETERS.H

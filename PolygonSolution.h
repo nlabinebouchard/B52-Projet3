@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SOPARAMETERS.H
+#define SOPARAMETERS.H
 
 class PolygonSolution
 {
@@ -12,3 +13,5 @@ public:
 
 
 };
+
+#endif // SOPARAMETERS.H

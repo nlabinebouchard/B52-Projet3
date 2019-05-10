@@ -1,4 +1,5 @@
-#pragma once 
+#ifndef CIRCLESOLUTION.H
+#define CIRCLESOLUTION.H
 
 class CircleSolution
 {
@@ -10,3 +11,5 @@ public:
 
 
 };
+
+#endif // CIRCLESOLUTION.H

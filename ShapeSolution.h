@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SHAPESOLUTION.H
+#define SHAPESOLUTION.H
+
 class ShapeSolution
 {
 public:
@@ -6,3 +8,4 @@ public:
 	~ShapeSolution();
 };
 
+#endif // SHAPESOLUTION.H

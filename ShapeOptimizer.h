@@ -1,4 +1,7 @@
-#pragma once
+#ifndef SHAPEOPTIMIZER.H
+#define SHAPEOPTIMIZER.H
+
+
 class ShapeOptimizer
 {
 public:
@@ -6,3 +9,4 @@ public:
 	~ShapeOptimizer();
 };
 
+#endif // SHAPEOPTIMIZER.H
