@@ -17,7 +17,7 @@ public:
 
 	};
 
-	void setup();
+	void setup(ShapeOptimizer::SOParameters const &soParams, GAParameters::StructName const& gaParams);
 
 	void run();
 };
