@@ -2,8 +2,7 @@
 
 Chromosome::Chromosome(std::vector<bool> const & vect)
 	:vectChromosome{ vect }
-{
-}
+{}
 
 void Chromosome::resize(size_t grandeur)
 {

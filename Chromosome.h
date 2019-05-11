@@ -1,7 +1,6 @@
 #ifndef CHROMOSOME_H
 #define CHROMOSOME_H
 #include <vector>
-#include <bitset>
 
 class Chromosome
 {
