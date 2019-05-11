@@ -4,10 +4,7 @@ Chromosome::Chromosome(std::vector<bool> const & vect)
 	:vectChromosome{ vect }
 {}
 
-void Chromosome::resize(size_t grandeur)
-{
-	vectChromosome.resize(grandeur);
-}
+void Chromosome::resize(size_t grandeur) { vectChromosome.resize(grandeur); }
 
 size_t Chromosome::read(size_t indDebut, size_t indFin) const
 {
