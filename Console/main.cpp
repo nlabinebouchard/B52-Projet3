@@ -1,10 +1,11 @@
 #include "Console.h"
 
 
-int main 
+int main()
 {
+	ConsoleContext themeCompact();
 
 
 
-	
+	int a{ 0 };
 }

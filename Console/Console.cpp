@@ -1,7 +1,7 @@
 #include "Console.h"
 #include "ConsoleContext.h"
 #include <string>
-
+#include <algorithm> // pas sur
 
 
 using namespace std;
@@ -61,7 +61,7 @@ Console::Console(ConsoleContext const & context)
 	CONSOLE_FONT_INFOEX consoleFontInfoEx;
 	consoleFontInfoEx.cbSize = sizeof(consoleFontInfoEx);
 	consoleFontInfoEx.nFont = 0;
-	consoleFontInfoEx.dwFontSize.X = clamp((SHORT)context.fontWidth, (SHORT)MinFontSize, (SHORT)MaxFontSize);
+	consoleFontInfoEx.dwFontSize.X = std::clamp((SHORT)context.fontWidth, (SHORT)MinFontSize, (SHORT)MaxFontSize);
 	consoleFontInfoEx.dwFontSize.Y = std::clamp((SHORT)context.fontHeight, (SHORT)MinFontSize, (SHORT)MaxFontSize);
 	consoleFontInfoEx.FontFamily = FF_DONTCARE;
 	consoleFontInfoEx.FontWeight = FW_NORMAL;
