@@ -21,6 +21,11 @@ size_t Chromosome::read(size_t indDebut, size_t indFin) const
 		return 0;
 }
 
+std::vector<bool> Chromosome::read() const
+{
+	return vectChromosome;
+}
+
 void Chromosome::write(size_t indDebut, size_t indFin, size_t valeur)
 {
 	if (indDebut < vectChromosome.size() && indFin < vectChromosome.size()) {
