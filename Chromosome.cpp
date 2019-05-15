@@ -4,6 +4,8 @@ Chromosome::Chromosome(std::vector<bool> const & vect)
 	:vectChromosome{ vect }
 {}
 
+size_t Chromosome::size() { return vectChromosome.size(); }
+
 void Chromosome::resize(size_t grandeur) { vectChromosome.resize(grandeur); }
 
 size_t Chromosome::read(size_t indDebut, size_t indFin) const
@@ -19,6 +21,11 @@ size_t Chromosome::read(size_t indDebut, size_t indFin) const
 	}
 	else
 		return 0;
+}
+
+bool Chromosome::read(size_t ind) const
+{
+	return vectChromosome[ind];
 }
 
 std::vector<bool> Chromosome::read() const
