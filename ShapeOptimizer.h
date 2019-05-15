@@ -1,23 +1,17 @@
 #ifndef SHAPEOPTIMIZER.H
 #define SHAPEOPTIMIZER.H
 
+#include "SOParameters.h"
+#include "GAParameters.h"
+
 
 class ShapeOptimizer
 {
 public:
-	ShapeOptimizer() = delete;
-	~ShapeOptimizer() = delete;
+	ShapeOptimizer() = default;
+	~ShapeOptimizer() = default;
 
-	struct SOParameters
-	{
-
-		size_t width;
-		size_t height;
-		size_t obstacleCount;
-
-	};
-
-	void setup(ShapeOptimizer::SOParameters const &soParams, GAParameters::StructName const& gaParams);
+	void setup(SOParameters const &soParams, GAParameters const& GAParams);
 
 	void run();
 };
