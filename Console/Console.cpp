@@ -1,8 +1,7 @@
 #include "Console.h"
-
-
 #include "ConsoleContext.h"
 #include <string>
+#include <algorithm> // pas sur
 
 
 using namespace std;
