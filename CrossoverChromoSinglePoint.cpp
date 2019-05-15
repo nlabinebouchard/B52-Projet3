@@ -7,4 +7,9 @@ void breed(Solution const & genitor1, Solution const & genitor2, Solution & offs
 	genitor2.chromosome().read();
 
 
+	//offspring.chromosome(genitor1.chromosome().size()).resize();
+
+	//	
+
+
 }

@@ -6,12 +6,13 @@
 class MutatorChromo : public Mutator
 {
 public:
+	MutatorChromo() = default;
+	~MutatorChromo() = default;
 
-	void mutate() override;
+	void mutate(Solution & chromo) override;
 
-private :
-
-
+private:
+	int bitFlip;
 };
 
 #endif // MUTATORCHROMO_H
