@@ -2,7 +2,7 @@
 
 
 
-void ShapeOptimizer::setup(SOParameters const& soParams, GAParameters const& GAParams)
+void ShapeOptimizer::setup(SOParameters const& SOParams, GAParameters const& GAParams)
 {
 }
 

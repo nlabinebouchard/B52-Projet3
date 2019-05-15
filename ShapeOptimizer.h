@@ -11,7 +11,7 @@ public:
 	ShapeOptimizer() = default;
 	~ShapeOptimizer() = default;
 
-	void setup(SOParameters const &soParams, GAParameters const& GAParams);
+	void setup(SOParameters const &SOParams, GAParameters const& GAParams);
 
 	void run();
 };
