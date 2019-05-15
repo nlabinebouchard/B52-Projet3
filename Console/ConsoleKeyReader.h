@@ -1,7 +1,7 @@
 #ifndef CONSOLE_KEY_READER
 #define CONSOLE_KEY_READER
 
-
+#include <memory>
 #include "ConsoleKeyFilter.h"
 #include <list>
 

@@ -1,10 +1,23 @@
 #include "ShapeOptimizer.h"
-#include "GAEngine.h"
 
-void ShapeOptimizer::setup(ShapeOptimizer::SOParameters const& soParams, GAEngine::StructName const& gaParams)
+
+
+void ShapeOptimizer::setup(SOParameters const& SOParams, GAParameters const& GAParams)
 {
 }
 
 void ShapeOptimizer::run()
 {
+
+}
+
+
+int main()
+{
+	ShapeOptimizer carre;
+	carre.run();
+
+
+
+
 }

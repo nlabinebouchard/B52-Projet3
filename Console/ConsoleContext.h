@@ -11,7 +11,7 @@ public:
 	size_t width;
 	size_t height;
 	std::string title;
-
+	
 	int16_t fontWidth;
 	int16_t fontHeight;
 	std::wstring fontName;

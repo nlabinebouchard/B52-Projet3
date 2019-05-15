@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Solution"
-#include "Selector"
-#include "Crossover"
-#include "Mutator"
+#include "Solution.h"
+#include "Selector.h"
+#include "Crossover.h"
+#include "Mutator.h"
 
 	struct GAParameters
 	{
