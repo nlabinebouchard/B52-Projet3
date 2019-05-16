@@ -6,10 +6,12 @@ class Chromosome
 {
 private :
 	std::vector <bool> vectChromosome;
+	static std::vector <size_t> vectLargeurBit;
 
 public :
 
 	Chromosome(std::vector <bool> const & vect);
+	Chromosome(std::vector <bool> const & vect, std::vector <size_t> vectBit);
 
 	size_t size();
 	void resize(size_t grandeur);

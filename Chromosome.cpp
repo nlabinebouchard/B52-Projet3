@@ -4,6 +4,12 @@ Chromosome::Chromosome(std::vector<bool> const & vect)
 	:vectChromosome{ vect }
 {}
 
+Chromosome::Chromosome(std::vector<bool> const & vect, std::vector<size_t> vectBit)
+	: vectChromosome{ vect }
+{
+	vectLargeurBit = vectBit;
+}
+
 size_t Chromosome::size() { return vectChromosome.size(); }
 
 void Chromosome::resize(size_t grandeur) { vectChromosome.resize(grandeur); }
