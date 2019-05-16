@@ -17,7 +17,7 @@ public:
 
 	size_t & epoch();
 
-	const Population & population();
+	const Population & population(size_t populationEngine);
 
 	const FitnessStatistics & statistics(size_t epoch);
 

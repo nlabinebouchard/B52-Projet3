@@ -13,12 +13,12 @@ public:
 	fitness_t fitness();
 	Chromosome chromosome();
 
-private:
 	virtual void processFitness();
 	virtual void randomize();
 	virtual void encode();
 	virtual void decode();
-	virtual Solution clone();
+	virtual Solution* clone();
+private:
 };
 
 #endif // SOLUTION_H
