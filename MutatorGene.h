@@ -11,7 +11,7 @@ public:
 
 private:
 	size_t mBitFlip;
-
+	size_t mPosBit;
 };
 
 #endif // MUTATORGENE_H

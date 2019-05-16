@@ -1,6 +1,6 @@
 #include "Population.h"
 
-size_t Population::size() 
+size_t Population::size() const 
 { 
 	return vectSolution.size(); 
 }
@@ -24,7 +24,18 @@ void Population::sort()
 	std::sort(vectSolution.begin(), vectSolution.end(), Comparator);
 }
 
+Solution & Population::operator[](size_t index)
+{
+	return vectSolution.at(index);
+}
+
+Solution const & Population::operator[](size_t index) const
+{
+	return vectSolution.at(index);
+}
+
 bool Population::Comparator(size_t plusPetit, size_t plusGrand)
 {
-	return vectSolution[plusPetit].mFitness > vectSolution[plusGrand].mFitness;
+	return vectSolution[plusPetit].fitness() > vectSolution[plusGrand].fitness();
 }
+

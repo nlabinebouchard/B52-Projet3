@@ -11,15 +11,15 @@ bool RandomUtil::generateEvent(double probability)
 	return randomDistribution(randomGenerator);
 }
 
-int RandomUtil::randomInRange(size_t min, size_t max)
+size_t RandomUtil::randomInRange(size_t min, size_t max)
 {
 	std::uniform_int_distribution<size_t> dist(min, max);
 	return dist(randomGenerator);
 }
 
-size_t RandomUtil::randomInRange(size_t min, size_t max)
+double RandomUtil::randomRangeHundred(double min, double max)
 {
-	std::uniform_int_distribution<size_t> dist(min, max);
+	std::uniform_real_distribution<double> dist(min, max);
 	return dist(randomGenerator);
 }
 

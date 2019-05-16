@@ -14,6 +14,12 @@ public:
 
 protected:
 	std::vector <double> mRankWeight;
+	fitness_t mTotalFitness;
+	fitness_t mWeight;
+	double mProbabilities;
+	double mValueRandom;
+	double mInterval;
+
 };
 
 #endif // SELECTOR_ROULETTE_WHEEL_H

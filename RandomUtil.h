@@ -43,7 +43,7 @@ public:
 
 	static size_t randomInRange(size_t min, size_t max);
 
-	static size_t randomInRange(size_t min, size_t max);
+	static double randomRangeHundred(double min, double max);
 	
 private:
 	static std::random_device randomDevice;

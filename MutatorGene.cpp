@@ -5,14 +5,17 @@
 
 void MutatorGene::mutate(Solution & offspring)
 {
+	mPosBit=0;
 	if (RandomUtil::generateEvent(mMutationRate)){
 		for (size_t i{}; i < offspring.chromosome().sizeGene(); ++i) {
+			mPosBit += offspring.chromosome().readGene(i)-1;
 			if (i > 0) {
-				mBitFlip = RandomUtil::randomInRange(offspring.chromosome().readGene(i-1), offspring.chromosome().readGene(i)-1);
+				mBitFlip = RandomUtil::randomInRange(mPosBit - offspring.chromosome().readGene(i), mPosBit);
 			}
 			else {
-				mBitFlip = RandomUtil::randomInRange(0, offspring.chromosome().readGene(i)-1);
+				mBitFlip = RandomUtil::randomInRange(0, mPosBit);
 			}
+			++mPosBit;
 			offspring.chromosome().flip(mBitFlip);
 		}
 	}
