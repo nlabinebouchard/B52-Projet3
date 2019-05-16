@@ -10,7 +10,6 @@ private :
 
 public :
 
-	Chromosome(std::vector <bool> const & vect);
 	Chromosome(std::vector <bool> const & vect, std::vector <size_t> vectBit);
 
 	size_t size();
