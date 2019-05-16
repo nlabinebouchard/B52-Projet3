@@ -7,10 +7,10 @@ class MutatorGene : public Mutator
 {
 public:
 
-	void mutate() override;
+	void mutate(Solution & offspring) override;
 
 private:
-
+	int mBitFlip;
 
 };
 

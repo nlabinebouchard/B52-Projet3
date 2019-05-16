@@ -9,7 +9,7 @@ public:
 	MutatorChromo() = default;
 	~MutatorChromo() = default;
 
-	void mutate(Solution & chromo) override;
+	void mutate(Solution & offspring) override;
 
 private:
 	int bitFlip;
