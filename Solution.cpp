@@ -9,6 +9,12 @@ fitness_t Solution::fitness() const
 	return fitness_t(); 
 }
 
+
+Chromosome Solution::chromosome()
+{ 
+	return mChromosome; 
+}
+
 Chromosome & Solution::chromosome()
 { 
 	return Solution::mChromosome; 
@@ -18,3 +24,10 @@ Chromosome const & Solution::chromosome() const
 {
 	return Solution::mChromosome;
 }
+
+Chromosome const & Solution::chromosome() const
+{
+	return Solution::mChromosome;
+}
+
+Solution* Solution::clone() { return this; }

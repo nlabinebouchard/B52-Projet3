@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\B52-Projet3\Fitness_t.h"
+#include "Fitness_t.h"
 
 struct FitnessStatistics
 {

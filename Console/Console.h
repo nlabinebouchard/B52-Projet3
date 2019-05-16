@@ -6,7 +6,6 @@
 #include <Windows.h>
 #include <cstdint>
 #include <exception>
-#include <algorithm> // pas sur
 #include "ConsoleKeyReader.h"
 #include "ConsoleWriter.h"
 

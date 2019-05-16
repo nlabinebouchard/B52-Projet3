@@ -5,10 +5,6 @@ Canevas::Canevas(size_t width, size_t height, size_t ObstacleCount)
 {
 }
 
-Canevas::~Canevas()
-{
-}
-
 size_t Canevas::width() const
 {
 	return mWidth;
@@ -32,19 +28,33 @@ void Canevas::setSize(size_t const& width, size_t const& height)
 
 void Canevas::setObstacleCount(size_t const& count)
 {
-	mVectOfObstacle.resize(count);
+	if (mVectOfObstacle.size() > count) // increase size and randomize pos of new obstacle
+	{
+		mVectOfObstacle.resize(count);
+
+		for (size_t i{ count }; i < mVectOfObstacle.size(); ++i)
+		{
+			mVectOfObstacle[i].randomizePosition(0, 0, mWidth, mHeight);
+		}
+
+	}
+	else
+	{
+		mVectOfObstacle.resize(count); // cut size and delete obstacle not in the vector
+	}
 }
 
 void Canevas::setup(SOParameters const SOParams)
 {
 	setSize(SOParams.width, SOParams.height);
+	setObstacleCount(SOParams.obstacleCount);
 }
 
 void Canevas::randomizeObstaclesPosition()
 {
 	for (size_t i{}; i < mVectOfObstacle.size(); ++i)
 	{
-		mVectOfObstacle[i].randomizePosition(1, 1, 1, 1); // need to randomise values
+		mVectOfObstacle[i].randomizePosition(0, 0, mWidth, mHeight); 
 	}
 }
 

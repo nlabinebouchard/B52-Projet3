@@ -42,6 +42,8 @@ public:
 	static bool generateEvent(double probability = 0.5);
 
 	static size_t randomInRange(size_t min, size_t max);
+
+	static size_t randomInRange(size_t min, size_t max);
 	
 private:
 	static std::random_device randomDevice;

@@ -1,6 +1,8 @@
 #pragma once
 
-#include "../B52-Projet3/GAParameters.h"
+#include "GAParameters.h"
+#include "PopulationEngine.h"
+#include "FitnessHistory.h"
 
 using Population = size_t; //à enlever
 
@@ -13,13 +15,15 @@ public:
 
 	~GAEngine() = default;
 
-	size_t & epoch() const;
+	size_t & epoch();
 
-	Population & population();
+	const Population & population(size_t populationEngine);
+
+	const FitnessStatistics & statistics(size_t epoch);
 
 	void reset();
 
-	void evolve();
+	void evolve(); //peut-être retourné un bool
 
 	void setup(GAParameters parameters);
 
@@ -28,5 +32,14 @@ public:
 private:
 
 	size_t mEpoch;
+
+	GAParameters mParameters;
+
+	std::vector<FitnessStatistics> mFitnessStatistics;
+
+	std::vector<PopulationEngine> mPopulationEngines;
+	std::vector<PopulationEngine>::iterator mPopEngIt;
+	
+	FitnessHistory mFitnessHistory;
 
 };
