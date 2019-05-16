@@ -7,8 +7,9 @@
 
 	struct GAParameters
 	{
+		size_t populationCount;
 		size_t populationSize;
-		size_t elitismsize;
+		size_t elitismSize;
 		double mutationRate;
 		double convergenceRate;
 		size_t maximumGenerationCount;

@@ -1,13 +1,13 @@
 
 #include "MutatorChromo.h"
-#include "RandomUtilEvoChromo.h"
+#include "RandomUtil.h"
 
 
-void MutatorChromo::mutate(Solution & chromoMu)
+void MutatorChromo::mutate(Solution & offspring)
 {
-	if (RandomUtilEvoChromo::generateEvent(mMutationRate)) {
+	if (RandomUtil::generateEvent(mMutationRate)) {
 		//bitFlip = RandomUtilEvoChromo::randomInRange(0, chromoMu.chromosome.size()-1);
-		bitFlip = RandomUtilEvoChromo::randomInRange(0, chromoMu.chromosome.size());
-		chromoMu.chromosome().flip(bitFlip);
+		bitFlip = RandomUtil::randomInRange(0, offspring.chromosome.size());
+		offspring.chromosome().flip(bitFlip);
 	}
 }

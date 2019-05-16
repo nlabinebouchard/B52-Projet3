@@ -1,12 +1,12 @@
 
 #include "CrossoverChromoSinglePoint.h"
-#include "RandomUtilEvoChromo.h"
+#include "RandomUtil.h"
 
 
 void CrossoverChromoSinglePoint::breed(Solution const & genitor1, Solution const & genitor2, Solution & offspring)
 {
 
-	bitPivot = RandomUtilEvoChromo::randomInRange(0, genitor1.chromosome.size());
+	bitPivot = RandomUtil::randomInRange(0, genitor1.chromosome.size());
 	offspring.chromosome().resize(genitor1.chromosome().size());
 
 	genitor1.chromosome().read();
