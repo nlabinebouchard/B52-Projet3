@@ -2,8 +2,8 @@
 // ...
 // ...
 
-#ifndef RANDOM_UTIL_EVO_CHROMO_H
-#define RANDOM_UTIL_EVO_CHROMO_H
+#ifndef RANDOM_UTIL_H
+#define RANDOM_UTIL_H
 
 
 #include <random>
@@ -15,19 +15,19 @@
 //! Les fonctions sont statiques et ne requièrent pas d'instance de la 
 //! classe.
 //////////////////////////////////////////////////////////////////////////
-class RandomUtilEvoChromo
+class RandomUtil
 {
 public:
 	//////////////////////////////////////////////////////////////////////////
 	//! \brief Le constructeur est retiré puisqu'aucune instance de 
 	//! cette classe n'est attendue.
 	//////////////////////////////////////////////////////////////////////////
-	RandomUtilEvoChromo() = delete;
+	RandomUtil() = delete;
 	//////////////////////////////////////////////////////////////////////////
 	//! \brief Le destructeur est retiré puisqu'aucune instance de 
 	//! cette classe n'est attendue.
 	//////////////////////////////////////////////////////////////////////////
-	~RandomUtilEvoChromo() = delete;
+	~RandomUtil() = delete;
 
 	//////////////////////////////////////////////////////////////////////////
 	//! \brief Fonction générant un évènement aléatoire selon une certaine 
@@ -41,7 +41,7 @@ public:
 	//////////////////////////////////////////////////////////////////////////
 	static bool generateEvent(double probability = 0.5);
 
-	static int randomRange(int min, int max);
+	static int randomInRange(int min, int max);
 	
 private:
 	static std::random_device randomDevice;
@@ -49,4 +49,4 @@ private:
 
 };
 
-#endif // RANDOM_UTIL_EVO_CHROMO_H
+#endif // RANDOM_UTIL_H

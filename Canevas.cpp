@@ -1,7 +1,7 @@
 #include "Canevas.h"
 
 Canevas::Canevas(size_t width, size_t height, size_t ObstacleCount)
-	:mWidth{ width }, mHeight{ height }, mVectOfObstacle{ ObstacleCount, Obstacle::Obstacle(0,0,0,0) }  // initial value of reference to non-const must be an lvalue
+	:mWidth{ width }, mHeight{ height }, mVectOfObstacle( ObstacleCount )  
 {
 }
 

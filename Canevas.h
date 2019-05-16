@@ -30,7 +30,7 @@ public:
 private:
 	size_t mWidth;
 	size_t mHeight;
-	std::vector<Obstacle>& mVectOfObstacle;
+	std::vector<Obstacle> mVectOfObstacle;
 	};
 
 #endif // CANEVAS.H
