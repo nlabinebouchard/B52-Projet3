@@ -1,5 +1,6 @@
 #ifndef SOLUTION_H
 #define SOLUTION_H
+#include "Fitness_t.h"
 
 class Solution
 {
