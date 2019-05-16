@@ -1,9 +1,5 @@
 # include "Chromosome.h"
 
-Chromosome::Chromosome(std::vector<bool> const & vect)
-	:vectChromosome{ vect }
-{}
-
 Chromosome::Chromosome(std::vector<bool> const & vect, std::vector<size_t> vectBit)
 	: vectChromosome{ vect }
 {
