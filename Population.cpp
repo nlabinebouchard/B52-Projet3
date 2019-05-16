@@ -1,6 +1,9 @@
 #include "Population.h"
 
-size_t Population::size() { return vectSolution.size(); }
+size_t Population::size() 
+{ 
+	return vectSolution.size(); 
+}
 
 void Population::set(size_t size, Solution * solutionSample)
 {

@@ -1,21 +1,20 @@
 
 #include "CrossoverGeneSinglePoint.h"
 #include "RandomUtil.h"
+#include "Solution.h"
 
 void CrossoverGeneSinglePoint::breed(Solution const & genitor1, Solution const & genitor2, Solution & offspring)
 {
-	for (int i{}; i < genitor1.chromosome().sizeGene(); ++i) {
-
+	for (size_t i{}; i < offspring.chromosome().sizeGene(); ++i) {
 		if (i > 0) {
-			mBitFlip = RandomUtil::randomInRange(genitor1.chromosome.getValue(i-1), genitor1.chromosome.getValue(i));
+			mBitPivot = RandomUtil::randomInRange(genitor1.chromosome().readGene(i-1), genitor1.chromosome().readGene(i)-1);
 		}
 		else {
-			mBitFlip = RandomUtil::randomInRange(0, genitor1.chromosome.getValue(i));
+			mBitPivot = RandomUtil::randomInRange(0, genitor1.chromosome().readGene(i)-1);
 		}
 
-		for (int j{}; j < genitor1.chromosome().getValue(i); ++j) {
-
-			if (j < mBitFlip) {
+		for (size_t j{}; j < offspring.chromosome().readGene(i); ++j) {
+			if (j < mBitPivot) {
 				offspring.chromosome().write(j, genitor1.chromosome().read(i));
 			}
 			else {

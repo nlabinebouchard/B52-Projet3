@@ -10,7 +10,7 @@ public:
 	void mutate(Solution & offspring) override;
 
 private:
-	int mBitFlip;
+	size_t mBitFlip;
 
 };
 

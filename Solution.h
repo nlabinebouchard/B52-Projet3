@@ -5,15 +5,16 @@
 
 class Solution
 {
-public:
+private:
 	fitness_t mFitness;
 	Chromosome mChromosome;
 
+public:
 	Solution(std::vector <bool> const & vect, std::vector <size_t> vectBit);
-	fitness_t fitness();
-	Chromosome chromosome();
+	fitness_t fitness() const;
+	Chromosome & chromosome();
+	Chromosome const & chromosome() const;
 
-private:
 	virtual void processFitness();
 	virtual void randomize();
 	virtual void encode();

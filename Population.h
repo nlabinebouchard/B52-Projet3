@@ -7,16 +7,15 @@
 class Population
 {
 public:
-	std::vector <Solution> vectSolution;
-
 	size_t size();
 	void set(size_t size, Solution *solutionSample);
 	void processFitness();
+	void sort();
 
 private:
 
-	void sort();
 	bool Comparator(size_t plusPetit, size_t plusGrand);
+	std::vector <Solution> vectSolution;
 };
 
 #endif // POPULATION_H

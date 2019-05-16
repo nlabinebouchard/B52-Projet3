@@ -12,3 +12,4 @@ void Mutator::setMutationRate(double newRate)
 		mMutationRate = newRate;
 	}
 }
+

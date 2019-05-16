@@ -1,5 +1,5 @@
-#ifndef CROSSOVERGENESINGLEPOINT_H
-#define CROSSOVERGENESINGLEPOINT_H
+#ifndef CROSSOVER_GENE_SINGLE_POINT_H
+#define CROSSOVER_GENE_SINGLE_POINT_H
 
 #include "Crossover.h"
 class Solution;
@@ -13,9 +13,8 @@ public:
 	void breed(Solution const & genitor1, Solution const & genitor2, Solution & offspring) override;
 
 private:
-	int mBitPivot;
-	int mIndex;
+	size_t mBitPivot;
 
 };
 
-#endif // CROSSOVERGENESINGLEPOINT_H
+#endif // CROSSOVER_GENE_SINGLE_POINT_H
