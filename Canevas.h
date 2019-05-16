@@ -8,7 +8,7 @@
 class Canevas
 {
 public:
-	Canevas() = default; // temporary
+	Canevas() = delete;
 	Canevas(size_t width, size_t height, size_t ObstacleCount);
 	~Canevas() = default;
 
