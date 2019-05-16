@@ -21,7 +21,7 @@ public:
 
 	size_t elitismSize();
 
-	const std::vector<Solution *> population();
+	const Population & population();
 
 	const FitnessStatistics & statistics();
 
@@ -63,6 +63,10 @@ private:
 	Selector mSelector;
 	Population mActivePopulation;
 	Population mNextPopulation;
+	Population * mActivePopPointer;
+	Population * mNextPopPointer;
+	size_t mElitismSize;
+
 
 
 };
