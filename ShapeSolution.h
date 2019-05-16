@@ -3,7 +3,7 @@
 #include "Solution.h"
 #include "Obstacle.h"
 
-class ShapeSolution extends Solution
+class ShapeSolution:Solution
 {
 public:
 	ShapeSolution();
@@ -11,7 +11,7 @@ public:
 	virtual void draw();
 
 private:
-	virtual bool collide(Obstacke const & obs);
+	virtual bool collide(Obstacle const & obs);
 	virtual double distance(Obstacle const & obs);
 	virtual double area();
 	virtual double perimeter();

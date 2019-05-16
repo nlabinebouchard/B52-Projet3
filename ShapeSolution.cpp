@@ -1,7 +1,6 @@
 #include "ShapeSolution.h"
 
 
-
 ShapeSolution::ShapeSolution()
 {
 }
