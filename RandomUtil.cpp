@@ -17,3 +17,9 @@ int RandomUtil::randomInRange(int min, int max)
 	return dist(randomGenerator);
 }
 
+size_t RandomUtil::randomInRange(size_t min, size_t max)
+{
+	std::uniform_int_distribution<size_t> dist(min, max);
+	return dist(randomGenerator);
+}
+
