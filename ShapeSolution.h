@@ -3,18 +3,19 @@
 #include "Solution.h"
 #include "Obstacle.h"
 
-class ShapeSolution:Solution
+class ShapeSolution:public Solution
 {
 public:
 	ShapeSolution();
 	~ShapeSolution();
 	virtual void draw();
-
-private:
 	virtual bool collide(Obstacle const & obs);
 	virtual double distance(Obstacle const & obs);
 	virtual double area();
 	virtual double perimeter();
+
+private:
+
 };
 
 #endif // SHAPESOLUTION.H

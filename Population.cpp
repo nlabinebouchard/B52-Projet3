@@ -12,7 +12,7 @@ void Population::set(size_t size, Solution * solutionSample)
 void Population::processFitness()
 {
 	for (size_t i{}; i < vectSolution.size(); ++i) {
-		vectSolution[i].fitness();
+		vectSolution[i].processFitness();
 	}
 }
 
