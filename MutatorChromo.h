@@ -1,5 +1,5 @@
-#ifndef MUTATORCHROMO_H
-#define MUTATORCHROMO_H
+#ifndef MUTATOR_CHROMO_H
+#define MUTATOR_CHROMO_H
 
 #include "Mutator.h"
 
@@ -13,6 +13,7 @@ public:
 
 private:
 	int bitFlip;
+
 };
 
 #endif // MUTATORCHROMO_H
