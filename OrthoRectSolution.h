@@ -2,6 +2,7 @@
 #define ORTHORECTSOLUTION.H
 #include "ShapeSolution.h"
 #include <math.h>
+#include <vector>
 class OrthoRectSolution
 
 {
@@ -20,7 +21,9 @@ public:
 	double distance(Obstacle const & obs);
 	bool collide(Obstacle const & obs);
 	void draw();
-
+	
+	std::vector <bool> encode(std::vector<size_t> vectSize);
+	void decode(std::vector <bool> vect, std::vector<size_t> vectSize);
 
 };
 
