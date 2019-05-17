@@ -2,7 +2,6 @@
 #define CROSSOVERCHROMOSINGLEPOINT_H
 
 #include "Crossover.h"
-class Solution;
 
 class CrossoverChromoSinglePoint : public Crossover
 {
