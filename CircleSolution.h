@@ -3,6 +3,7 @@
 #include "ShapeSolution.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include "Console\Console.h"
 class CircleSolution: public ShapeSolution
 {
 public:

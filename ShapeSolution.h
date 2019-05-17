@@ -8,11 +8,12 @@ class ShapeSolution:public Solution
 public:
 	ShapeSolution();
 	~ShapeSolution();
-	virtual void draw();
-	virtual bool collide(Obstacle const & obs);
-	virtual double distance(Obstacle const & obs);
-	virtual double area();
-	virtual double perimeter();
+	void processFitness();
+	virtual void draw()=0;
+	virtual bool collide(Obstacle const & obs)=0;
+	virtual double distance(Obstacle const & obs)=0;
+	virtual double area()=0;
+	virtual double perimeter()=0;
 
 private:
 

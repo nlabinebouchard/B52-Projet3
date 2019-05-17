@@ -8,9 +8,66 @@ OrthoRectSolution::~OrthoRectSolution()
 {
 }
 
-double OrthoRectSolution::area() { return width*heigth; }
+double OrthoRectSolution::area() const { return width*heigth; }
 
-double OrthoRectSolution::perimeter() { return 2*width+2*heigth; }
+double OrthoRectSolution::perimeter() const { return 2*width+2*heigth; }
+
+double OrthoRectSolution::distance(Obstacle const & obs) const
+{
+	if (x < obs.mX)
+}
+
+double OrthoRectSolution::calculDistance(size_t x1, size_t y1, size_t x2, size_t y2)
+{
+	return sqrt(pow(x2-x1,2)+pow(y2-y1,2));
+}
+
+bool OrthoRectSolution::collide(Obstacle const & obs) const
+{
+	// left   = rectangle corner with lowest  "x"
+	// right  = rectangle corner with highest "x"
+	// top    = rectangle corner with highest "y"
+	// bottom = rectangle corner with lowest  "y"
+
+		// outside the bounding box ?
+	//if (x < left.x)   return false;
+	//if (x > right.x)  return false;
+	//if (y > top.y)    return false;
+	//if (y < bottom.y) return false;
+
+	//// identify sub-regions of the bounding box and test determinant sign
+	//if (x <= bottom.x && y <= left.y)
+	//	if ((y - bottom.y)*(bottom.x - left.x) < (left.y - bottom.y)*(bottom.x - x)) return false;
+
+	//if (x >= bottom.x && y <= right.y)
+	//	if ((y - bottom.y)*(right.x - bottom.x) < (right.y - bottom.y)*(x - bottom.x)) return false;
+
+	//if (x >= top.x && y >= right.y)
+	//	if ((top.y - y)*(right.x - top.x) < (top.y - right.y)*(x - top.x)) return false;
+
+	//if (x <= top.x && y >= left.y)
+	//	if ((top.y - y)*(top.x - left.x) < (top.y - left.y)*(top.x - x)) return false;
+
+	//return true;
+
+	//-------------------------------------------------------------
+	//ou
+
+	//double pointX = x;
+	//double pointY = y;
+	//// Just had to change around the math
+	//if (pointX < (this->x + (.5*this->width)) && pointX >(this->x - (.5*this->width)) &&
+	//	pointY < (this->y + (.5*this->height)) && pointY >(this->y - (.5*this->height)))
+	//	return true;
+	//else
+	//	return false;
+	
+}
+
+void OrthoRectSolution::draw() const
+{
+	Console::getInstance().writer().createImage("Forme").drawRect(1, 1, 10, 10, 'w', ConsoleColor::tb);
+}
 
 std::vector<bool> OrthoRectSolution::encode(std::vector<size_t> vectSize)
 {
@@ -65,5 +122,10 @@ void OrthoRectSolution::decode(std::vector<bool> vect, std::vector<size_t> vectS
 	for (size_t i{ vectSize[2] }; i < vectSize[3]; ++i) {
 		heigth += vect[i];
 	}
+}
+
+Solution * OrthoRectSolution::clone()
+{
+	return this;
 }
 
