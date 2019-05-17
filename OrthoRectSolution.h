@@ -3,8 +3,8 @@
 #include "ShapeSolution.h"
 #include <math.h>
 #include <vector>
-class OrthoRectSolution
-
+#include "Console\Console.h"
+class OrthoRectSolution:public ShapeSolution
 {
 public:
 
@@ -16,15 +16,17 @@ public:
 	OrthoRectSolution();
 	~OrthoRectSolution();
 
-	double area();
-	double perimeter();
-	double distance(Obstacle const & obs);
-	bool collide(Obstacle const & obs);
-	void draw();
+	double area() const;
+	double perimeter() const;
+	double distance(Obstacle const & obs) const;
+	double calculDistance(size_t x1, size_t y1, size_t x2, size_t y2);
+	bool collide(Obstacle const & obs) const;
+	void draw() const;
 	
 	std::vector <bool> encode(std::vector<size_t> vectSize);
 	void decode(std::vector <bool> vect, std::vector<size_t> vectSize);
-
+	Solution* clone();
+	void randomize();
 };
 
 #endif // ORTHORECTSOLUTION.H

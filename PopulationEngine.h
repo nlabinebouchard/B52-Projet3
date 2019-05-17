@@ -21,7 +21,7 @@ public:
 
 	size_t elitismSize();
 
-	const Population & population();
+	/*const*/ Population & population();
 
 	const FitnessStatistics & statistics();
 
@@ -59,12 +59,13 @@ private:
 
 
 	FitnessStatistics mFitessStatistics;
-	Mutator mMutator;
-	Selector mSelector;
+	Mutator* mMutator;
+	Selector* mSelector;
+	Crossover* mCrossover;
 	Population mActivePopulation;
 	Population mNextPopulation;
-	Population * mActivePopPointer;
-	Population * mNextPopPointer;
+	Population * mActivePopPointer;  //les initialiser!!!!
+	Population * mNextPopPointer;//les initialiser!!!!
 	size_t mElitismSize;
 
 

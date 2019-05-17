@@ -1,5 +1,5 @@
-#ifndef SHAPESOLUTION.H
-#define SHAPESOLUTION.H
+#ifndef SHAPESOLUTION_H
+#define SHAPESOLUTION_H
 #include "Solution.h"
 #include "Obstacle.h"
 
@@ -8,14 +8,15 @@ class ShapeSolution:public Solution
 public:
 	ShapeSolution();
 	~ShapeSolution();
-	virtual void draw();
-	virtual bool collide(Obstacle const & obs);
-	virtual double distance(Obstacle const & obs);
-	virtual double area();
-	virtual double perimeter();
+	void processFitness();
+	virtual void draw()=0;
+	virtual bool collide(Obstacle const & obs)=0;
+	virtual double distance(Obstacle const & obs)=0;
+	virtual double area()=0;
+	virtual double perimeter()=0;
 
 private:
 
 };
 
-#endif // SHAPESOLUTION.H
+#endif // SHAPESOLUTION_H

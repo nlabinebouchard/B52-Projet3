@@ -1,16 +1,20 @@
-#ifndef OBSTACLE.H
-#define OBSTACLE.H
+#ifndef OBSTACLE_H
+#define OBSTACLE_H
 
 
 class Obstacle
 {
 public:
 
-	Obstacle() = delete;
+	Obstacle() = default;
 	Obstacle(size_t const minX,size_t const minY, size_t const  maxX, size_t const  maxY) ;
 	~Obstacle() = default;
 
 	void randomizePosition(size_t minX, size_t minY, size_t maxX, size_t maxY);
+
+	int const& posX() const;
+
+	int const& posY() const;
 
 private:
 	size_t mX;
@@ -18,4 +22,4 @@ private:
 
 };
 
-#endif // OBSTACLE.H
+#endif // OBSTACLE_H
