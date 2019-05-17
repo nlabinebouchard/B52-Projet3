@@ -16,6 +16,7 @@ public:
 
 	int posY() const;
 
+
 private:
 	size_t mX;
 	size_t mY;

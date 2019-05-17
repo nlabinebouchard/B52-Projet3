@@ -9,9 +9,6 @@ public:
 
 	void mutate(Solution & offspring) override;
 
-private:
-	size_t mBitFlip;
-	size_t mPosBit;
 };
 
 #endif // MUTATORGENE_H

@@ -12,6 +12,7 @@ void Obstacle::randomizePosition(size_t minX, size_t minY, size_t maxX, size_t m
 	mY = RandomUtil::randomInRange(minY, maxY);
 }
 
+
 int Obstacle::posX() const
 {
 	return static_cast<int>(mX);

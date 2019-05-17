@@ -1,5 +1,6 @@
 #include "PopulationEngine.h"
 #include <algorithm>
+#include "RandomUtil.h"
 
 
 
@@ -33,6 +34,8 @@ void PopulationEngine::setPopulation(size_t size, Solution* solutionSample)
 {
 	mActivePopulation.set(size, solutionSample);
 	mNextPopulation.set(size, solutionSample);
+	mActivePopPointer=&mActivePopulation;
+	mNextPopPointer=&mNextPopulation;
 }
 
 void PopulationEngine::setSelector(Selector * selector)
@@ -53,17 +56,16 @@ void PopulationEngine::setMutator(Mutator * mutator)
 void PopulationEngine::randomize() //randomize active population??
 {
 	mActivePopPointer->randomize();
+	mNextPopPointer->randomize();
 }
 
 void PopulationEngine::evolve()
 {
+	processFitness();
 	processElitism();
 	processOffsprings();
 	swapPopulations();
 	processStatistics();
-
-
-	//MUTATION A A JOUR
 
 }
 
@@ -86,6 +88,10 @@ void PopulationEngine::processElitism()
 void PopulationEngine::processOneOffspring(size_t index)
 {
 	mCrossover->breed(mSelector->select(population()), mSelector->select(population()),(*mNextPopPointer)[index]);
+	if (RandomUtil::generateEvent(mMutator->mutationRate) == true)
+	{
+		(*mMutator).mutate((*mNextPopPointer)[index]);
+	}
 }
 
 void PopulationEngine::processOffsprings()
@@ -103,5 +109,27 @@ void PopulationEngine::swapPopulations()
 
 void PopulationEngine::processStatistics()
 {
+	mFitessStatistics.average = 0;
+	mFitessStatistics.minimum = 0;
+	mFitessStatistics.maximum = 0;
 
+
+
+	for (size_t i = 0; i < mNextPopPointer->size(); i++)
+	{
+		mFitessStatistics.average+=(*mNextPopPointer)[i].fitness();
+
+		if (mFitessStatistics.minimum>(*mNextPopPointer)[i].fitness())
+		{
+			mFitessStatistics.minimum = (*mNextPopPointer)[i].fitness();
+		}
+
+		if ((mFitessStatistics.maximum<(*mNextPopPointer)[i].fitness()))
+		{
+			(mFitessStatistics.maximum = (*mNextPopPointer)[i].fitness());
+		}
+
+	}
+
+	mFitessStatistics.average /= mNextPopPointer->size();
 }

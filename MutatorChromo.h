@@ -11,9 +11,6 @@ public:
 
 	void mutate(Solution & offspring) override;
 
-private:
-	int bitFlip;
-
 };
 
 #endif // MUTATORCHROMO_H

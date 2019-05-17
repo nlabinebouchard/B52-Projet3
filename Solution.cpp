@@ -24,6 +24,11 @@ Chromosome const & Solution::chromosome() const
 	return Solution::mChromosome;
 }
 
+void Solution::setFitness(double num)
+{
+	mFitness = num;
+}
+
 Solution* Solution::clone() 
 { 
 	return this; 

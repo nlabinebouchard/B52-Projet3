@@ -1,9 +1,11 @@
-#ifndef ORTHORECTSOLUTION.H
-#define ORTHORECTSOLUTION.H
+#ifndef ORTHORECTSOLUTION_H
+#define ORTHORECTSOLUTION_H
 #include "ShapeSolution.h"
 #include <math.h>
 #include <vector>
 #include "Console\Console.h"
+#include "RandomUtil.h"
+#include "Canevas.h"
 class OrthoRectSolution:public ShapeSolution
 {
 public:
@@ -19,7 +21,7 @@ public:
 	double area() const;
 	double perimeter() const;
 	double distance(Obstacle const & obs) const;
-	double calculDistance(size_t x1, size_t y1, size_t x2, size_t y2);
+	static double calculDistance(size_t x1, size_t y1, size_t x2, size_t y2);
 	bool collide(Obstacle const & obs) const;
 	void draw() const;
 	
@@ -29,4 +31,4 @@ public:
 	void randomize();
 };
 
-#endif // ORTHORECTSOLUTION.H
+#endif // ORTHORECTSOLUTION_H
