@@ -58,3 +58,8 @@ void Canevas::randomizeObstaclesPosition()
 	}
 }
 
+Canevas* Canevas::getCanevas()
+{
+	return this;
+}
+

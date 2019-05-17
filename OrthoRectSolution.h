@@ -1,9 +1,11 @@
-#ifndef ORTHORECTSOLUTION.H
-#define ORTHORECTSOLUTION.H
+#ifndef ORTHORECTSOLUTION_H
+#define ORTHORECTSOLUTION_H
 #include "ShapeSolution.h"
 #include <math.h>
 #include <vector>
 #include "Console\Console.h"
+#include "RandomUtil.h"
+#include "Canevas.h"
 class OrthoRectSolution:public ShapeSolution
 {
 public:
@@ -29,4 +31,4 @@ public:
 	void randomize();
 };
 
-#endif // ORTHORECTSOLUTION.H
+#endif // ORTHORECTSOLUTION_H
