@@ -24,11 +24,6 @@ Chromosome const & Solution::chromosome() const
 	return Solution::mChromosome;
 }
 
-Chromosome const & Solution::chromosome() const
-{
-	return Solution::mChromosome;
-}
-
 Solution* Solution::clone() 
 { 
 	return this; 

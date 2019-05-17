@@ -10,6 +10,7 @@ public:
 	~Crossover() = default;
 	
 	virtual void breed(Solution const & genitor1, Solution const & genitor2, Solution & offspring)=0;
+	//virtual void breed(Solution const & genitor1, Solution const & genitor2, Solution & offspring1, ) = 0;
 
 };
 
