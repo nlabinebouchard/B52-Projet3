@@ -35,18 +35,21 @@ int main()
 
 	Console::defineContext(myContext);
 
-	ConsoleWriter &curWriter = Console::getInstance().writer();
+	ConsoleWriter curWriter = Console::getInstance().writer();
 
 	std::vector<Obstacle> const &vectObstacle{ canvas.obstacles() };
 
 	for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
 	{
-		Console::getInstance().writer().createImage("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), 'o', ConsoleColor::tc);
+		curWriter.createImage("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), 'o', ConsoleColor::tc);
 	}
 	
-	int b{ 0 };
+	curWriter.write("Allo");
 
-	Console::getInstance().writer().write("Allo");
+
+
+
+
 
 	int a{0};
 
