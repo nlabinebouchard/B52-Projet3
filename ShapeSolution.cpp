@@ -9,3 +9,8 @@ ShapeSolution::ShapeSolution()
 ShapeSolution::~ShapeSolution()
 {
 }
+
+void ShapeSolution::processFitness()
+{
+	setFitness((*this).perimeter());
+}
