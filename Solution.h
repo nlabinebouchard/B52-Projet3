@@ -15,10 +15,10 @@ public:
 	Chromosome & chromosome();
 	Chromosome const & chromosome() const;
 
-	virtual void processFitness();
-	virtual void randomize();
-	virtual void encode();
-	virtual void decode();
+	virtual void processFitness()=0;
+	virtual void randomize()=0;
+	virtual void encode()=0;
+	virtual void decode()=0;
 	virtual Solution* clone();
 private:
 };

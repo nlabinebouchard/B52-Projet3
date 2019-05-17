@@ -16,8 +16,8 @@ public:
 	Solution const & operator[](size_t index) const;
 
 private:
-	bool Comparator(size_t plusPetit, size_t plusGrand);
-	std::vector <Solution> vectSolution;
+	static bool Comparator(Solution* plusPetit, Solution* plusGrand);
+	std::vector <Solution*> vectSolution;
 };
 
 
