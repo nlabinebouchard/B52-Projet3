@@ -12,10 +12,6 @@ public:
 
 	void breed(Solution const & genitor1, Solution const & genitor2, Solution & offspring) override;
 
-private:
-	int bitPivot;
-	int index;
-
 };
 
 #endif // CROSSOVERCHROMOSINGLEPOINT_H
