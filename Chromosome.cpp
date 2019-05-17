@@ -37,9 +37,7 @@ size_t Chromosome::read(size_t indDebut, size_t indFin) const
 
 bool Chromosome::read(size_t ind) const 
 {
-	if (ind >= 0 && ind < mData.size()) {
-		return mData[ind];
-	}
+	return mData[ind];
 }
 
 std::vector<bool> Chromosome::read() const 
@@ -49,9 +47,7 @@ std::vector<bool> Chromosome::read() const
 
 size_t Chromosome::readGene(size_t ind) const 
 {
-	if (ind >= 0 && ind < mData.size()) {
-		return mGene[ind];
-	}
+	return mGene[ind];
 }
 
 void Chromosome::write(size_t indDebut, size_t indFin, size_t valeur)
