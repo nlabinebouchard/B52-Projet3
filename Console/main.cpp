@@ -18,13 +18,27 @@ int main()
 
 	//Console::getInstance().writer().randomize();
 
-	Console::getInstance().writer().createImage("Allo").drawRect(1, 1, 10, 10, 'w', ConsoleColor::tb);
+	ConsoleWriter *curWriter = &Console::getInstance().writer();
 
-	Console::getInstance().writer().write("Allo");
+	//Console::getInstance().writer().createImage("Allo").drawRect(1, 1, 10, 10, 'w', ConsoleColor::tb);
+	Console::getInstance().writer().createImage("Allo").drawRect(30, 30, 10, 10, 'w', ConsoleColor::tb);
 
-	//Console::getInstance().writer().write(ConsoleWriter::createImage("Allo").drawRect(30, 30, 5, 5, "o", ConsoleColor::tc));
+	curWriter->createImage("Allo").drawRect(1, 1, 10, 10, 'w', ConsoleColor::tb);
 
-	// Console::getInstance().writer().write();
+	int b{ 0 };
+
+	while (b == 0)
+	{
+
+		curWriter->write("Allo");
+
+	//Console::getInstance().writer().write("Allo");
+
+	// fonctionne pas Console::getInstance().writer().write(ConsoleWriter::createImage("Allo").drawRect(30, 30, 5, 5, "o", ConsoleColor::tc));
+
+
+	//Console::getInstance().writer().write("bonjour");
+	}
 
 
 	int a{ 0 };

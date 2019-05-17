@@ -1,5 +1,5 @@
-#ifndef CANEVAS.H
-#define CANEVAS.H
+#ifndef CANEVAS_H
+#define CANEVAS_H
 
 #include "ShapeOptimizer.h"
 #include "Obstacle.h"
@@ -8,7 +8,7 @@
 class Canevas
 {
 public:
-	Canevas() = delete;
+	Canevas() = default;
 	Canevas(size_t width, size_t height, size_t ObstacleCount);
 	~Canevas() = default;
 

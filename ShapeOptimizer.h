@@ -1,8 +1,8 @@
-#ifndef SHAPEOPTIMIZER.H
-#define SHAPEOPTIMIZER.H
+#ifndef SHAPEOPTIMIZER_H
+#define SHAPEOPTIMIZER_H
 
 #include "SOParameters.h"
-#include "GAParameters.h"
+//#include "GAParameters.h"
 
 
 class ShapeOptimizer
@@ -11,9 +11,11 @@ public:
 	ShapeOptimizer() = default;
 	~ShapeOptimizer() = default;
 
-	void setup(SOParameters const &SOParams, GAParameters const& GAParams);
+	//void setup(SOParameters const &SOParams, GAParameters const& GAParams);
+
+	void setupTemp(SOParameters const &SOParams);
 
 	void run();
 };
 
-#endif // SHAPEOPTIMIZER.H
+#endif // SHAPEOPTIMIZER_H

@@ -1,5 +1,5 @@
-#ifndef SHAPESOLUTION.H
-#define SHAPESOLUTION.H
+#ifndef SHAPESOLUTION_H
+#define SHAPESOLUTION_H
 #include "Solution.h"
 #include "Obstacle.h"
 
@@ -18,4 +18,4 @@ private:
 
 };
 
-#endif // SHAPESOLUTION.H
+#endif // SHAPESOLUTION_H
