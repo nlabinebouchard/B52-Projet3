@@ -4,6 +4,8 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include "Console\Console.h"
+#include "Canevas.h"
+#include "RandomUtil.h"
 class CircleSolution: public ShapeSolution
 {
 public:
@@ -20,6 +22,11 @@ public:
 	double distance(Obstacle const & obs);
 	bool collide(Obstacle const & obs);
 	void draw();
+
+	std::vector <bool> encode(std::vector<size_t> vectSize);
+	void decode(std::vector <bool> vect, std::vector<size_t> vectSize);
+	Solution* clone();
+	void randomize();
 };
 
 #endif // CIRCLESOLUTION.H
