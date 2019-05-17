@@ -2,6 +2,7 @@
 #define SELECTOR_ROULETTE_WHEEL_H
 
 #include "Selector.h"
+#include <vector>
 
 class SelectorRouletteWheel : public Selector 
 {
@@ -10,15 +11,10 @@ public:
 	~SelectorRouletteWheel() = default;
 
 	void prepare(Population const & population) override;
-	Solution & select(Population & population) const override;
+	Solution & select(Population & population) override;
 
 protected:
 	std::vector<double> mRankWeight;
-	fitness_t mTotalFitness;
-	fitness_t mWeight;
-	double mProbabilities;
-	double mValueRandom;
-	double mInterval;
 
 };
 

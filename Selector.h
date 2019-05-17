@@ -11,7 +11,7 @@ public:
 	~Selector() = default;
 
 	virtual void prepare(Population const & pop)=0;
-	virtual Solution & select(Population & pop)const=0;
+	virtual Solution & select(Population & pop)=0;
 };
 
 #endif // SELECTOR_H

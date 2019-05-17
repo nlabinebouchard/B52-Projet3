@@ -13,7 +13,7 @@ public:
 	void sort();
 
 	Solution & operator[](size_t index);
-	Solution const & operator[](size_t index) const;
+	Solution const & operator[](size_t index)const;
 
 private:
 	bool Comparator(size_t plusPetit, size_t plusGrand);
