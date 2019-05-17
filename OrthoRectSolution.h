@@ -19,7 +19,7 @@ public:
 	double area() const;
 	double perimeter() const;
 	double distance(Obstacle const & obs) const;
-	double calculDistance(size_t x1, size_t y1, size_t x2, size_t y2);
+	static double calculDistance(size_t x1, size_t y1, size_t x2, size_t y2);
 	bool collide(Obstacle const & obs) const;
 	void draw() const;
 	
