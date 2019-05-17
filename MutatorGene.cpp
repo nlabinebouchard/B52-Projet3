@@ -5,7 +5,9 @@
 
 void MutatorGene::mutate(Solution & offspring)
 {
-	mPosBit=0;
+	size_t mBitFlip;
+	size_t mPosBit{};
+
 	if (RandomUtil::generateEvent(mMutationRate)){
 		for (size_t i{}; i < offspring.chromosome().sizeGene(); ++i) {
 			mPosBit += offspring.chromosome().readGene(i)-1;
