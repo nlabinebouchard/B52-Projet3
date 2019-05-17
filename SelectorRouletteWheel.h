@@ -13,7 +13,7 @@ public:
 	Solution & select(Population & population) const override;
 
 protected:
-	std::vector <double> mRankWeight;
+	std::vector<double> mRankWeight;
 	fitness_t mTotalFitness;
 	fitness_t mWeight;
 	double mProbabilities;

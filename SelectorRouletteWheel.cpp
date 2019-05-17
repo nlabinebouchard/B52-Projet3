@@ -12,6 +12,7 @@ void SelectorRouletteWheel::prepare(Population const & population)
 	//	-----
 	//	Plus le fitness du Chromosone est grand, plus il y a de chance qu'il soit sélectionner 
 	//	-----
+	mRankWeight.resize(population.size());
 
 	mTotalFitness = 0;
 	for (size_t i{}; i < population.size(); ++i) {
@@ -24,7 +25,6 @@ void SelectorRouletteWheel::prepare(Population const & population)
 		mRankWeight.insert(mRankWeight.begin()+i, mProbabilities);
 	}
 }
-
 
 Solution & SelectorRouletteWheel::select(Population & population) const
 {
