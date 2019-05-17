@@ -14,7 +14,42 @@ double OrthoRectSolution::perimeter() const { return 2*width+2*heigth; }
 
 double OrthoRectSolution::distance(Obstacle const & obs) const
 {
-	if (x < obs.mX)
+	size_t pX = obs.posX();
+	size_t pY = obs.posY();
+
+	if (x < pX && x + width > pX) {
+		if (y < pY && y + heigth > pY) {
+			return -1; // point a l'intérieur du rectangle
+		}
+		else if (y < pY) {
+			return calculDistance(x, y + heigth, pX, pY);
+		}
+		else {
+			return calculDistance(pX, y, pX, pY);
+		}
+	}
+	else if (x < pX) {
+		if (y < pY && y + heigth > pY) {
+			return calculDistance(x + width, pY, pX, pY);
+		}
+		else if (y < pY) {
+			return calculDistance(x + width, y + heigth, pX, pY);
+		}
+		else {
+			return calculDistance(x + width, y, pX, pY);
+		}
+	}
+	else {
+		if (y < pY && y + heigth > pY) {
+			return calculDistance(x, pY, pX, pY);
+		}
+		else if (y < pY) {
+			return calculDistance(x, y + heigth, pX, pY);
+		}
+		else {
+			return calculDistance(x, y, pX, pY);
+		}
+	}
 }
 
 double OrthoRectSolution::calculDistance(size_t x1, size_t y1, size_t x2, size_t y2)
