@@ -134,9 +134,11 @@ Solution * OrthoRectSolution::clone()
 
 void OrthoRectSolution::randomize()
 {
-	x = RandomUtil::randomInRange(0, (*Canevas::getCanevas()).width() -1);
-	y = RandomUtil::randomInRange(0, (*Canevas::getCanevas()).height() -1);
-	width = RandomUtil::randomInRange(0, (*Canevas::getCanevas()).width() -x);
-	heigth = RandomUtil::randomInRange(0, (*Canevas::getCanevas()).height() -y);
+	if (Canevas::getCanevas()) {
+		x = RandomUtil::randomInRange(0, (*Canevas::getCanevas()).width() - 1);
+		y = RandomUtil::randomInRange(0, (*Canevas::getCanevas()).height() - 1);
+		width = RandomUtil::randomInRange(0, (*Canevas::getCanevas()).width() - x);
+		heigth = RandomUtil::randomInRange(0, (*Canevas::getCanevas()).height() - y);
+	}
 }
 
