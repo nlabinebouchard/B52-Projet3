@@ -12,8 +12,10 @@ public:
 
 	void randomizePosition(size_t minX, size_t minY, size_t maxX, size_t maxY);
 
-	int const & posX() const;
-	int const & posY() const;
+	int posX() const;
+
+	int posY() const;
+
 
 private:
 	size_t mX;
