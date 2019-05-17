@@ -14,6 +14,7 @@ public:
 	fitness_t fitness() const;
 	Chromosome & chromosome();
 	Chromosome const & chromosome() const;
+	void setFitness(double num);
 
 	virtual void processFitness()=0;
 	virtual void randomize()=0;
