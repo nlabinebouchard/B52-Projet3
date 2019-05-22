@@ -68,3 +68,4 @@ size_t Canevas::myHeight()
 	return mHeight;
 }
 
+
