@@ -4,17 +4,17 @@
 
 
 
-bool PopulationEngine::isReady()//à voir!!!!!!!!!!!!!
+bool PopulationEngine::isReady() const//à voir!!!!!!!!!!!!!
 {
 	return true;
 }
 
-size_t PopulationEngine::elitismSize()
+size_t PopulationEngine::elitismSize() const
 {
 	return mElitismSize;
 }
 
-/*const*/ Population & PopulationEngine::population() //à vérifier pour le const bug pour l'utilisation du mSelector sinon
+const Population & PopulationEngine::population() const //à vérifier pour le const bug pour l'utilisation du mSelector sinon
 {
 	return *mActivePopPointer;
 }
@@ -36,6 +36,9 @@ void PopulationEngine::setPopulation(size_t size, Solution* solutionSample)
 	mNextPopulation.set(size, solutionSample);
 	mActivePopPointer=&mActivePopulation;
 	mNextPopPointer=&mNextPopulation;
+
+	processFitness();
+	processStatistics();
 }
 
 void PopulationEngine::setSelector(Selector * selector)
@@ -61,10 +64,10 @@ void PopulationEngine::randomize() //randomize active population??
 
 void PopulationEngine::evolve()
 {
-	processFitness();
 	processElitism();
 	processOffsprings();
 	swapPopulations();
+	processFitness();
 	processStatistics();
 
 }
@@ -115,21 +118,27 @@ void PopulationEngine::processStatistics()
 
 
 
-	for (size_t i = 0; i < mNextPopPointer->size(); i++)
+	for (size_t i = 0; i < mActivePopPointer->size(); i++)
 	{
-		mFitessStatistics.average+=(*mNextPopPointer)[i].fitness();
+		mFitessStatistics.average+=(*mActivePopPointer)[i].fitness();
 
-		if (mFitessStatistics.minimum>(*mNextPopPointer)[i].fitness())
+		if (mFitessStatistics.minimum>(*mActivePopPointer)[i].fitness())
 		{
-			mFitessStatistics.minimum = (*mNextPopPointer)[i].fitness();
+			mFitessStatistics.minimum = (*mActivePopPointer)[i].fitness();
 		}
 
-		if ((mFitessStatistics.maximum<(*mNextPopPointer)[i].fitness()))
+		if ((mFitessStatistics.maximum<(*mActivePopPointer)[i].fitness()))
 		{
-			(mFitessStatistics.maximum = (*mNextPopPointer)[i].fitness());
+			(mFitessStatistics.maximum = (*mActivePopPointer)[i].fitness());
 		}
 
 	}
 
-	mFitessStatistics.average /= mNextPopPointer->size();
+	mFitessStatistics.average /= mActivePopPointer->size();
+}
+
+
+Population & PopulationEngine::population() 
+{
+	return *mActivePopPointer;
 }

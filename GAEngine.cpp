@@ -1,25 +1,33 @@
 #include "GAEngine.h"
 
-size_t & GAEngine::epoch()
+size_t GAEngine::epoch() const
 {
 	return mEpoch;
 
 }
 
-const Population & GAEngine::population(size_t populationEngine)
+const Population & GAEngine::population(size_t populationEngine) const
 {
 	return mPopulationEngines[populationEngine].population();
 }
 
-const FitnessStatistics & GAEngine::statistics(size_t epoch) {
-	return mFitnessStatistics[epoch];
+const FitnessStatistics & GAEngine::statistics(size_t popIndex, size_t epoch) const {
+	return mFitnessHistory.getStatistics(popIndex,epoch);  
 }
 
 void GAEngine::reset() {
 
+	mEpoch = 0;
+	mFitnessHistory.clearHistory(mParameters.populationCount);
+	
+	mPopEngIt = mPopulationEngines.begin();
 
-	//reset toute à 0
-	// peut-être réutiliser le setup pour toute re
+	while (mPopEngIt != mPopulationEngines.end())
+	{
+		mPopEngIt->randomize();
+		++mPopEngIt;
+	}
+
 }
 
 void GAEngine::evolve() {
@@ -62,6 +70,3 @@ void GAEngine::setup(GAParameters parameters) {
 	}
 	
 }
-
-
-//std::clamp -> limiter la valeur
