@@ -28,7 +28,7 @@ public:
 	std::vector <bool> encode(std::vector<size_t> vectSize);
 	void decode(std::vector <bool> vect, std::vector<size_t> vectSize);
 	Solution* clone();
-	void randomize();
+	void randomize(Canevas & const canvas);
 };
 
 #endif // ORTHORECTSOLUTION_H

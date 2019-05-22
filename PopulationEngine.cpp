@@ -34,6 +34,8 @@ void PopulationEngine::setPopulation(size_t size, Solution* solutionSample)
 {
 	mActivePopulation.set(size, solutionSample);
 	mNextPopulation.set(size, solutionSample);
+	mActivePopPointer=&mActivePopulation;
+	mNextPopPointer=&mNextPopulation;
 }
 
 void PopulationEngine::setSelector(Selector * selector)
@@ -54,6 +56,7 @@ void PopulationEngine::setMutator(Mutator * mutator)
 void PopulationEngine::randomize() //randomize active population??
 {
 	mActivePopPointer->randomize();
+	mNextPopPointer->randomize();
 }
 
 void PopulationEngine::evolve()
