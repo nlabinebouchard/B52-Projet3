@@ -168,6 +168,7 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 	bool start{ false };
 	bool affichageObs{ true };
 	bool enPause{ false };
+	size_t etatSolution{ 1 };
 
 	while (start != true)
 	{
@@ -181,13 +182,19 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 			{
 				switch (keyPressed.keyA())
 				{
-				case 's':	// Si en pause, fait un seul pas d'évolution
+				case 's':
+					if (enPause) {
+
+					}
 					break;
 				case 'z':	// Bascule l'affichage des obstacles ( aucun - tous)
 					affichageObs = !affichageObs;
 					ShapeOptimizer::afficherObstacle(curWriter,canvas,affichageObs);
 					break;
-				case 'x':	// Bascule l'affichage des solution ( aucune - toutes - la meilleurs).
+				case 'x': // Bascule l'affichage des solution ( aucune - toutes - la meilleurs).
+					++etatSolution;
+					if (etatSolution == 3) { etatSolution = 0; }
+					ShapeOptimizer::afficherSolution(curWriter, canvas, etatSolution);
 					break;
 				case 27: ShapeOptimizer::accueil(curReader, curWriter, keys,canvas);
 
@@ -200,6 +207,22 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 		}
 		//curWriter.createImage("Allo").drawRect(5 + keyPressed.keyA(), 5 + keyPressed.keyA(), 10, 10, ' ', ConsoleColor::bR);
 		curWriter.write("Allo"); // affiche l'image
+	}
+}
+
+void ShapeOptimizer::afficherSolution(ConsoleWriter & curWriter, Canevas & canvas, size_t etat)
+{
+	switch (etat)
+	{
+	case 0:
+		curWriter.createImage("Allo").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bk); // a changer pour une boucle qui passe a travers la population pou rfaire afficher les solution avec la methode draw dans les obj
+		break;
+	case 1:
+		curWriter.createImage("Allo").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bR);
+		break;
+	case 2:
+		curWriter.createImage("Allo").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bR);
+		break;
 	}
 }
 

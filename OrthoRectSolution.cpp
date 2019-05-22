@@ -69,7 +69,7 @@ bool OrthoRectSolution::collide(Obstacle const & obs) const
 
 void OrthoRectSolution::draw() const
 {
-	Console::getInstance().writer().createImage("Forme").drawRect(1, 1, 10, 10, 'w', ConsoleColor::tb);
+	Console::getInstance().writer().image("Forme").drawRect(1, 1, 10, 10, 'w', ConsoleColor::tb);
 }
 
 std::vector<bool> OrthoRectSolution::encode(std::vector<size_t> vectSize)
