@@ -65,18 +65,19 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 					break;
 				case '4':	// Détermine le nombre de population:
 					break;
-
-
-				case 32: start = true; // barre d'espace // debute l'évolution
+				case 'a':	// bascule forme a traiter ( cercle - rectangle - polygone)
 					break;
-
-				default:
+				case 'z':	// bascule obstacle entre 0 et tous
+					break;
+				case 'x':	// cache ou affiche la forme géométrique
+					break;
+				case 32: start = true; // barre d'espace // debute l'évolution
 					break;
 				}
 			}
 		}
 		//curWriter.createImage("Allo").drawRect(5 + keyPressed.keyA(), 5 + keyPressed.keyA(), 10, 10, ' ', ConsoleColor::bR);
-		curWriter.write("Allo");
+		curWriter.write("Allo"); // affiche l'image
 	}
 }
 
