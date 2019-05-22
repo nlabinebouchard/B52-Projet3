@@ -5,6 +5,7 @@
 #include "GAParameters.h"
 #include "Console\ConsoleKeyReader.h"
 #include "Canevas.h"
+#include "GAEngine.h"
 
 
 class ConsoleWriter;
@@ -28,7 +29,8 @@ public:
 	void afficherObstacle(ConsoleWriter & curWriter, Canevas &canvas, bool & affObs);
 	
 private:
-	//Canevas canvas;
+	Canevas mCanvas;
+	GAEngine mEngine;
 };
 
 #endif // SHAPEOPTIMIZER_H

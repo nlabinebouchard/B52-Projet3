@@ -56,7 +56,7 @@ void Canevas::setup(SOParameters const &SOParams)
 
 void Canevas::randomizeObstaclesPosition()
 {
-	for (size_t i{}; i < mVectOfObstacle.size(); ++i)
+	for (size_t i{0}; i < mVectOfObstacle.size(); ++i)
 	{
 		mVectOfObstacle[i].randomizePosition(0, 0, mWidth, mHeight); 
 	}
