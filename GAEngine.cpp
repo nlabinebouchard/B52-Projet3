@@ -32,28 +32,36 @@ void GAEngine::reset() {
 
 void GAEngine::evolve() {
 
-	mPopEngIt = mPopulationEngines.begin();
-	size_t indice = 0;
 
-	while (mPopEngIt!=mPopulationEngines.end())
+	if (mParameters.maximumGenerationCount > mEpoch)
 	{
 
-		mFitnessHistory.insertNewStatistics(indice, mPopEngIt->statistics());
 
-		mPopEngIt->evolve();
+		mPopEngIt = mPopulationEngines.begin();
+		size_t indice = 0;
 
-		++mPopEngIt;
-		++indice;
+		while (mPopEngIt!=mPopulationEngines.end())
+		{
+
+			mFitnessHistory.insertNewStatistics(indice, mPopEngIt->statistics());
+
+			mPopEngIt->evolve();
+
+			++mPopEngIt;
+			++indice;
+		}
+
+
+	
 	}
 
+	else
+	{
+
+	}
 
 //vérifier les condtions de sorties pour arrêter de faire les evolve, avec une variable bool
-	//convergencerate, maximumGeneration, mutationRate???, 
-
-	//remplir à la fin du evolve 
-
-	//faire un HistoryStatistics----classe détenue par le GAEngine pour dealer avec les 
-	//statistics de chaque PopulationEngine à chaque époque, donc vecteur de vecteur ou dequoi de même.
+	//convergencerate, maximumGeneration, 
 }
 
 void GAEngine::setup(GAParameters parameters) {
@@ -70,3 +78,12 @@ void GAEngine::setup(GAParameters parameters) {
 	}
 	
 }
+
+void GAEngine::standardDeviation()
+{
+
+}
+
+
+
+//calcul écart type des maximums de exemple 10 derniers statistics, si le rate de convergence est atteint, on arrête en comparant les écart types

@@ -3,8 +3,7 @@
 #include "GAParameters.h"
 #include "PopulationEngine.h"
 #include "FitnessHistory.h"
-
-using Population = size_t; //à enlever
+#include "Population.h"
 
 class GAEngine
 {
@@ -26,6 +25,8 @@ public:
 	void evolve(); //peut-être retourné un bool
 
 	void setup(GAParameters parameters);
+
+	void standardDeviation();
 
 
 
