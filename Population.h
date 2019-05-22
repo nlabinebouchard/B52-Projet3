@@ -20,6 +20,7 @@ public:
 private:
 	static bool Comparator(Solution* plusPetit, Solution* plusGrand);
 	std::vector <Solution*> vectSolution;
+
 };
 
 

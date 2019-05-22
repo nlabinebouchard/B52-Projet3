@@ -12,7 +12,7 @@ void MutatorGene::mutate(Solution & offspring)
 		for (size_t i{}; i < offspring.chromosome().sizeGene(); ++i) {
 			mPosBit += offspring.chromosome().readGene(i)-1;
 			if (i > 0) {
-				mBitFlip = RandomUtil::randomInRange(mPosBit - offspring.chromosome().readGene(i), mPosBit);
+				mBitFlip = RandomUtil::randomInRange(mPosBit - (offspring.chromosome().readGene(i)-1), mPosBit);
 			}
 			else {
 				mBitFlip = RandomUtil::randomInRange(0, mPosBit);

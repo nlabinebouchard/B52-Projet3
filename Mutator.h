@@ -13,6 +13,7 @@ public:
 
 protected:
 	double mMutationRate{};
+
 };
 
 #endif // MUTATOR_H
