@@ -25,9 +25,11 @@ public:
 
 	void evolution(ConsoleKeyReader &curReader, ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys);
 
+	void afficherObstacle();
+	
 private:
 	//Canevas canvas;
-	
+
 };
 
 #endif // SHAPEOPTIMIZER_H

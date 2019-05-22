@@ -15,11 +15,11 @@ public:
 
 	~GAEngine() = default;
 
-	size_t & epoch();
+	size_t epoch() const;
 
-	const Population & population(size_t populationEngine);
+	const Population & population(size_t populationEngine) const;
 
-	const FitnessStatistics & statistics(size_t epoch);
+	const FitnessStatistics & statistics(size_t popIndex, size_t epoch) const;
 
 	void reset();
 
@@ -34,8 +34,6 @@ private:
 	size_t mEpoch;
 
 	GAParameters mParameters;
-
-	std::vector<FitnessStatistics> mFitnessStatistics;
 
 	std::vector<PopulationEngine> mPopulationEngines;
 	std::vector<PopulationEngine>::iterator mPopEngIt;

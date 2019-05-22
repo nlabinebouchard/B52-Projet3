@@ -17,11 +17,11 @@ public:
 
 	~PopulationEngine() = default;
 
-	bool isReady() ;
+	bool isReady() const;
 
-	size_t elitismSize();
+	size_t elitismSize() const;
 
-	/*const*/ Population & population();
+	const Population & population() const;
 
 	const FitnessStatistics & statistics();
 
@@ -38,6 +38,7 @@ public:
 	void randomize();
 
 	void evolve();
+
 	
 
 
@@ -56,6 +57,8 @@ private:
 	void swapPopulations();
 
 	void processStatistics();
+
+	Population & population();
 
 
 	FitnessStatistics mFitessStatistics;
