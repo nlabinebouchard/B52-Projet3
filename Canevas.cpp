@@ -1,4 +1,5 @@
 #include "Canevas.h"
+#include "SOParameters.h"
 
 Canevas::Canevas(size_t width, size_t height, size_t ObstacleCount)
 	:mWidth{ width }, mHeight{ height }, mVectOfObstacle( ObstacleCount )  
@@ -44,7 +45,7 @@ void Canevas::setObstacleCount(size_t const& count)
 	}
 }
 
-void Canevas::setup(SOParameters const SOParams)
+void Canevas::setup(SOParameters const & SOParams)
 {
 	setSize(SOParams.width, SOParams.height);
 	setObstacleCount(SOParams.obstacleCount);

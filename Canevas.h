@@ -1,7 +1,7 @@
 #ifndef CANEVAS_H
 #define CANEVAS_H
 
-#include "ShapeOptimizer.h"
+struct SOParameters;
 #include "Obstacle.h"
 #include <vector>
 
@@ -19,9 +19,9 @@ public:
 
 	void setSize(size_t const  &width, size_t const &height);
 
-	void setObstacleCount(size_t const& count);
+	void setObstacleCount(size_t const & count);
 
-	void setup(SOParameters const SOParams);
+	void setup(SOParameters const & SOParams);
 
 	void randomizeObstaclesPosition();
 
