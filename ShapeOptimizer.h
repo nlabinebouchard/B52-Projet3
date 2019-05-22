@@ -3,6 +3,12 @@
 
 #include "SOParameters.h"
 #include "GAParameters.h"
+#include "Console\Console.h"
+#include "Console\ConsoleContext.h"
+#include "Console\ConsoleKeyReader.h"
+#include "Canevas.h"
+#include "Console\ConsoleKeyFilterDown.h"
+#include "Console\ConsoleKeyFilterModifiers.h"
 
 
 class ShapeOptimizer

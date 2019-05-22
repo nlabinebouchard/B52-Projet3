@@ -1,10 +1,4 @@
 #include "ShapeOptimizer.h"
-#include "Console\Console.h"
-#include "Console\ConsoleContext.h"
-#include "Console\ConsoleKeyReader.h"
-#include "Canevas.h"
-#include "Console\ConsoleKeyFilterDown.h"
-#include "Console\ConsoleKeyFilterModifiers.h"
 #include <iostream>
 
 
@@ -121,6 +115,6 @@ int main()
 	curReader.installFilter(new ConsoleKeyFilterDown);
 	curReader.installFilter(new ConsoleKeyFilterModifiers);
 
-
+	main.accueil(curReader,curWriter, keys);
 
 }
