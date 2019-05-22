@@ -132,13 +132,11 @@ Solution * OrthoRectSolution::clone()
 	return this;
 }
 
-void OrthoRectSolution::randomize()
+void OrthoRectSolution::randomize(Canevas & const canvas)
 {
-	if (Canevas::getCanevas()) {
-		x = RandomUtil::randomInRange(0, (*Canevas::getCanevas()).width() - 1);
-		y = RandomUtil::randomInRange(0, (*Canevas::getCanevas()).height() - 1);
-		width = RandomUtil::randomInRange(0, (*Canevas::getCanevas()).width() - x);
-		heigth = RandomUtil::randomInRange(0, (*Canevas::getCanevas()).height() - y);
-	}
+	x = RandomUtil::randomInRange(0, canvas.myWidth() - 1);
+	y = RandomUtil::randomInRange(0, canvas.myHeight() - 1);
+	width = RandomUtil::randomInRange(0, canvas.myWidth() - x);
+	heigth = RandomUtil::randomInRange(0, canvas.myHeight() - y);
 }
 
