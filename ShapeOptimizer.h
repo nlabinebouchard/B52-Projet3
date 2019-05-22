@@ -27,6 +27,7 @@ public:
 
 private:
 	//Canevas canvas;
+	void afficherObstacle();
 };
 
 #endif // SHAPEOPTIMIZER_H

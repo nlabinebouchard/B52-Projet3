@@ -95,16 +95,15 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 		{
 			for (auto &keyPressed : keys)
 			{
-
 				switch (keyPressed.keyA())
 				{
 				case 's':	// Si en pause, fait un seul pas d'évolution
 					break;
 				case 'z':	// Bascule l'affichage des obstacles ( aucun - tous)
 					break;
-				case 'x':	// Bascule l'affichage des solution ( aucune - toutes - la meilleurs)
+				case 'x':	// Bascule l'affichage des solution ( aucune - toutes - la meilleurs).
 					break;
-				case 27:	// esc // reviens a l'acceuil
+				case 27: ShapeOptimizer::accueil(curReader, curWriter, keys);
 					break;
 				case 32: start = true; // barre d'espace // met sur pause
 					break;
@@ -113,6 +112,14 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 		}
 		//curWriter.createImage("Allo").drawRect(5 + keyPressed.keyA(), 5 + keyPressed.keyA(), 10, 10, ' ', ConsoleColor::bR);
 		curWriter.write("Allo"); // affiche l'image
+	}
+}
+
+void ShapeOptimizer::afficherObstacle()
+{
+	for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
+	{
+		curWriter.createImage("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
 	}
 }
 
