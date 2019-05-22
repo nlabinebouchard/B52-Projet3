@@ -83,6 +83,41 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 	}
 }
 
+void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & curWriter, ConsoleKeyReader::KeyEvents & keys)
+{
+	bool start{ false };
+
+	while (start != true)
+	{
+		// menu d'acceuil
+
+		curReader.read(keys);
+
+		if (keys.size() != 0)
+		{
+			for (auto &keyPressed : keys)
+			{
+
+				switch (keyPressed.keyA())
+				{
+				case 's':	// Si en pause, fait un seul pas d'évolution
+					break;
+				case 'z':	// Bascule l'affichage des obstacles ( aucun - tous)
+					break;
+				case 'x':	// Bascule l'affichage des solution ( aucune - toutes - la meilleurs)
+					break;
+				case 27:	// esc // reviens a l'acceuil
+					break;
+				case 32: start = true; // barre d'espace // met sur pause
+					break;
+				}
+			}
+		}
+		//curWriter.createImage("Allo").drawRect(5 + keyPressed.keyA(), 5 + keyPressed.keyA(), 10, 10, ' ', ConsoleColor::bR);
+		curWriter.write("Allo"); // affiche l'image
+	}
+}
+
 
 int main()
 {

@@ -22,7 +22,14 @@ public:
 	void run();
 
 	//void accueil(ConsoleKeyReader &curReader, ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys);
+
 	void accueil(ConsoleKeyReader &curReader, ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys, Canevas &canvas);
+
+	void evolution(ConsoleKeyReader &curReader, ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys);
+
+private:
+	//Canevas canvas;
+
 };
 
 #endif // SHAPEOPTIMIZER_H
