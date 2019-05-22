@@ -30,7 +30,7 @@ void GAEngine::reset() {
 
 }
 
-void GAEngine::evolve() {
+void GAEngine::evolve() {//retourner un bool pour savoir que le evolve est finit
 
 
 	if (mParameters.maximumGenerationCount > mEpoch)
@@ -42,7 +42,7 @@ void GAEngine::evolve() {
 
 		while (mPopEngIt!=mPopulationEngines.end())
 		{
-
+			//rajouter une condition if pour ne pas faire le evolve si la converge d'une pop est atteinte
 			mFitnessHistory.insertNewStatistics(indice, mPopEngIt->statistics());
 
 			mPopEngIt->evolve();
