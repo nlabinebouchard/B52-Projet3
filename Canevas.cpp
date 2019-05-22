@@ -45,7 +45,8 @@ void Canevas::setObstacleCount(size_t const& count)
 	}
 }
 
-void Canevas::setup(SOParameters const & SOParams)
+
+void Canevas::setup(SOParameters const &SOParams)
 {
 	setSize(SOParams.width, SOParams.height);
 	setObstacleCount(SOParams.obstacleCount);
