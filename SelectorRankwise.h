@@ -13,10 +13,10 @@ public:
 	double gamma()const;
 	void setGamma(double gamma);
 	void prepare(Population const & population) override;
-	//Solution & select(Population & population) override;
 
 private:
 	double mGamma;
+
 };
 
 #endif // SELECTOR_SELECTOR_RANKWISE_H

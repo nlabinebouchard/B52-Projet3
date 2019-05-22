@@ -1,4 +1,8 @@
 #include "ShapeOptimizer.h"
+#include "Console\Console.h"
+#include "Console\ConsoleContext.h"
+#include "Console\ConsoleKeyFilterDown.h"
+#include "Console\ConsoleKeyFilterModifiers.h"
 #include <iostream>
 
 
@@ -6,9 +10,9 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 {
 
 	// Params du canevas
-	SOParams.height = 200;
-	SOParams.width = 200;
-	SOParams.obstacleCount = 20;
+	SOParams.height = 400;
+	SOParams.width = 400;
+	SOParams.obstacleCount = 50;
 	// Params du Genetic algorithm engine
 	GAParams.convergenceRate;		// = value
 	GAParams.crossover;				// = value
@@ -38,6 +42,8 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 {
 	bool start{ false };
 
+	std::vector<Obstacle> const &vectObstacle{ canvas.obstacles() };
+
 	while (start != true)
 	{ 
 		// menu d'acceuil
@@ -52,13 +58,39 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 				switch (keyPressed.keyA())
 				{
 				case 'q':	// augmente le nombre d'obstacle de 10
+					
+					if (vectObstacle.size() <= 245){
+						canvas.setObstacleCount(vectObstacle.size() + 10);
+					}
+					for (size_t i{ vectObstacle.size()-10 }; i < vectObstacle.size(); ++i)
+					{
+						curWriter.image("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
+					}
 					break;
+
+
 				case 'w':	// diminue le nombre d'obstacle de 10
+
+					if (vectObstacle.size() >= 15) {
+						canvas.setObstacleCount(vectObstacle.size() - 10);
+					}
+					curWriter.removeImage("Allo");
+					curWriter.createImage("Allo");
+
+					for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
+					{
+						curWriter.image("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
+					}
+
 					break;
+
 				case 'e':	// réinitialise les positions des obstacles
+
+
+
 					break;
 				case '1':	// Détermine le nombre de population
-					break;
+					break; 
 				case '2':	// Détermine le nombre de population:
 					break;
 				case '3':	// Détermine le nombre de population:
@@ -77,6 +109,8 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 				}
 			}
 		}
+
+	
 		//curWriter.createImage("Allo").drawRect(5 + keyPressed.keyA(), 5 + keyPressed.keyA(), 10, 10, ' ', ConsoleColor::bR);
 		curWriter.write("Allo"); // affiche l'image
 		
@@ -153,7 +187,7 @@ int main()
 
 	canvas.setup(SOparams);
 
-	ConsoleContext myContext(canvas.width(), canvas.height(), "Projet-3 B52", 10, 10, L"Consolas");
+	ConsoleContext myContext(canvas.width(), canvas.height(), "Projet-3 B52", 2, 2, L"Consolas");
 	Console::defineContext(myContext);
 	ConsoleWriter &curWriter{ Console::getInstance().writer() };
 	std::vector<Obstacle> const &vectObstacle{ canvas.obstacles() };

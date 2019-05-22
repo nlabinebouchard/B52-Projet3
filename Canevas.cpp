@@ -37,8 +37,10 @@ void Canevas::setObstacleCount(size_t const& count)
 	}
 	else
 	{
+		size_t diff{ count - mVectOfObstacle.size() };
+		
 		mVectOfObstacle.resize(count); // increase size and randomize pos of new obstacle
-		for (size_t i{ 0 }; i < mVectOfObstacle.size(); ++i)
+		for (size_t i{ mVectOfObstacle.size()-diff }; i < mVectOfObstacle.size(); ++i)
 		{
 			mVectOfObstacle[i].randomizePosition(0, 0, mWidth, mHeight);
 		}

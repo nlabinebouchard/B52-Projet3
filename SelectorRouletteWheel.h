@@ -15,7 +15,7 @@ public:
 
 protected:
 	std::vector<double> mRankWeight;
-
+	double mValueMax;
 };
 
 #endif // SELECTOR_ROULETTE_WHEEL_H
