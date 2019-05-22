@@ -25,6 +25,7 @@ public:
 
 	void evolution(ConsoleKeyReader &curReader, ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys, Canevas &canvas);
 
+	void afficherSolution(ConsoleWriter & curWriter, Canevas &canvas, size_t etat);
 	void afficherObstacle(ConsoleWriter & curWriter, Canevas &canvas, bool & affObs);
 	
 private:
