@@ -11,6 +11,7 @@ public:
 	void set(size_t size, Solution *solutionSample);
 	void processFitness();
 	void sort();
+	void randomize();
 
 	Solution & operator[](size_t index);
 	Solution const & operator[](size_t index)const;

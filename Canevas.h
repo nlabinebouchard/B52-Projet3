@@ -25,7 +25,8 @@ public:
 
 	void randomizeObstaclesPosition();
 
-	static Canevas* getCanevas();
+	size_t myWidth();
+	size_t myHeight();
 
 private:
 	size_t mWidth;
