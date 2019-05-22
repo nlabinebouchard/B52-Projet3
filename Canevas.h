@@ -21,7 +21,7 @@ public:
 
 	void setObstacleCount(size_t const& count);
 
-	void setup(SOParameters const SOParams);
+	void setup(SOParameters const &SOParams);
 
 	void randomizeObstaclesPosition();
 

@@ -34,7 +34,7 @@ void ShapeOptimizer::run()
 
 }
 
-void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys)
+void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys, Canevas &canvas)
 {
 	bool start{ false };
 
@@ -72,12 +72,14 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 				case 'x':	// cache ou affiche la forme géométrique
 					break;
 				case 32: start = true; // barre d'espace // debute l'évolution
+				
 					break;
 				}
 			}
 		}
 		//curWriter.createImage("Allo").drawRect(5 + keyPressed.keyA(), 5 + keyPressed.keyA(), 10, 10, ' ', ConsoleColor::bR);
 		curWriter.write("Allo"); // affiche l'image
+		
 	}
 }
 
@@ -91,9 +93,7 @@ int main()
 
 	main.setup(SOparams, GAparam);
 
-	canvas.setSize(50, 50);
-	canvas.setObstacleCount(5);
-
+	canvas.setup(SOparams);
 
 	ConsoleContext myContext(canvas.width(), canvas.height(), "Projet-3 B52", 10, 10, L"Consolas");
 	Console::defineContext(myContext);
@@ -116,6 +116,7 @@ int main()
 	curReader.installFilter(new ConsoleKeyFilterDown);
 	curReader.installFilter(new ConsoleKeyFilterModifiers);
 
-	main.accueil(curReader,curWriter, keys);
+	main.accueil(curReader,curWriter, keys, canvas);
+	
 
 }
