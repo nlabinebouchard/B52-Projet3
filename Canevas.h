@@ -25,12 +25,12 @@ public:
 
 	void randomizeObstaclesPosition();
 
-	static Canevas* getCanevas();
 
 private:
 	size_t mWidth;
 	size_t mHeight;
 	std::vector<Obstacle> mVectOfObstacle;
+	
 	};
 
 #endif // CANEVAS.H
