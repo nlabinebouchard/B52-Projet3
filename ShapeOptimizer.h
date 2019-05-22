@@ -25,12 +25,12 @@ public:
 
 	void accueil(ConsoleKeyReader &curReader, ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys, Canevas &canvas);
 
-	void evolution(ConsoleKeyReader &curReader, ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys);
+	void evolution(ConsoleKeyReader &curReader, ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys, Canevas &canvas);
 
 private:
 	//Canevas canvas;
 
-	void afficherObstacle();
+	void afficherObstacle(ConsoleWriter & curWriter, Canevas &canvas, bool & affObs);
 
 };
 

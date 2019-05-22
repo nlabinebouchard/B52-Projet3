@@ -9,5 +9,5 @@ void SelectorRouletteWheel::prepare(Population const & population)
 
 Solution & SelectorRouletteWheel::select(Population & population)
 {
-	
+
 }
