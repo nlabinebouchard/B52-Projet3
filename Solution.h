@@ -2,6 +2,7 @@
 #define SOLUTION_H
 #include "Fitness_t.h"
 #include "Chromosome.h"
+#include "Canevas.h"
 
 class Solution
 {
@@ -17,7 +18,7 @@ public:
 	void setFitness(double num);
 
 	virtual void processFitness()=0;
-	virtual void randomize()=0;
+	virtual void randomize(Canevas canvas)=0;
 	virtual void encode()=0;
 	virtual void decode()=0;
 	virtual Solution* clone();
