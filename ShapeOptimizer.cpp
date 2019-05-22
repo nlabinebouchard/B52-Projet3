@@ -69,7 +69,7 @@ void ShapeOptimizer::run()
 	curReader.installFilter(new ConsoleKeyFilterDown);
 	curReader.installFilter(new ConsoleKeyFilterModifiers);
 
-	main.accueil(curReader, curWriter, keys, mCanvas);
+	main.evolution(curReader, curWriter, keys, mCanvas);
 
 }
 
@@ -184,7 +184,7 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 				{
 				case 's':
 					if (enPause) {
-
+						
 					}
 					break;
 				case 'z':	// Bascule l'affichage des obstacles ( aucun - tous)
@@ -221,7 +221,7 @@ void ShapeOptimizer::afficherSolution(ConsoleWriter & curWriter, Canevas & canva
 		curWriter.createImage("Allo").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bR);
 		break;
 	case 2:
-		curWriter.createImage("Allo").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bR);
+		curWriter.createImage("Allo").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bC);
 		break;
 	}
 }
