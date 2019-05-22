@@ -3,13 +3,12 @@
 
 #include "SOParameters.h"
 #include "GAParameters.h"
-#include "Console\Console.h"
-#include "Console\ConsoleContext.h"
 #include "Console\ConsoleKeyReader.h"
 #include "Canevas.h"
-#include "Console\ConsoleKeyFilterDown.h"
-#include "Console\ConsoleKeyFilterModifiers.h"
+//#include "GAEngine.h"
 
+
+class ConsoleWriter;
 
 class ShapeOptimizer
 {
@@ -25,13 +24,14 @@ public:
 
 	void accueil(ConsoleKeyReader &curReader, ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys, Canevas &canvas);
 
-	void evolution(ConsoleKeyReader &curReader, ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys);
+	void evolution(ConsoleKeyReader &curReader, ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys, Canevas &canvas);
 
+	void afficherSolution(ConsoleWriter & curWriter, Canevas &canvas, size_t etat);
+	void afficherObstacle(ConsoleWriter & curWriter, Canevas &canvas, bool & affObs);
+	
 private:
-	//Canevas canvas;
-
-	void afficherObstacle();
-
+	Canevas mCanvas;
+	//GAEngine mEngine;
 };
 
 #endif // SHAPEOPTIMIZER_H

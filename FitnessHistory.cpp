@@ -2,18 +2,25 @@
 
 
 
-void FitnessHistory::insertNewStatistics(size_t PopolutationEngine, FitnessStatistics statistics) {
+void FitnessHistory::insertNewStatistics(size_t PopulationEngine, FitnessStatistics statistics) {
 
-	mStatisticsHistory[PopolutationEngine].push_back(statistics);
+	mStatisticsHistory[PopulationEngine].push_back(statistics);
 
 
 	}
 
-const FitnessStatistics & FitnessHistory::getStatistics(size_t PopolutationEngine, size_t epoch)
+const FitnessStatistics & FitnessHistory::getStatistics(size_t PopulationEngine, size_t epoch) const
 {
 
-	return mStatisticsHistory[PopolutationEngine][epoch];
+	return mStatisticsHistory[PopulationEngine][epoch];
 
 }
 
 
+void FitnessHistory::clearHistory(const size_t & popNumber)
+{
+	for (size_t i = 0; i < popNumber; ++i)
+	{
+		mStatisticsHistory[i].clear();
+	}
+}

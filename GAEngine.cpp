@@ -1,51 +1,67 @@
 #include "GAEngine.h"
 
-size_t & GAEngine::epoch()
+size_t GAEngine::epoch() const
 {
 	return mEpoch;
 
 }
 
-const Population & GAEngine::population(size_t populationEngine)
+const Population & GAEngine::population(size_t populationEngine) const
 {
 	return mPopulationEngines[populationEngine].population();
 }
 
-const FitnessStatistics & GAEngine::statistics(size_t epoch) {
-	return mFitnessStatistics[epoch];
+const FitnessStatistics & GAEngine::statistics(size_t popIndex, size_t epoch) const {
+	return mFitnessHistory.getStatistics(popIndex,epoch);  
 }
 
 void GAEngine::reset() {
 
-
-	//reset toute à 0
-	// peut-être réutiliser le setup pour toute re
-}
-
-void GAEngine::evolve() {
-
+	mEpoch = 0;
+	mFitnessHistory.clearHistory(mParameters.populationCount);
+	
 	mPopEngIt = mPopulationEngines.begin();
-	size_t indice = 0;
 
-	while (mPopEngIt!=mPopulationEngines.end())
+	while (mPopEngIt != mPopulationEngines.end())
 	{
-
-		mFitnessHistory.insertNewStatistics(indice, mPopEngIt->statistics());
-
-		mPopEngIt->evolve();
-
+		mPopEngIt->randomize();
 		++mPopEngIt;
-		++indice;
 	}
 
+}
+
+void GAEngine::evolve() {//retourner un bool pour savoir que le evolve est finit
+
+
+	if (mParameters.maximumGenerationCount > mEpoch)
+	{
+
+
+		mPopEngIt = mPopulationEngines.begin();
+		size_t indice = 0;
+
+		while (mPopEngIt!=mPopulationEngines.end())
+		{
+			//rajouter une condition if pour ne pas faire le evolve si la converge d'une pop est atteinte
+			mFitnessHistory.insertNewStatistics(indice, mPopEngIt->statistics());
+
+			mPopEngIt->evolve();
+
+			++mPopEngIt;
+			++indice;
+		}
+
+
+	
+	}
+
+	else
+	{
+
+	}
 
 //vérifier les condtions de sorties pour arrêter de faire les evolve, avec une variable bool
-	//convergencerate, maximumGeneration, mutationRate???, 
-
-	//remplir à la fin du evolve 
-
-	//faire un HistoryStatistics----classe détenue par le GAEngine pour dealer avec les 
-	//statistics de chaque PopulationEngine à chaque époque, donc vecteur de vecteur ou dequoi de même.
+	//convergencerate, maximumGeneration, 
 }
 
 void GAEngine::setup(GAParameters parameters) {
@@ -63,5 +79,11 @@ void GAEngine::setup(GAParameters parameters) {
 	
 }
 
+void GAEngine::standardDeviation()
+{
 
-//std::clamp -> limiter la valeur
+}
+
+
+
+//calcul écart type des maximums de exemple 10 derniers statistics, si le rate de convergence est atteint, on arrête en comparant les écart types

@@ -3,8 +3,7 @@
 #include "GAParameters.h"
 #include "PopulationEngine.h"
 #include "FitnessHistory.h"
-
-using Population = size_t; //à enlever
+#include "Population.h"
 
 class GAEngine
 {
@@ -15,17 +14,19 @@ public:
 
 	~GAEngine() = default;
 
-	size_t & epoch();
+	size_t epoch() const;
 
-	const Population & population(size_t populationEngine);
+	const Population & population(size_t populationEngine) const;
 
-	const FitnessStatistics & statistics(size_t epoch);
+	const FitnessStatistics & statistics(size_t popIndex, size_t epoch) const;
 
 	void reset();
 
 	void evolve(); //peut-être retourné un bool
 
 	void setup(GAParameters parameters);
+
+	void standardDeviation();
 
 
 
@@ -34,8 +35,6 @@ private:
 	size_t mEpoch;
 
 	GAParameters mParameters;
-
-	std::vector<FitnessStatistics> mFitnessStatistics;
 
 	std::vector<PopulationEngine> mPopulationEngines;
 	std::vector<PopulationEngine>::iterator mPopEngIt;

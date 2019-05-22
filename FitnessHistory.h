@@ -14,13 +14,16 @@ public:
 
 	~FitnessHistory() = default;
 
-	void insertNewStatistics(size_t PopolutationEngine, FitnessStatistics statistics);
+	void insertNewStatistics(size_t PopulationEngine, FitnessStatistics statistics);
 
-	const FitnessStatistics & getStatistics(size_t PopolutationEngine, size_t epoch);
+	const FitnessStatistics & getStatistics(size_t PopulationEngine, size_t epoch) const;
+
+	void clearHistory(const size_t & popNumber);
 
 
 private:
 
 	std::vector<std::vector<FitnessStatistics>> mStatisticsHistory;
+
 
 };

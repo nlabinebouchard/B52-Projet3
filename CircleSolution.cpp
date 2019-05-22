@@ -44,7 +44,7 @@ bool CircleSolution::collide(Obstacle const & obs)
 
 void CircleSolution::draw()
 {
-	Console::getInstance().writer().createImage("Forme").drawCircle(x, y, r,'w', ConsoleColor::tb);
+	Console::getInstance().writer().image("Forme").drawCircle(x, y, r,'w', ConsoleColor::tb);
 }
 
 std::vector<bool> CircleSolution::encode(std::vector<size_t> vectSize)
