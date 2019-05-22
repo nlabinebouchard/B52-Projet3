@@ -86,7 +86,7 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 
 				case 'e':	// réinitialise les positions des obstacles
 
-
+					canvas.randomizeObstaclesPosition();
 
 					break;
 				case '1':	// Détermine le nombre de population
@@ -139,7 +139,7 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 					break;
 				case 'x':	// Bascule l'affichage des solution ( aucune - toutes - la meilleurs).
 					break;
-				case 27: ShapeOptimizer::accueil(curReader, curWriter, keys);
+				case 27: ShapeOptimizer::accueil(curReader, curWriter, keys,canvas);
 					break;
 				case 32: start = true; // barre d'espace // met sur pause
 					break;
