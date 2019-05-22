@@ -5,7 +5,7 @@
 
 struct SOParameters
 {
-	size_t width;
-	size_t height;
-	size_t obstacleCount;
+	size_t width{200};
+	size_t height{200};
+	size_t obstacleCount{55};
 };
