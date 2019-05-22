@@ -117,9 +117,11 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 	}
 }
 
-void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & curWriter, ConsoleKeyReader::KeyEvents & keys)
+void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & curWriter, ConsoleKeyReader::KeyEvents & keys,Canevas &canvas)
 {
 	bool start{ false };
+	bool affichageObs{ true };
+	bool enPause{ false };
 
 	while (start != true)
 	{
@@ -136,12 +138,16 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 				case 's':	// Si en pause, fait un seul pas d'évolution
 					break;
 				case 'z':	// Bascule l'affichage des obstacles ( aucun - tous)
+					affichageObs = !affichageObs;
+					ShapeOptimizer::afficherObstacle(curWriter,canvas,affichageObs);
 					break;
 				case 'x':	// Bascule l'affichage des solution ( aucune - toutes - la meilleurs).
 					break;
 				case 27: ShapeOptimizer::accueil(curReader, curWriter, keys,canvas);
+
 					break;
-				case 32: start = true; // barre d'espace // met sur pause
+				case 32: // barre d'espace // met sur pause
+					enPause = !enPause;
 					break;
 				}
 			}
@@ -151,11 +157,21 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 	}
 }
 
-void ShapeOptimizer::afficherObstacle()
+void ShapeOptimizer::afficherObstacle(ConsoleWriter & curWriter,Canevas &canvas, bool & affichageObs)
 {
-	for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
-	{
-		curWriter.createImage("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
+	std::vector<Obstacle> const &vectObstacle{ canvas.obstacles() };
+
+	if (affichageObs) {
+		for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
+		{
+			curWriter.image("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);;
+		}
+	}
+	else {
+		for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
+		{
+			curWriter.image("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bk);;
+		}
 	}
 }
 
@@ -192,7 +208,7 @@ int main()
 	curReader.installFilter(new ConsoleKeyFilterDown);
 	curReader.installFilter(new ConsoleKeyFilterModifiers);
 
-	main.accueil(curReader,curWriter, keys, canvas);
+	main.evolution(curReader,curWriter, keys, canvas);
 	
 
 }
