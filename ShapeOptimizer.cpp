@@ -41,7 +41,8 @@ void ShapeOptimizer::run()
 
 	main.setup(SOparams, GAparam);
 
-	mEngine.setup(GAparam);
+	//mEngine.setup(GAparam);
+
 
 	mCanvas.setup(SOparams);
 

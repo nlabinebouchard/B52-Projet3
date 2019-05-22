@@ -5,7 +5,7 @@
 #include "GAParameters.h"
 #include "Console\ConsoleKeyReader.h"
 #include "Canevas.h"
-#include "GAEngine.h"
+//#include "GAEngine.h"
 
 
 class ConsoleWriter;
@@ -30,7 +30,7 @@ public:
 	
 private:
 	Canevas mCanvas;
-	GAEngine mEngine;
+	//GAEngine mEngine;
 };
 
 #endif // SHAPEOPTIMIZER_H
