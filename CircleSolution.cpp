@@ -98,7 +98,7 @@ Solution * CircleSolution::clone()
 	return this;
 }
 
-void CircleSolution::randomize(Canevas canvas)
+void CircleSolution::randomize(Canevas & const canvas)
 {
 	x = RandomUtil::randomInRange(0, canvas.myWidth() - 1);
 	y = RandomUtil::randomInRange(0, canvas.myHeight() - 1);
