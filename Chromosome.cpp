@@ -74,3 +74,13 @@ void Chromosome::flip(size_t indice)
 		mData[indice] = !mData[indice];
 	}
 }
+
+std::vector<bool> Chromosome::myData()
+{
+	return mData;
+}
+
+std::vector<size_t> Chromosome::myGene()
+{
+	return mGene;
+}

@@ -1,9 +1,9 @@
 #include "ShapeSolution.h"
 
 
-ShapeSolution::ShapeSolution()
-{
-}
+ShapeSolution::ShapeSolution(Canevas  * ref)
+	:refCanevas{ ref }
+{}
 
 
 ShapeSolution::~ShapeSolution()
@@ -12,5 +12,6 @@ ShapeSolution::~ShapeSolution()
 
 void ShapeSolution::processFitness()
 {
-	setFitness((*this).perimeter());
+	setFitness((*this).area());
 }
+

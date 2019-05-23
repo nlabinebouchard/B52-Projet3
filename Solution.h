@@ -11,6 +11,7 @@ private:
 	Chromosome mChromosome;
 
 public:
+	Solution() = default;
 	Solution(std::vector <bool> const & vect, std::vector <size_t> vectBit);
 	fitness_t fitness() const;
 	Chromosome & chromosome();
@@ -18,10 +19,10 @@ public:
 	void setFitness(double num);
 
 	virtual void processFitness()=0;
-	virtual void randomize(Canevas canvas)=0;
-	virtual void encode()=0;
-	virtual void decode()=0;
-	virtual Solution* clone();
+	virtual void randomize()=0;
+	virtual std::vector <bool> encode(std::vector<size_t> vectSize)=0;
+	virtual void decode(std::vector <bool> vect, std::vector<size_t> vectSize)=0;
+	virtual Solution* clone()=0;
 private:
 };
 

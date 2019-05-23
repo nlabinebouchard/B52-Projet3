@@ -13,6 +13,7 @@ class ConsoleWriter;
 class ShapeOptimizer
 {
 public:
+
 	ShapeOptimizer() = default;
 	~ShapeOptimizer() = default;
 

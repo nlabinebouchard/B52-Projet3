@@ -18,17 +18,17 @@ public:
 	OrthoRectSolution();
 	~OrthoRectSolution();
 
-	double area() const;
-	double perimeter() const;
-	double distance(Obstacle const & obs) const;
+	double area() const override;
+	double perimeter() const override;
+	double distance(Obstacle const & obs) const override;
 	static double calculDistance(size_t x1, size_t y1, size_t x2, size_t y2);
-	bool collide(Obstacle const & obs) const;
-	void draw() const;
-	
-	std::vector <bool> encode(std::vector<size_t> vectSize);
-	void decode(std::vector <bool> vect, std::vector<size_t> vectSize);
-	Solution* clone();
-	void randomize(Canevas & const canvas);
+	bool collide(Obstacle const & obs) const override;
+	void draw() const override;
+
+	std::vector <bool> encode(std::vector<size_t> vectSize) override;
+	void decode(std::vector <bool> vect, std::vector<size_t> vectSize) override;
+	Solution* clone() override;
+	void randomize() override;
 };
 
 #endif // ORTHORECTSOLUTION_H
