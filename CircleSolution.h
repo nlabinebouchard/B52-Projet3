@@ -1,5 +1,5 @@
-#ifndef CIRCLESOLUTION.H
-#define CIRCLESOLUTION.H
+#ifndef CIRCLESOLUTION_H
+#define CIRCLESOLUTION_H
 #include "ShapeSolution.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -14,9 +14,9 @@ public:
 	size_t y;
 	size_t r;
 
-	CircleSolution();
-	~CircleSolution();
-
+	CircleSolution() = default;
+	~CircleSolution() = default;
+	//A refaire comme rect
 	double area();
 	double perimeter();
 	double distance(Obstacle const & obs);
@@ -29,4 +29,4 @@ public:
 	void randomize(Canevas & const canvas);
 };
 
-#endif // CIRCLESOLUTION.H
+#endif // CIRCLESOLUTION_H

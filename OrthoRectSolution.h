@@ -15,8 +15,8 @@ public:
 	size_t width;
 	size_t heigth;
 
-	OrthoRectSolution();
-	~OrthoRectSolution();
+	OrthoRectSolution() = default;
+	~OrthoRectSolution() = default;
 
 	double area() const override;
 	double perimeter() const override;

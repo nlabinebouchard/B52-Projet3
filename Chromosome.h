@@ -6,7 +6,7 @@ class Chromosome
 {
 private :
 	std::vector <bool> mData;
-	static std::vector <size_t> mGene;
+	std::vector <size_t> mGene;
 
 public :
 	Chromosome() = default;

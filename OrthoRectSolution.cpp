@@ -1,13 +1,5 @@
 #include "OrthoRectSolution.h"
 
-OrthoRectSolution::OrthoRectSolution()
-{
-}
-
-OrthoRectSolution::~OrthoRectSolution()
-{
-}
-
 double OrthoRectSolution::area() const { return width*heigth; }
 
 double OrthoRectSolution::perimeter() const { return 2*width+2*heigth; }
