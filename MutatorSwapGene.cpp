@@ -9,6 +9,7 @@ void MutatorSwapGene::mutate(Solution & offspring)
 	size_t fstRandBit;
 	size_t scdRandBit;
 	bool tempo;
+	bool notEqual = true;
 
 	if (RandomUtil::generateEvent(mMutationRate)) {
 
@@ -24,9 +25,9 @@ void MutatorSwapGene::mutate(Solution & offspring)
 				scdRandBit = RandomUtil::randomInRange(0, mPosBit);
 			}
 
-			while (true) {
+			while (notEqual) {
 				if (fstRandBit != scdRandBit) {
-					break;
+					notEqual = false;
 				}
 				scdRandBit = RandomUtil::randomInRange(0, offspring.chromosome().size() - 1);
 			}
@@ -36,6 +37,7 @@ void MutatorSwapGene::mutate(Solution & offspring)
 			offspring.chromosome().write(scdRandBit, tempo);
 
 			++mPosBit;
+			notEqual = true;
 		}
 	}
 }

@@ -9,6 +9,7 @@ void MutatorInversionGene::mutate(Solution & offspring)
 	size_t fstRandBit;
 	size_t scdRandBit;
 	std::vector<bool> mVecValueTempo;
+	bool notEqual = true;
 
 	if (RandomUtil::generateEvent(mMutationRate)) {
 
@@ -27,9 +28,9 @@ void MutatorInversionGene::mutate(Solution & offspring)
 				scdRandBit = RandomUtil::randomInRange(0, mPosBit);
 			}
 
-			while (true) {
+			while (notEqual) {
 				if (fstRandBit != scdRandBit) {
-					break;
+					notEqual = false;
 				}
 				scdRandBit = RandomUtil::randomInRange(0, offspring.chromosome().size() - 1);
 			}
