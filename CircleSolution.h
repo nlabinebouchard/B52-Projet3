@@ -17,16 +17,16 @@ public:
 	CircleSolution() = default;
 	~CircleSolution() = default;
 	//A refaire comme rect
-	double area();
-	double perimeter();
-	double distance(Obstacle const & obs);
-	bool collide(Obstacle const & obs);
-	void draw();
+	double area() const override;
+	double perimeter() const override;
+	double distance(Obstacle const & obs) const override;
+	bool collide(Obstacle const & obs) const override;
+	void draw() const override;
 
-	std::vector <bool> encode(std::vector<size_t> vectSize);
-	void decode(std::vector <bool> vect, std::vector<size_t> vectSize);
-	Solution* clone();
-	void randomize(Canevas & const canvas);
+	std::vector <bool> encode(std::vector<size_t> vectSize) override;
+	void decode(std::vector <bool> vect, std::vector<size_t> vectSize) override;
+	Solution* clone() override;
+	void randomize() override;
 };
 
 #endif // CIRCLESOLUTION_H
