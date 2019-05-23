@@ -95,7 +95,7 @@ void CircleSolution::randomize()
 	x = RandomUtil::randomInRange(0, refCanevas->myWidth() - 1);
 	y = RandomUtil::randomInRange(0, refCanevas->myHeight() - 1);
 	r = RandomUtil::randomInRange(0, refCanevas->myWidth() - x);
-	if (y + r > refCanevas->myHeight) {
+	if (y + r > refCanevas->myHeight && y-r < 0) {
 		r = RandomUtil::randomInRange(0, refCanevas->myHeight() - y);
 	}
 }
