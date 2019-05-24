@@ -16,6 +16,8 @@ public:
 
 	void insertNewStatistics(size_t PopulationEngine, FitnessStatistics statistics);
 
+	void setup(size_t PopulationEngine);
+
 	const FitnessStatistics & getStatistics(size_t PopulationEngine, size_t epoch) const;
 
 	void clearHistory(const size_t & popNumber);

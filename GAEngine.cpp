@@ -68,9 +68,14 @@ void GAEngine::setup(GAParameters parameters) {
 
 	mParameters = parameters;
 
+	mFitnessHistory.setup(mParameters.populationCount);
+
+	mPopulationEngines.resize(mParameters.populationCount);
+
+
 	for (size_t i = 0; i < parameters.populationCount; i++)
 	{
-		mPopulationEngines.push_back(PopulationEngine());
+		mPopulationEngines[i]=(PopulationEngine());
 		mPopulationEngines[i].setElitism(mParameters.elitismSize);
 		mPopulationEngines[i].setCrossover(mParameters.crossover);
 		mPopulationEngines[i].setMutator(mParameters.mutator);

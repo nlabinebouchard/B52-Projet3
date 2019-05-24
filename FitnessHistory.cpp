@@ -1,6 +1,9 @@
 #include "FitnessHistory.h"
 
-
+void FitnessHistory::setup(size_t PopulationEngine)
+{
+	mStatisticsHistory.resize(PopulationEngine);
+}
 
 void FitnessHistory::insertNewStatistics(size_t PopulationEngine, FitnessStatistics statistics) {
 

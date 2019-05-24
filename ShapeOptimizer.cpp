@@ -21,7 +21,7 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 	GAParams.maximumGenerationCount = 10;
 	GAParams.mutationRate = 0.05;
 	GAParams.mutator = new MutatorChromo;
-	GAParams.populationCount = 2;
+	GAParams.populationCount = 3;
 	GAParams.populationSize = 100;
 	GAParams.selector = new SelectorRouletteWheel;
 	GAParams.solutionSample = new CircleSolution(&mCanvas);
@@ -42,9 +42,9 @@ void ShapeOptimizer::run()
 	//GAEngine engine;
 	SOParameters SOparams;
 	GAParameters GAparam;
-	ShapeOptimizer main;
+	//ShapeOptimizer main;
 
-	main.setup(SOparams, GAparam);
+	setup(SOparams, GAparam);
 
 	mEngine.setup(GAparam);
 
@@ -56,13 +56,13 @@ void ShapeOptimizer::run()
 	ConsoleWriter &curWriter{ Console::getInstance().writer() };
 	std::vector<Obstacle> const &vectObstacle{ mCanvas.obstacles() };
 
-	for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
-	{
-		curWriter.createImage("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
-	}
+	//for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
+	//{
+	//	curWriter.createImage("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
+	//}
 
 	curWriter.createImage("Allo").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bR);
-	curWriter.write("Allo");
+	//curWriter.write("Allo");
 
 
 	bool start{ false };
@@ -72,7 +72,7 @@ void ShapeOptimizer::run()
 	curReader.installFilter(new ConsoleKeyFilterDown);
 	curReader.installFilter(new ConsoleKeyFilterModifiers);
 
-	main.evolution(curReader, curWriter, keys, mCanvas);
+	evolution(curReader, curWriter, keys, mCanvas);
 
 }
 
@@ -256,9 +256,12 @@ void ShapeOptimizer::afficherObstacle(ConsoleWriter & curWriter,Canevas &canvas,
 
 int main()
 {
-	ShapeOptimizer main;
+	ShapeOptimizer masterClass;
 
-	main.run();
+
+	masterClass.run();
+
+	
 
 	////Canevas canvas;
 	//SOParameters SOparams;

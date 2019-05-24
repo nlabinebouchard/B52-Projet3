@@ -101,7 +101,7 @@ void PopulationEngine::processElitism()
 	mActivePopPointer->sort();
 	for (size_t i = 0; i < mElitismSize; i++)
 	{
-		mNextPopPointer[i] = mActivePopPointer[i];
+		(*mNextPopPointer)[i] = (*mActivePopPointer)[i];
 	}
 }
 
