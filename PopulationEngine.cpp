@@ -54,31 +54,22 @@ void PopulationEngine::setPopulation(size_t size, Solution* solutionSample)
 
 void PopulationEngine::setSelector(Selector * selector)
 {
-	if (mSelector!=nullptr)
-	{
-		delete []mSelector;
-		mSelector = nullptr;
-	}
+	delete mSelector;
 	mSelector = selector;
 }
 
 void PopulationEngine::setCrossover(Crossover * crossover)
 {
-	if (mSelector != nullptr)
-	{
-		delete[]mCrossover;
-		mCrossover = nullptr;
-	}
+
+	delete mCrossover;
 	mCrossover = crossover;
+	
 }
 
 void PopulationEngine::setMutator(Mutator * mutator)
 {
-	if (mSelector != nullptr)
-	{
-		delete[]mMutator;
-		mMutator = nullptr;
-	}
+
+	delete mMutator;
 	mMutator = mutator;
 }
 

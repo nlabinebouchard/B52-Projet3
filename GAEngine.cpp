@@ -66,16 +66,24 @@ void GAEngine::evolve() {//retourner un bool pour savoir que le evolve est finit
 
 void GAEngine::setup(GAParameters parameters) {
 
+	mParameters = parameters;
+
 	for (size_t i = 0; i < parameters.populationCount; i++)
 	{
 		mPopulationEngines.push_back(PopulationEngine());
-		mPopulationEngines[i].setElitism(parameters.elitismSize);
-		mPopulationEngines[i].setCrossover(parameters.crossover);
-		mPopulationEngines[i].setMutator(parameters.mutator);
-		mPopulationEngines[i].setPopulation(parameters.populationSize,parameters.solutionSample);
-		mPopulationEngines[i].setSelector(parameters.selector);
+		mPopulationEngines[i].setElitism(mParameters.elitismSize);
+		mPopulationEngines[i].setCrossover(mParameters.crossover);
+		mPopulationEngines[i].setMutator(mParameters.mutator);
+		mPopulationEngines[i].setPopulation(mParameters.populationSize, mParameters.solutionSample);
+		mPopulationEngines[i].setSelector(mParameters.selector);
 		
 	}
+
+	parameters.crossover = nullptr;
+	parameters.mutator = nullptr;
+	parameters.selector = nullptr;
+
+
 	
 }
 

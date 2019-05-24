@@ -8,17 +8,19 @@ void MutatorSwapChromo::mutate(Solution & offspring)
 	size_t fstRandBit;
 	size_t scdRandBit;
 	bool tempo;
-	bool notEqual = true;
+	bool notEqual = false;
 
 	if (RandomUtil::generateEvent(mMutationRate)) {
 		fstRandBit = RandomUtil::randomInRange(0, offspring.chromosome().size() - 1);
 		scdRandBit = RandomUtil::randomInRange(0, offspring.chromosome().size() - 1);
 
-		while (notEqual) {
+		while (!notEqual) {
 			if (fstRandBit != scdRandBit) {
-				notEqual = false;
+				notEqual = true;
 			}
-			scdRandBit = RandomUtil::randomInRange(0, offspring.chromosome().size() - 1);
+			else {
+				scdRandBit = RandomUtil::randomInRange(0, offspring.chromosome().size() - 1);
+			}
 		}
 
 		tempo = offspring.chromosome().read(fstRandBit);

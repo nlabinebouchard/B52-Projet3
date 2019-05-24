@@ -12,23 +12,24 @@ void SelectorRouletteWheel::prepare(Population const & population)
 	mRankWeight.resize(population.size());
 
 	for (size_t i{}; i < population.size(); ++i) {
-		mTotalFitness+=population[i].fitness();
+		mTotalFitness += population[i].fitness();
 	}
 
 	for (size_t i{}; i < population.size(); ++i) {
 		mWeight = population[i].fitness();
-		mProbabilities = (mWeight / mTotalFitness) * mValueMax;
-		mRankWeight.insert(mRankWeight.begin()+i, mProbabilities);
+		mProbabilities = (mWeight * mValueMax) / mTotalFitness;
+		mRankWeight.at(i) = mProbabilities;
 	}
 }
 
 Solution & SelectorRouletteWheel::select(Population & population)
 {
-	fitness_t mMaxValueIntervalGene{};
+	fitness_t mMaxValueInterval{};
 	fitness_t mValueRandom = RandomUtil::randomRangeHundred(0.00, mValueMax);
 
 	for (size_t i{}; i < population.size(); ++i) {
-		if (mValueRandom < mRankWeight.at(i)) {
+		mMaxValueInterval += mRankWeight.at(i);
+		if (mValueRandom < mMaxValueInterval) {
 			return population[i];
 		}
 	}
