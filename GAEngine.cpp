@@ -92,9 +92,28 @@ void GAEngine::setup(GAParameters parameters) {
 	
 }
 
-void GAEngine::standardDeviation()
+void GAEngine::standardDeviation(size_t epochNumber, size_t popEngine)
 {
+	fitness_t mean{0};
+	fitness_t variance{ 0 };
+	fitness_t standardDeviation{ 0 };
 
+
+	for (size_t i = mEpoch; i > mEpoch-epochNumber; i++)
+	{
+		mean+=mFitnessHistory.getStatistics(popEngine, i).maximum;
+	}
+
+	mean /= epochNumber;
+
+	for (size_t i = mEpoch; i > mEpoch - epochNumber; i++)
+	{
+		variance += sqrt(mFitnessHistory.getStatistics(popEngine, i).maximum - mean);
+	}
+
+	standardDeviation = sqrt(variance / epochNumber);
+
+	
 }
 
 GAParameters  const & GAEngine::getParameters() const
