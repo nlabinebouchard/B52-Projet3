@@ -97,8 +97,7 @@ void GAEngine::standardDeviation()
 
 }
 
-
-GAParameters const & GAEngine::getParameters() const 
+GAParameters  const & GAEngine::getParameters() const
 {
 	return mParameters;
 }
