@@ -28,6 +28,8 @@ public:
 
 	void standardDeviation();
 
+	const GAParameters & getParameters();
+
 
 
 private:
