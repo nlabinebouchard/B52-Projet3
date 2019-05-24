@@ -3,9 +3,8 @@
 #include "ShapeSolution.h"
 #include <math.h>
 #include <vector>
-#include "Console\Console.h"
+#include "Console\ConsoleWriter.h"
 #include "RandomUtil.h"
-#include "Canevas.h"
 class OrthoRectSolution:public ShapeSolution
 {
 public:
@@ -15,7 +14,8 @@ public:
 	size_t width;
 	size_t heigth;
 
-	OrthoRectSolution() = default;
+	OrthoRectSolution(Canevas * ref);
+	OrthoRectSolution() = delete;
 	~OrthoRectSolution() = default;
 
 	double area() const override;
@@ -23,7 +23,7 @@ public:
 	double distance(Obstacle const & obs) const override;
 	static double calculDistance(size_t x1, size_t y1, size_t x2, size_t y2);
 	bool collide(Obstacle const & obs) const override;
-	void draw() const override;
+	void draw(ConsoleWriter &curWriter) const override;
 
 	std::vector <bool> encode(std::vector<size_t> vectSize) override;
 	void decode(std::vector <bool> vect, std::vector<size_t> vectSize) override;

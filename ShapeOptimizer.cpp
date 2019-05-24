@@ -3,29 +3,34 @@
 #include "Console\ConsoleContext.h"
 #include "Console\ConsoleKeyFilterDown.h"
 #include "Console\ConsoleKeyFilterModifiers.h"
-#include <iostream>
-
+#include "CrossoverChromoSinglePoint.h"
+#include "MutatorChromo.h"
+#include "SelectorRouletteWheel.h"
+#include "CircleSolution.h"
 
 void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 {
-
 	// Params du canevas
 	SOParams.height = 400;
 	SOParams.width = 400;
 	SOParams.obstacleCount = 50;
 	// Params du Genetic algorithm engine
-	GAParams.convergenceRate;		// = value
-	GAParams.crossover;				// = value
-	GAParams.elitismSize;			// = value
-	GAParams.maximumGenerationCount;// = value
-	GAParams.mutationRate;			// = value
-	GAParams.mutator;				// = value
-	GAParams.populationCount;		// = value
-	GAParams.populationSize;		// = value
-	GAParams.selector;				// = value
-	GAParams.solutionSample;		// = value
-	
+	GAParams.convergenceRate = 1;
+	GAParams.crossover = new CrossoverChromoSinglePoint;
+	GAParams.elitismSize = 5;
+	GAParams.maximumGenerationCount = 10;
+	GAParams.mutationRate = 0.05;
+	GAParams.mutator = new MutatorChromo;
+	GAParams.populationCount = 2;
+	GAParams.populationSize = 100;
+	GAParams.selector = new SelectorRouletteWheel;
+	GAParams.solutionSample = new CircleSolution(&mCanvas);
 
+
+
+
+
+	int a{ 0 };
 
 
 }
@@ -34,19 +39,17 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 void ShapeOptimizer::run()
 {
 	//Canevas canvas;
+	//GAEngine engine;
 	SOParameters SOparams;
 	GAParameters GAparam;
-	//GAEngine engine;
 	ShapeOptimizer main;
 
 	main.setup(SOparams, GAparam);
 
-	//mEngine.setup(GAparam);
-
+	mEngine.setup(GAparam);
 
 	mCanvas.setup(SOparams);
 
-	//GAparam.populationCount = 1;
 
 	ConsoleContext myContext(mCanvas.width(), mCanvas.height(), "Projet-3 B52", 2, 2, L"Consolas");
 	Console::defineContext(myContext);
@@ -156,7 +159,7 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 			}
 		}
 
-	
+		
 		//curWriter.createImage("Allo").drawRect(5 + keyPressed.keyA(), 5 + keyPressed.keyA(), 10, 10, ' ', ConsoleColor::bR);
 		curWriter.write("Allo"); // affiche l'image
 		
@@ -184,7 +187,7 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 				{
 				case 's':
 					if (enPause) {
-						
+						mEngine.evolve();
 					}
 					break;
 				case 'z':	// Bascule l'affichage des obstacles ( aucun - tous)
@@ -196,8 +199,8 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 					if (etatSolution == 3) { etatSolution = 0; }
 					ShapeOptimizer::afficherSolution(curWriter, canvas, etatSolution);
 					break;
-				case 27: ShapeOptimizer::accueil(curReader, curWriter, keys,canvas);
-
+				case 27: 
+					ShapeOptimizer::accueil(curReader, curWriter, keys,canvas);
 					break;
 				case 32: // barre d'espace // met sur pause
 					enPause = !enPause;
@@ -206,8 +209,14 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 			}
 		}
 		//curWriter.createImage("Allo").drawRect(5 + keyPressed.keyA(), 5 + keyPressed.keyA(), 10, 10, ' ', ConsoleColor::bR);
+		if (!enPause) {
+			mEngine.evolve();
+			int a{ 0 };
+		}
 		curWriter.write("Allo"); // affiche l'image
 	}
+
+
 }
 
 void ShapeOptimizer::afficherSolution(ConsoleWriter & curWriter, Canevas & canvas, size_t etat)

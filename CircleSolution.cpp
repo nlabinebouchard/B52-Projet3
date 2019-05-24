@@ -1,5 +1,9 @@
 #include "CircleSolution.h"
 
+CircleSolution::CircleSolution(Canevas * ref)
+	:ShapeSolution(ref)
+{}
+
 double CircleSolution::area() const
 { 
 	return M_PI * pow(r,2) ; 
@@ -34,9 +38,9 @@ bool CircleSolution::collide(Obstacle const & obs) const
 	}
 }
 
-void CircleSolution::draw() const
+void CircleSolution::draw(ConsoleWriter &curWriter) const
 {
-	Console::getInstance().writer().image("Forme").drawCircle(x, y, r,'w', ConsoleColor::tb);
+	curWriter.image("Forme").drawCircle(x, y, r,' ', ConsoleColor::bC);
 }
 
 std::vector<bool> CircleSolution::encode(std::vector<size_t> vectSize)

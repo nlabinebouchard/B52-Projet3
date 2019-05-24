@@ -1,5 +1,10 @@
 #include "OrthoRectSolution.h"
 
+OrthoRectSolution::OrthoRectSolution(Canevas * ref)
+	:ShapeSolution(ref)
+{
+}
+
 double OrthoRectSolution::area() const { return width*heigth; }
 
 double OrthoRectSolution::perimeter() const { return 2*width+2*heigth; }
@@ -59,9 +64,10 @@ bool OrthoRectSolution::collide(Obstacle const & obs) const
 	}
 }
 
-void OrthoRectSolution::draw() const
+void OrthoRectSolution::draw(ConsoleWriter &curWriter) const
 {
-	Console::getInstance().writer().image("Forme").drawRect(1, 1, 10, 10, 'w', ConsoleColor::tb);
+	curWriter.image("Forme").drawRect(x, y, (int)width, heigth, ' ', ConsoleColor::bC);
+	
 }
 
 std::vector<bool> OrthoRectSolution::encode(std::vector<size_t> vectSize)

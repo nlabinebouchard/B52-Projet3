@@ -2,6 +2,7 @@
 #define SHAPESOLUTION_H
 #include "Solution.h"
 #include "Obstacle.h"
+#include "Console\ConsoleWriter.h"
 
 class ShapeSolution:public Solution
 {
@@ -13,7 +14,7 @@ public:
 
 	void processFitness();
 
-	virtual void draw() const=0;
+	virtual void draw(ConsoleWriter &curWriter) const=0;
 	virtual bool collide(Obstacle const & obs) const=0;
 	virtual double distance(Obstacle const & obs) const=0;
 	virtual double area() const=0;

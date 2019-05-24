@@ -33,7 +33,7 @@ void GAEngine::reset() {
 void GAEngine::evolve() {//retourner un bool pour savoir que le evolve est finit
 
 
-	if (mParameters.maximumGenerationCount > mEpoch)
+	if (mParameters.maximumGenerationCount >= mEpoch)
 	{
 
 
