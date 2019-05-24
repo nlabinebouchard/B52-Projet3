@@ -61,14 +61,14 @@ void MutatorScrambleChromo::mutate(Solution & offspring)
 
 				while (notEqual) {
 					if (fstRandPos != scdRandPos) {
-						notEqual=false;
+						notEqual=true;
 					}
 					scdRandPos = RandomUtil::randomInRange(0, offspring.chromosome().size() - 1);
 				}
 				tempo = mVecValueTempo.at(scdRandPos);
 				mVecValueTempo.insert(mVecValueTempo.begin() + scdRandPos, mVecValueTempo.at(fstRandPos));
 				mVecValueTempo.insert(mVecValueTempo.begin() + fstRandPos, tempo);
-				notEqual = true;
+				notEqual = false;
 			}
 			for (size_t i = scdRandBit; i < fstRandBit; ++i) {
 				offspring.chromosome().write(i, mVecValueTempo.at(i));
