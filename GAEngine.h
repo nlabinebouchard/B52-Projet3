@@ -28,7 +28,7 @@ public:
 
 	void standardDeviation();
 
-	const GAParameters & getParameters();
+	GAParameters const& getParameters() const;
 
 
 

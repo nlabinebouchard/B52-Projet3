@@ -132,9 +132,9 @@ Solution*  OrthoRectSolution::clone()
 
 void OrthoRectSolution::randomize()
 {
-	x = RandomUtil::randomInRange(0,refCanevas->myWidth()  - 1);
-	y = RandomUtil::randomInRange(0, refCanevas->myHeight() - 1);
-	width = RandomUtil::randomInRange(0, refCanevas->myWidth() - x);
-	heigth = RandomUtil::randomInRange(0, refCanevas->myHeight() - y);
+	x = RandomUtil::randomInRange(0,refCanevas->width()  - 1);
+	y = RandomUtil::randomInRange(0, refCanevas->height() - 1);
+	width = RandomUtil::randomInRange(0, refCanevas->width() - x);
+	heigth = RandomUtil::randomInRange(0, refCanevas->height() - y);
 }
 

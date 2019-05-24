@@ -48,6 +48,8 @@ void PopulationEngine::setPopulation(size_t size, Solution* solutionSample)
 	mActivePopPointer=&mActivePopulation;
 	mNextPopPointer=&mNextPopulation;
 
+	randomize();
+
 	processFitness();
 	processStatistics();
 }

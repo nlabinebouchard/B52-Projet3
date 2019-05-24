@@ -15,22 +15,17 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 	SOParams.width = 400;
 	SOParams.obstacleCount = 50;
 	// Params du Genetic algorithm engine
-	GAParams.convergenceRate = 1;
+	GAParams.convergenceRate = 10;
 	GAParams.crossover = new CrossoverChromoSinglePoint;
 	GAParams.elitismSize = 5;
-	GAParams.maximumGenerationCount = 10;
+	GAParams.maximumGenerationCount = 1000;
 	GAParams.mutationRate = 0.05;
 	GAParams.mutator = new MutatorChromo;
-	GAParams.populationCount = 3;
-	GAParams.populationSize = 100;
+	GAParams.populationCount = 1;
+	GAParams.populationSize = 10;
 	GAParams.selector = new SelectorRouletteWheel;
 	GAParams.solutionSample = new CircleSolution(&mCanvas);
 
-
-
-
-
-	int a{ 0 };
 
 
 }
@@ -46,9 +41,10 @@ void ShapeOptimizer::run()
 
 	setup(SOparams, GAparam);
 
+	mCanvas.setup(SOparams);
+
 	mEngine.setup(GAparam);
 
-	mCanvas.setup(SOparams);
 
 
 	ConsoleContext myContext(mCanvas.width(), mCanvas.height(), "Projet-3 B52", 2, 2, L"Consolas");
@@ -56,13 +52,12 @@ void ShapeOptimizer::run()
 	ConsoleWriter &curWriter{ Console::getInstance().writer() };
 	std::vector<Obstacle> const &vectObstacle{ mCanvas.obstacles() };
 
-	curWriter.createImage("Allo").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bR);
+	curWriter.createImage("Forme");
 	for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
 	{
-		curWriter.image("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
+		curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
 	}
 
-	//curWriter.write("Allo");
 
 
 	bool start{ false };
@@ -102,7 +97,7 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 					}
 					for (size_t i{ vectObstacle.size()-10 }; i < vectObstacle.size(); ++i)
 					{
-						curWriter.image("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
+						curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
 					}
 					break;
 
@@ -112,12 +107,12 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 					if (vectObstacle.size() >= 15) {
 						canvas.setObstacleCount(vectObstacle.size() - 10);
 					}
-					curWriter.removeImage("Allo");
-					curWriter.createImage("Allo");
+					curWriter.removeImage("Forme");
+					curWriter.createImage("Forme");
 
 					for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
 					{
-						curWriter.image("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
+						curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
 					}
 
 					break;
@@ -125,12 +120,12 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 				case 'e':	// réinitialise les positions des obstacles
 
 					canvas.randomizeObstaclesPosition();
-					curWriter.removeImage("Allo");
-					curWriter.createImage("Allo");
+					curWriter.removeImage("Forme");
+					curWriter.createImage("Forme");
 
 					for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
 					{
-						curWriter.image("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
+						curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
 					}
 
 					break;
@@ -160,8 +155,8 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 		}
 
 		
-		//curWriter.createImage("Allo").drawRect(5 + keyPressed.keyA(), 5 + keyPressed.keyA(), 10, 10, ' ', ConsoleColor::bR);
-		curWriter.write("Allo"); // affiche l'image
+		//curWriter.createImage("Forme").drawRect(5 + keyPressed.keyA(), 5 + keyPressed.keyA(), 10, 10, ' ', ConsoleColor::bR);
+		curWriter.write("Forme"); // affiche l'image
 		
 	}
 }
@@ -178,6 +173,7 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 		// menu d'acceuil
 
 		curReader.read(keys);
+
 
 		if (keys.size() != 0)
 		{
@@ -208,19 +204,19 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 				}
 			}
 		}
-		//curWriter.createImage("Allo").drawRect(5 + keyPressed.keyA(), 5 + keyPressed.keyA(), 10, 10, ' ', ConsoleColor::bR);
+		//curWriter.createImage("Forme").drawRect(5 + keyPressed.keyA(), 5 + keyPressed.keyA(), 10, 10, ' ', ConsoleColor::bR);
 		if (!enPause) {
 			mEngine.evolve();
 			int a{ 0 };
 		}
-
-		for (size_t i{ 0 }; i < mEngine.getSize(); ++i) {
-			for (size_t j{ 0 }; j < mEngine.population(i).size;++j) {
-				
+		
+		for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
+			for (size_t j{ 0 }; j < mEngine.population(i).size();++j) {
+				static_cast<ShapeSolution const &>(mEngine.population(i)[j]).draw(curWriter);
 			}
 		}
 
-		curWriter.write("Allo"); // affiche l'image
+		curWriter.write("Forme"); // affiche l'image
 	}
 
 
@@ -231,13 +227,13 @@ void ShapeOptimizer::afficherSolution(ConsoleWriter & curWriter, Canevas & canva
 	switch (etat)
 	{
 	case 0:
-		curWriter.createImage("Allo").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bk); // a changer pour une boucle qui passe a travers la population pou rfaire afficher les solution avec la methode draw dans les obj
+		curWriter.createImage("Forme").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bk); // a changer pour une boucle qui passe a travers la population pou rfaire afficher les solution avec la methode draw dans les obj
 		break;
 	case 1:
-		curWriter.createImage("Allo").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bR);
+		curWriter.createImage("Forme").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bR);
 		break;
 	case 2:
-		curWriter.createImage("Allo").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bC);
+		curWriter.createImage("Forme").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bC);
 		break;
 	}
 }
@@ -249,13 +245,13 @@ void ShapeOptimizer::afficherObstacle(ConsoleWriter & curWriter,Canevas &canvas,
 	if (affichageObs) {
 		for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
 		{
-			curWriter.image("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);;
+			curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);;
 		}
 	}
 	else {
 		for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
 		{
-			curWriter.image("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bk);;
+			curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bk);;
 		}
 	}
 }
@@ -267,45 +263,5 @@ int main()
 
 
 	masterClass.run();
-
-	
-
-	////Canevas canvas;
-	//SOParameters SOparams;
-	//GAParameters GAparam;
-	////GAEngine engine;
-	//ShapeOptimizer main;
-
-	//main.setup(SOparams, GAparam);
-
-	//mEngine.setup(GAparam);
-
-	//mCanvas.setup(SOparams);
-
-	//GAparam.populationCount = 1;
-
-	//ConsoleContext myContext(canvas.width(), canvas.height(), "Projet-3 B52", 2, 2, L"Consolas");
-	//Console::defineContext(myContext);
-	//ConsoleWriter &curWriter{ Console::getInstance().writer() };
-	//std::vector<Obstacle> const &vectObstacle{ canvas.obstacles() };
-
-	//for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
-	//{
-	//	curWriter.createImage("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
-	//}
-
-	//curWriter.createImage("Allo").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bR);
-	//curWriter.write("Allo");
-
-
-	//bool start{ false };
-
-	//ConsoleKeyReader::KeyEvents keys;
-	//ConsoleKeyReader &curReader{ Console::getInstance().keyReader() };
-	//curReader.installFilter(new ConsoleKeyFilterDown);
-	//curReader.installFilter(new ConsoleKeyFilterModifiers);
-
-	//main.accueil(curReader,curWriter, keys, canvas);
-	//
 
 }

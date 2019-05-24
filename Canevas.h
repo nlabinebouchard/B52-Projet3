@@ -25,9 +25,6 @@ public:
 
 	void randomizeObstaclesPosition();
 
-	size_t myWidth();
-	size_t myHeight();
-
 private:
 	size_t mWidth;
 	size_t mHeight;
