@@ -18,7 +18,7 @@ void SelectorRouletteWheel::prepare(Population const & population)
 	for (size_t i{}; i < population.size(); ++i) {
 		mWeight = population[i].fitness();
 		mProbabilities = (mWeight * mValueMax) / mTotalFitness;
-		mRankWeight.at(i) = mProbabilities;
+		mRankWeight[i] = mProbabilities;
 	}
 }
 
@@ -28,7 +28,7 @@ Solution & SelectorRouletteWheel::select(Population & population)
 	fitness_t mValueRandom = RandomUtil::randomRangeHundred(0.00, mValueMax);
 
 	for (size_t i{}; i < population.size(); ++i) {
-		mMaxValueInterval += mRankWeight.at(i);
+		mMaxValueInterval += mRankWeight[i];
 		if (mValueRandom < mMaxValueInterval) {
 			return population[i];
 		}
