@@ -56,12 +56,12 @@ void ShapeOptimizer::run()
 	ConsoleWriter &curWriter{ Console::getInstance().writer() };
 	std::vector<Obstacle> const &vectObstacle{ mCanvas.obstacles() };
 
-	//for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
-	//{
-	//	curWriter.createImage("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
-	//}
-
 	curWriter.createImage("Allo").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bR);
+	for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
+	{
+		curWriter.image("Allo").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
+	}
+
 	//curWriter.write("Allo");
 
 
@@ -213,6 +213,13 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 			mEngine.evolve();
 			int a{ 0 };
 		}
+
+		for (size_t i{ 0 }; i < mEngine.getSize(); ++i) {
+			for (size_t j{ 0 }; j < mEngine.population(i).size;++j) {
+				
+			}
+		}
+
 		curWriter.write("Allo"); // affiche l'image
 	}
 

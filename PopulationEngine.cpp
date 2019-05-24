@@ -101,8 +101,10 @@ void PopulationEngine::processElitism()
 	mActivePopPointer->sort();
 	for (size_t i = 0; i < mElitismSize; i++)
 	{
-		(*mNextPopPointer)[i] = (*mActivePopPointer)[i];
+		(*mNextPopPointer)[i] = (*mActivePopPointer)[i]; ////////////////////////////////
 	}
+
+
 }
 
 void PopulationEngine::processOneOffspring(size_t index)
@@ -116,6 +118,7 @@ void PopulationEngine::processOneOffspring(size_t index)
 
 void PopulationEngine::processOffsprings()
 {
+	mSelector->prepare(population());
 	for (size_t i = mElitismSize; i < mActivePopPointer->size(); i++)  //commence après les éléments élites
 	{
 		processOneOffspring(i);
