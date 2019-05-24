@@ -7,11 +7,11 @@
 void CrossoverChromoSinglePoint::breed(Solution const & genitor1, Solution const & genitor2, Solution & offspring)
 {
 	size_t bitPivot;
-	size_t index{};
+	size_t index;
 
 	bitPivot = RandomUtil::randomInRange(0, offspring.chromosome().size());
 
-	for (index; index < bitPivot; ++index) {
+	for (index=0; index < bitPivot; ++index) {
 		offspring.chromosome().write(index, genitor1.chromosome().read(index));
 	}
 

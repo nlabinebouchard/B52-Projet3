@@ -15,8 +15,6 @@ public:
 private:
 
 	static bool ToBeCompare(Solution* s1, Solution* s2);
-	
-	std::vector <Solution*> mSolutionSelected;
 
 };
 

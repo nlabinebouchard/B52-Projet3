@@ -5,20 +5,24 @@
 	
 Solution & SelectorTournament::select(Population & population)
 {
-	size_t randTourPop = RandomUtil::randomInRange(2, population.size()-1);
-	Solution * solution = NULL;
+	std::vector<Solution*> solutionSelected;
+	size_t randTourPop;
 
-	mSolutionSelected.resize(randTourPop);
-
-	for (size_t i = 0; i < randTourPop; ++i) {
-
-		*solution = SelectorRouletteWheel::select(population);
-
-		mSolutionSelected.insert(mSolutionSelected.begin()+i, solution);
+	if (population.size() == 1) {
+		return population[0];
 	}
-	std::sort(mSolutionSelected.begin(), mSolutionSelected.end(), ToBeCompare);
+	else {
+		randTourPop = RandomUtil::randomInRange(2, population.size() - 1);
+	}
 
-	return *mSolutionSelected.back();
+	solutionSelected.resize(randTourPop);
+	for (auto & sol : solutionSelected) {
+		sol = &SelectorRouletteWheel::select(population);
+	}
+
+	std::sort(solutionSelected.begin(), solutionSelected.end(), ToBeCompare);
+
+	return *solutionSelected.back();
 }
 
 bool SelectorTournament::ToBeCompare(Solution* s1, Solution* s2)
