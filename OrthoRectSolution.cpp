@@ -1,13 +1,5 @@
 #include "OrthoRectSolution.h"
 
-OrthoRectSolution::OrthoRectSolution()
-{
-}
-
-OrthoRectSolution::~OrthoRectSolution()
-{
-}
-
 double OrthoRectSolution::area() const { return width*heigth; }
 
 double OrthoRectSolution::perimeter() const { return 2*width+2*heigth; }
@@ -127,16 +119,16 @@ void OrthoRectSolution::decode(std::vector<bool> vect, std::vector<size_t> vectS
 	}
 }
 
-Solution * OrthoRectSolution::clone()
+Solution*  OrthoRectSolution::clone()
 {
-	return this;
+	return new OrthoRectSolution(*this);
 }
 
-void OrthoRectSolution::randomize(Canevas & const canvas)
+void OrthoRectSolution::randomize()
 {
-	x = RandomUtil::randomInRange(0, canvas.myWidth() - 1);
-	y = RandomUtil::randomInRange(0, canvas.myHeight() - 1);
-	width = RandomUtil::randomInRange(0, canvas.myWidth() - x);
-	heigth = RandomUtil::randomInRange(0, canvas.myHeight() - y);
+	x = RandomUtil::randomInRange(0,refCanevas->myWidth()  - 1);
+	y = RandomUtil::randomInRange(0, refCanevas->myHeight() - 1);
+	width = RandomUtil::randomInRange(0, refCanevas->myWidth() - x);
+	heigth = RandomUtil::randomInRange(0, refCanevas->myHeight() - y);
 }
 

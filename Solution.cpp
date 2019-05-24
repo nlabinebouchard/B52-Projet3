@@ -23,8 +23,3 @@ void Solution::setFitness(double num)
 {
 	mFitness = num;
 }
-
-Solution* Solution::clone() 
-{ 
-	return this; 
-}

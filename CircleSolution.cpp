@@ -1,24 +1,16 @@
 #include "CircleSolution.h"
 
-CircleSolution::CircleSolution()
-{
-}
-
-CircleSolution::~CircleSolution()
-{
-}
-
-double CircleSolution::area() 
+double CircleSolution::area() const
 { 
 	return M_PI * pow(r,2) ; 
 }
 
-double CircleSolution::perimeter()
+double CircleSolution::perimeter() const
 {
 	return 2*M_PI*r;
 }
 
-double CircleSolution::distance(Obstacle const & obs)
+double CircleSolution::distance(Obstacle const & obs) const
 {
 	size_t pX = static_cast<size_t>(obs.posX());
 	size_t pY = static_cast<size_t>(obs.posY());
@@ -32,7 +24,7 @@ double CircleSolution::distance(Obstacle const & obs)
 	}
 }
 
-bool CircleSolution::collide(Obstacle const & obs)
+bool CircleSolution::collide(Obstacle const & obs) const
 {
 	if (distance(obs) == -1) {
 		return true;
@@ -42,7 +34,7 @@ bool CircleSolution::collide(Obstacle const & obs)
 	}
 }
 
-void CircleSolution::draw()
+void CircleSolution::draw() const
 {
 	Console::getInstance().writer().image("Forme").drawCircle(x, y, r,'w', ConsoleColor::tb);
 }
@@ -95,12 +87,15 @@ void CircleSolution::decode(std::vector<bool> vect, std::vector<size_t> vectSize
 
 Solution * CircleSolution::clone()
 {
-	return this;
+	return new CircleSolution(*this);
 }
 
-void CircleSolution::randomize(Canevas & const canvas)
+void CircleSolution::randomize()
 {
-	x = RandomUtil::randomInRange(0, canvas.myWidth() - 1);
-	y = RandomUtil::randomInRange(0, canvas.myHeight() - 1);
-	r = RandomUtil::randomInRange(0, canvas.myWidth() - x);
+	x = RandomUtil::randomInRange(0, refCanevas->myWidth() - 1);
+	y = RandomUtil::randomInRange(0, refCanevas->myHeight() - 1);
+	r = RandomUtil::randomInRange(0, refCanevas->myWidth() - x);
+	if (y + r > refCanevas->myHeight() && y-r < 0) {
+		r = RandomUtil::randomInRange(0, refCanevas->myHeight() - y);
+	}
 }

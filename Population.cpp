@@ -24,10 +24,10 @@ void Population::sort()
 	std::sort(vectSolution.begin(), vectSolution.end(), Comparator);
 }
 
-void Population::randomize(Canevas & const canvas)
+void Population::randomize()
 {
 	for (size_t i{}; i < vectSolution.size(); ++i) {
-		vectSolution[i]->randomize(canvas);
+		vectSolution[i]->randomize();
 	}
 }
 

@@ -6,10 +6,10 @@ class Chromosome
 {
 private :
 	std::vector <bool> mData;
-	static std::vector <size_t> mGene;
+	std::vector <size_t> mGene;
 
 public :
-
+	Chromosome() = default;
 	Chromosome(std::vector <bool> const & vect, std::vector <size_t> vectBit);
 
 	size_t size() const;								//size de mData
@@ -23,6 +23,8 @@ public :
 	void write(size_t ind, size_t valeur);				//write mData
 	void flip(size_t indice);							//flip mData
 
+	std::vector <bool> myData();
+	std::vector <size_t> myGene();
 };
 
 #endif // CHROMOSOME_H

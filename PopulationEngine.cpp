@@ -4,6 +4,17 @@
 
 
 
+
+
+PopulationEngine::PopulationEngine()
+	:mMutator{nullptr},
+	mSelector{ nullptr },
+	mCrossover{ nullptr },
+	mActivePopPointer{ nullptr },
+	mNextPopPointer{ nullptr }
+{
+}
+
 bool PopulationEngine::isReady() const//à voir!!!!!!!!!!!!!
 {
 	return true;
@@ -43,16 +54,31 @@ void PopulationEngine::setPopulation(size_t size, Solution* solutionSample)
 
 void PopulationEngine::setSelector(Selector * selector)
 {
+	if (mSelector!=nullptr)
+	{
+		delete []mSelector;
+		mSelector = nullptr;
+	}
 	mSelector = selector;
 }
 
 void PopulationEngine::setCrossover(Crossover * crossover)
 {
+	if (mSelector != nullptr)
+	{
+		delete[]mCrossover;
+		mCrossover = nullptr;
+	}
 	mCrossover = crossover;
 }
 
 void PopulationEngine::setMutator(Mutator * mutator)
 {
+	if (mSelector != nullptr)
+	{
+		delete[]mMutator;
+		mMutator = nullptr;
+	}
 	mMutator = mutator;
 }
 
@@ -91,7 +117,7 @@ void PopulationEngine::processElitism()
 void PopulationEngine::processOneOffspring(size_t index)
 {
 	mCrossover->breed(mSelector->select(population()), mSelector->select(population()),(*mNextPopPointer)[index]);
-	if (RandomUtil::generateEvent(mMutator->mutationRate) == true)
+	if (RandomUtil::generateEvent(mMutator->mutationRate()) == true)
 	{
 		(*mMutator).mutate((*mNextPopPointer)[index]);
 	}

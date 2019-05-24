@@ -13,7 +13,7 @@ class PopulationEngine
 public:
 
 
-	PopulationEngine() = default;
+	PopulationEngine();
 
 	~PopulationEngine() = default;
 

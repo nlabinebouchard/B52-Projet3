@@ -1,5 +1,5 @@
-#ifndef SOPARAMETERS.H
-#define SOPARAMETERS.H
+#ifndef SOPARAMETERS_H
+#define SOPARAMETERS_H
 
 class PolygonSolution
 {
@@ -14,4 +14,4 @@ public:
 
 };
 
-#endif // SOPARAMETERS.H
+#endif // SOPARAMETERS_H
