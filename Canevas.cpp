@@ -62,14 +62,4 @@ void Canevas::randomizeObstaclesPosition()
 	}
 }
 
-size_t Canevas::myWidth()
-{
-	return mWidth;
-}
-
-size_t Canevas::myHeight()
-{
-	return mHeight;
-}
-
 

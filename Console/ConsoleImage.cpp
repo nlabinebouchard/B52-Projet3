@@ -222,7 +222,7 @@ int ConsoleImage::height() const
 }
 
 //template <> exception_management
-#define WHEN_OUT_OF_RANGE_STILL_NEED_FOR_SPEED
+#define WHEN_OUT_OF_RANGE_GO_TO_NEAREST
 
 CHAR_INFO * ConsoleImage::get(int x, int y) const
 {
