@@ -6,6 +6,8 @@
 class MutatorInversionChromo : public Mutator
 {
 public:
+	MutatorInversionChromo() = default;
+	~MutatorInversionChromo() = default;
 
 	void mutate(Solution & offspring) override;
 

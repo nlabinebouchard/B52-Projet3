@@ -9,7 +9,7 @@ public:
 	double mutationRate() const;
 	void setMutationRate(double newRate);
 
-	virtual void mutate(Solution & chromo)=0;
+	virtual void mutate(Solution & chromo) = 0;
 
 protected:
 	double mMutationRate{};

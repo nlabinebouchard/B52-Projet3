@@ -5,15 +5,11 @@
 
 void MutatorSwapChromo::mutate(Solution & offspring)
 {
-	size_t fstRandBit;
-	size_t scdRandBit;
-	bool tempo;
-	bool notEqual = false;
-
 	if (RandomUtil::generateEvent(mMutationRate)) {
-		fstRandBit = RandomUtil::randomInRange(0, offspring.chromosome().size() - 1);
-		scdRandBit = RandomUtil::randomInRange(0, offspring.chromosome().size() - 1);
+		size_t fstRandBit{ RandomUtil::randomInRange(0, offspring.chromosome().size() - 1) };
+		size_t scdRandBit{ RandomUtil::randomInRange(0, offspring.chromosome().size() - 1) };
 
+		bool notEqual{ false };
 		while (!notEqual) {
 			if (fstRandBit != scdRandBit) {
 				notEqual = true;
@@ -23,7 +19,7 @@ void MutatorSwapChromo::mutate(Solution & offspring)
 			}
 		}
 
-		tempo = offspring.chromosome().read(fstRandBit);
+		bool tempo{ offspring.chromosome().read(fstRandBit) };
 		offspring.chromosome().write(fstRandBit, offspring.chromosome().read(scdRandBit));
 		offspring.chromosome().write(scdRandBit, tempo);
 	}

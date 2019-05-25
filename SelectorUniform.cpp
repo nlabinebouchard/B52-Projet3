@@ -12,3 +12,4 @@ Solution & SelectorUniform::select(Population & population)
 	size_t mValueRandom = RandomUtil::randomInRange(0, endPop);
 	return population[mValueRandom];
 }
+

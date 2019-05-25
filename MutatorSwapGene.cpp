@@ -3,41 +3,38 @@
 #include "RandomUtil.h"
 #include "Solution.h"
 
+
 void MutatorSwapGene::mutate(Solution & offspring)
 {
-	size_t mPosBit{};
-	size_t fstRandBit;
-	size_t scdRandBit;
-	bool tempo;
-	bool notEqual = true;
+	size_t posBit{};
+	size_t lastPosBit{};
+	bool notEqual{ false };
 
 	if (RandomUtil::generateEvent(mMutationRate)) {
 
 		for (size_t z{}; z < offspring.chromosome().sizeGene(); ++z) {
-			mPosBit += offspring.chromosome().readGene(z) - 1;
+			posBit += offspring.chromosome().readGene(z) - 1;
 
-			if (z > 0) {
-				fstRandBit = RandomUtil::randomInRange(mPosBit - (offspring.chromosome().readGene(z) - 1), mPosBit);
-				scdRandBit = RandomUtil::randomInRange(mPosBit - (offspring.chromosome().readGene(z) - 1), mPosBit);
-			}
-			else {
-				fstRandBit = RandomUtil::randomInRange(0, mPosBit);
-				scdRandBit = RandomUtil::randomInRange(0, mPosBit);
-			}
+			size_t fstRandBit{ RandomUtil::randomInRange(lastPosBit, posBit) };
+			size_t scdRandBit{ RandomUtil::randomInRange(lastPosBit, posBit) };
 
-			while (notEqual) {
+			while (!notEqual) {
 				if (fstRandBit != scdRandBit) {
-					notEqual = false;
+					notEqual = true;
 				}
-				scdRandBit = RandomUtil::randomInRange(0, offspring.chromosome().size() - 1);
+				else {
+					scdRandBit = RandomUtil::randomInRange(lastPosBit, posBit);
+				}
 			}
 
-			tempo = offspring.chromosome().read(fstRandBit);
+			bool tempo{ offspring.chromosome().read(fstRandBit) };
 			offspring.chromosome().write(fstRandBit, offspring.chromosome().read(scdRandBit));
 			offspring.chromosome().write(scdRandBit, tempo);
 
-			++mPosBit;
-			notEqual = true;
+			++posBit;
+			lastPosBit = posBit;
+			notEqual = false;
 		}
 	}
 }
+
