@@ -7,9 +7,10 @@ void FitnessHistory::setup(size_t PopulationEngine)
 
 void FitnessHistory::insertNewStatistics(size_t PopulationEngine, FitnessStatistics statistics) {
 
-	mStatisticsHistory[PopulationEngine].push_back(statistics);
-
-
+	int size{ mStatisticsHistory[PopulationEngine].size() };
+	mStatisticsHistory[PopulationEngine].resize(size + 1);
+	mStatisticsHistory[PopulationEngine].at(size) = statistics;
+	
 	}
 
 const FitnessStatistics & FitnessHistory::getStatistics(size_t PopulationEngine, size_t epoch) const
