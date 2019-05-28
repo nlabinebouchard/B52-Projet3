@@ -9,7 +9,6 @@ void FitnessHistory::insertNewStatistics(size_t PopulationEngine, FitnessStatist
 
 	mStatisticsHistory[PopulationEngine].push_back(statistics);
 
-
 	}
 
 const FitnessStatistics & FitnessHistory::getStatistics(size_t PopulationEngine, size_t epoch) const

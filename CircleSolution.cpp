@@ -49,20 +49,29 @@ std::vector<bool> CircleSolution::encode(std::vector<size_t> vectSize)
 	size_t copieX{ x };
 	size_t copieY{ y };
 	size_t copieR{ r };
+	size_t compteur{};
 
+	for (auto & chrom : vectSize) {
+		compteur += chrom;
+	}
+	vectRetour.resize(compteur);
+	compteur = 0;
 	for (size_t i{}; i < vectSize[0]; ++i) {
-		vectRetour.push_back(copieX & 1);
+		vectRetour[compteur] = copieX & 1;
 		copieX >>= 1;
+		++compteur;
 	}
 
-	for (size_t i{ vectSize[0] }; i < vectSize[1]; ++i) {
-		vectRetour.push_back(copieY & 1);
+	for (size_t i{}; i < vectSize[1]; ++i) {
+		vectRetour[compteur] = copieY & 1;
 		copieY >>= 1;
+		++compteur;
 	}
 
-	for (size_t i{ vectSize[1] }; i < vectSize[2]; ++i) {
-		vectRetour.push_back(copieR & 1);
+	for (size_t i{}; i < vectSize[2]; ++i) {
+		vectRetour[compteur] = copieR & 1;
 		copieR >>= 1;
+		++compteur;
 	}
 
 	return std::vector<bool>();
