@@ -6,9 +6,10 @@
 class MutatorScrambleGene : public Mutator
 {
 public:
+	MutatorScrambleGene() = default;
+	~MutatorScrambleGene() = default;
 
 	void mutate(Solution & offspring) override;
 
 };
-
 #endif // MUTATOR_SCRAMBLE_GENE_H

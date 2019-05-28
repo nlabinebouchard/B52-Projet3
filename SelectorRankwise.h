@@ -15,7 +15,7 @@ public:
 	void prepare(Population const & population) override;
 
 private:
-	double mGamma;
+	double mGamma{ 2 };
 
 };
 

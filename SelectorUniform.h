@@ -4,7 +4,7 @@
 #include "Selector.h"
 #include <vector>
 
-class SelectorUniform : public Selector 
+class SelectorUniform : public Selector
 {
 public:
 	SelectorUniform() = default;

@@ -35,3 +35,4 @@ Solution & SelectorRouletteWheel::select(Population & population)
 	}
 	return population[population.size() - 1];
 }
+

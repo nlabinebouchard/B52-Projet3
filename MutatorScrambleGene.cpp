@@ -5,61 +5,64 @@
 
 void MutatorScrambleGene::mutate(Solution & offspring)
 {
-	size_t mPosBit{};
-	size_t fstRandBit;
-	size_t scdRandBit;
-	std::vector<bool> mVecValueTempo;
-	bool notEqual = true;
+	size_t posBit{};
+	bool notEqual{ false };
+	size_t lengVecTempo;
+	std::vector<bool> vecValueTempo;
 
 	if (RandomUtil::generateEvent(mMutationRate)) {
 
 		for (size_t z{}; z < offspring.chromosome().sizeGene(); ++z) {
+			size_t lastPosBit{ posBit };
+			posBit += offspring.chromosome().readGene(z) - 1;
 
-			mPosBit += offspring.chromosome().readGene(z) - 1;
-			fstRandBit = RandomUtil::randomInRange(1, offspring.chromosome().size() - 1);
-			scdRandBit = RandomUtil::randomInRange(1, offspring.chromosome().size() - 1);
+			size_t fstRandRange{ RandomUtil::randomInRange(lastPosBit, posBit) };
+			size_t scdRandRange{ RandomUtil::randomInRange(lastPosBit, posBit) };
 
-			if (z > 0) {
-				fstRandBit = RandomUtil::randomInRange(mPosBit - (offspring.chromosome().readGene(z) - 1), mPosBit);
-				scdRandBit = RandomUtil::randomInRange(mPosBit - (offspring.chromosome().readGene(z) - 1), mPosBit);
+			while (!notEqual) {
+				if (fstRandRange != scdRandRange) {
+					notEqual = true;
+				}
+				else {
+					scdRandRange = RandomUtil::randomInRange(lastPosBit, posBit);
+				}
 			}
-			else {
-				fstRandBit = RandomUtil::randomInRange(0, mPosBit);
-				scdRandBit = RandomUtil::randomInRange(0, mPosBit);
+			notEqual = false;
+
+			if (fstRandRange > scdRandRange) {
+				size_t tempoBit{ fstRandRange };
+				fstRandRange = scdRandRange;
+				scdRandRange = tempoBit;
 			}
 
-			while (notEqual) {
-				if (fstRandBit != scdRandBit) {
-					notEqual=false;
-				}
-				scdRandBit = RandomUtil::randomInRange(0, offspring.chromosome().size() - 1);
+			lengVecTempo = scdRandRange - fstRandRange + 1;
+			vecValueTempo.resize(lengVecTempo);
+			for (size_t i{ fstRandRange }; i <= scdRandRange; ++i) {
+				vecValueTempo[i - fstRandRange] = offspring.chromosome().read(i);
 			}
+			for (size_t i{ 0 }; i < vecValueTempo.size(); ++i) {
+				size_t fstRandBit{ RandomUtil::randomInRange(0, lengVecTempo - 1) };
+				size_t scdRandBit{ RandomUtil::randomInRange(0, lengVecTempo - 1) };
 
-			if (fstRandBit < scdRandBit) {
-				mVecValueTempo.resize(scdRandBit - fstRandBit + 1);
-				for (size_t i = fstRandBit; i < scdRandBit; ++i) {
-					mVecValueTempo.insert(mVecValueTempo.begin() + i, offspring.chromosome().read(i));
+				while (!notEqual) {
+					if (fstRandBit != scdRandBit) {
+						notEqual = true;
+					}
+					else {
+						scdRandBit = RandomUtil::randomInRange(0, lengVecTempo - 1);
+					}
 				}
-				//std::reverse(mVecValueTempo.begin(), mVecValueTempo.end());
-				for (size_t i = fstRandBit; i < scdRandBit; ++i) {
-					offspring.chromosome().write(i, mVecValueTempo.at(i));
-				}
+
+				bool tempo = vecValueTempo[fstRandBit];
+				vecValueTempo[fstRandBit] = vecValueTempo[scdRandBit];
+				vecValueTempo[scdRandBit] = tempo;
+				notEqual = false;
 			}
-			else {
-				mVecValueTempo.resize(fstRandBit - scdRandBit + 1);
-				for (size_t i = scdRandBit; i < fstRandBit; ++i) {
-					mVecValueTempo.insert(mVecValueTempo.begin() + i, offspring.chromosome().read(i));
-				}
-				//std::reverse(mVecValueTempo.begin(), mVecValueTempo.end());
-				for (size_t i = scdRandBit; i < fstRandBit; ++i) {
-					offspring.chromosome().write(i, mVecValueTempo.at(i));
-				}
+			for (size_t i{ fstRandRange }; i <= scdRandRange; ++i) {
+				offspring.chromosome().write(i, vecValueTempo[i - fstRandRange]);
 			}
-			++mPosBit;
-			notEqual = true;
+			++posBit;
 		}
 	}
-
-
-	
 }
+

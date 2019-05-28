@@ -5,94 +5,55 @@
 
 void MutatorScrambleChromo::mutate(Solution & offspring)
 {
-	size_t fstRandBit;
-	size_t scdRandBit;
-	size_t fstRandPos;
-	size_t scdRandPos;
-	bool tempo;
-	bool notEqual = false;
-	std::vector<bool> mVecValueTempo;
+	std::vector<bool> vecValueTempo;
+	size_t lengVecTempo;
+	bool notEqual{ false };
 
 	if (RandomUtil::generateEvent(mMutationRate)) {
-		fstRandBit = RandomUtil::randomInRange(1, offspring.chromosome().size() - 1);
-		scdRandBit = RandomUtil::randomInRange(1, offspring.chromosome().size() - 1);
+		size_t fstRandRange{ RandomUtil::randomInRange(0, offspring.chromosome().size() - 1) };
+		size_t scdRandRange{ RandomUtil::randomInRange(0, offspring.chromosome().size() - 1) };
 
 		while (!notEqual) {
-			if (fstRandBit != scdRandBit) {
+			if (fstRandRange != scdRandRange) {
 				notEqual = true;
 			}
-			scdRandBit = RandomUtil::randomInRange(0, offspring.chromosome().size() - 1);
+			else {
+				scdRandRange = RandomUtil::randomInRange(0, offspring.chromosome().size() - 1);
+			}
 		}
 		notEqual = false;
 
-		if (fstRandBit < scdRandBit) {
-			mVecValueTempo.resize(scdRandBit - fstRandBit + 1);
-			for (size_t i = fstRandBit; i < scdRandBit; ++i) {
-				mVecValueTempo.insert(mVecValueTempo.begin() + i, offspring.chromosome().read(i));
-			}
-			for (size_t i = fstRandBit; i < scdRandBit; ++i) {
-				fstRandPos = RandomUtil::randomInRange(fstRandBit, offspring.chromosome().size() - 1);
-				scdRandPos = RandomUtil::randomInRange(fstRandBit, offspring.chromosome().size() - 1);
-
-				while (!notEqual) {
-					if (fstRandPos != scdRandPos) {
-						notEqual=true;
-					}
-					scdRandPos = RandomUtil::randomInRange(0, offspring.chromosome().size() - 1);
-				}
-				
-				tempo = mVecValueTempo.at(fstRandPos);
-				mVecValueTempo.insert(mVecValueTempo.begin()+fstRandPos, mVecValueTempo.at(scdRandPos));
-				mVecValueTempo.insert(mVecValueTempo.begin() + scdRandPos, tempo);
-				notEqual = false;
-			}
-			for (size_t i = fstRandBit; i < scdRandBit; ++i) {
-				offspring.chromosome().write(i, mVecValueTempo.at(i));
-			}
+		if (fstRandRange > scdRandRange) {
+			size_t tempoBit{ fstRandRange };
+			fstRandRange = scdRandRange;
+			scdRandRange = tempoBit;
 		}
-		else {
-			mVecValueTempo.resize(fstRandBit - scdRandBit + 1);
-			for (size_t i = scdRandBit; i < fstRandBit; ++i) {
-				mVecValueTempo.insert(mVecValueTempo.begin() + i, offspring.chromosome().read(i));
-			}
-			for (size_t i = scdRandBit; i < fstRandBit; ++i) {
-				fstRandPos = RandomUtil::randomInRange(scdRandBit, offspring.chromosome().size() - 1);
-				scdRandPos = RandomUtil::randomInRange(scdRandBit, offspring.chromosome().size() - 1);
 
-				while (!notEqual) {
-					if (fstRandPos != scdRandPos) {
-						notEqual=true;
-					}
-					scdRandPos = RandomUtil::randomInRange(0, offspring.chromosome().size() - 1);
+		lengVecTempo = scdRandRange - fstRandRange + 1;
+		vecValueTempo.resize(lengVecTempo);
+		for (size_t i{ fstRandRange }; i <= scdRandRange; ++i) {
+			vecValueTempo[i - fstRandRange] = offspring.chromosome().read(i);
+		}
+		for (size_t i{ 0 }; i < vecValueTempo.size(); ++i) {
+			size_t fstRandBit{ RandomUtil::randomInRange(0, lengVecTempo - 1) };
+			size_t scdRandBit{ RandomUtil::randomInRange(0, lengVecTempo - 1) };
+
+			while (!notEqual) {
+				if (fstRandBit != scdRandBit) {
+					notEqual = true;
 				}
-				tempo = mVecValueTempo.at(scdRandPos);
-				mVecValueTempo.insert(mVecValueTempo.begin() + scdRandPos, mVecValueTempo.at(fstRandPos));
-				mVecValueTempo.insert(mVecValueTempo.begin() + fstRandPos, tempo);
-				notEqual = false;
+				else {
+					scdRandBit = RandomUtil::randomInRange(0, lengVecTempo - 1);
+				}
 			}
-			for (size_t i = scdRandBit; i < fstRandBit; ++i) {
-				offspring.chromosome().write(i, mVecValueTempo.at(i));
-			}
+
+			bool tempo = vecValueTempo[fstRandBit];
+			vecValueTempo[fstRandBit] = vecValueTempo[scdRandBit];
+			vecValueTempo[scdRandBit] = tempo;
+			notEqual = false;
+		}
+		for (size_t i{ fstRandRange }; i <= scdRandRange; ++i) {
+			offspring.chromosome().write(i, vecValueTempo[i - fstRandRange]);
 		}
 	}
-
-
 }
-
-
-//While(counterscra < randswathsize)
-//	Dim swap1 = RAND.Next(0, randswathsize - 1)
-//	Dim swap2 = RAND.Next(0, randswathsize - 1)
-//	If(swap2 = swap1) Then
-//	While(done = False)
-//	swap2 = RAND.Next(0, randswathsize - 1)
-//	If(swap2 <> swap1) Then
-//	done = True
-//	End If
-//	End While
-//	End If
-//	TempK = K(swap1)
-//	K(swap1) = K(swap2)
-//	K(swap2) = TempK
-//	counterscra += 1
-//End While

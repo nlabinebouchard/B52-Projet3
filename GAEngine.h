@@ -26,7 +26,7 @@ public:
 
 	void setup(GAParameters parameters);
 
-	void standardDeviation();
+	void standardDeviation(size_t epochNumber, size_t popEngine);
 
 	GAParameters const& getParameters() const;
 

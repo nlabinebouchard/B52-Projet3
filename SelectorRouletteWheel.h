@@ -4,7 +4,7 @@
 #include "Selector.h"
 #include <vector>
 
-class SelectorRouletteWheel : public Selector 
+class SelectorRouletteWheel : public Selector
 {
 public:
 	SelectorRouletteWheel() = default;

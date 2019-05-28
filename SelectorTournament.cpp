@@ -29,3 +29,4 @@ bool SelectorTournament::ToBeCompare(Solution* s1, Solution* s2)
 {
 	return s1->fitness() < s2->fitness();
 }
+
