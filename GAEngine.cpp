@@ -60,6 +60,8 @@ void GAEngine::evolve() {//retourner un bool pour savoir que le evolve est finit
 
 	}
 
+	++mEpoch;
+
 //vérifier les condtions de sorties pour arrêter de faire les evolve, avec une variable bool
 	//convergencerate, maximumGeneration, 
 }
