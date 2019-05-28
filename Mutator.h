@@ -6,6 +6,10 @@ class Solution;
 class Mutator
 {
 public:
+
+	Mutator() = default;
+	virtual ~Mutator() = default;
+
 	double mutationRate() const;
 	void setMutationRate(double newRate);
 

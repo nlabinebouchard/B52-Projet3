@@ -8,7 +8,7 @@ class SelectorUniform : public Selector
 {
 public:
 	SelectorUniform() = default;
-	~SelectorUniform() = default;
+	~SelectorUniform() override  = default;
 
 	void prepare(Population const & population) override;
 	Solution & select(Population & population) override;
