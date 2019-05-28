@@ -6,7 +6,7 @@
 
 class Solution
 {
-private:
+protected:
 	fitness_t mFitness;
 	Chromosome mChromosome;
 
@@ -24,7 +24,6 @@ public:
 	virtual std::vector <bool> encode(std::vector<size_t> vectSize)=0;
 	virtual void decode(std::vector <bool> vect, std::vector<size_t> vectSize)=0;
 	virtual Solution* clone()=0;
-private:
 };
 
 #endif // SOLUTION_H

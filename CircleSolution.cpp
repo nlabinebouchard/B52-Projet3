@@ -2,7 +2,15 @@
 
 CircleSolution::CircleSolution(Canevas * ref)
 	:ShapeSolution(ref)
-{}
+{
+	std::vector <size_t> vectSize(3);
+	vectSize[0] = 10; // x
+	vectSize[1] = 10; // y
+	vectSize[2] = 10; // r
+
+	mChromosome.writeGene(vectSize);
+	mChromosome.writeData(encode(vectSize));
+}
 
 double CircleSolution::area() const
 { 
@@ -74,7 +82,7 @@ std::vector<bool> CircleSolution::encode(std::vector<size_t> vectSize)
 		++compteur;
 	}
 
-	return std::vector<bool>();
+	return vectRetour;
 }
 
 void CircleSolution::decode(std::vector<bool> vect, std::vector<size_t> vectSize)
@@ -113,6 +121,6 @@ void CircleSolution::randomize()
 	{
 		r /= 2;
 	}
-
-	int a{ 0 };
+	encode(mChromosome.myGene());
+	mChromosome.writeData(encode(mChromosome.myGene()));
 }
