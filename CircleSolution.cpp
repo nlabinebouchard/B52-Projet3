@@ -124,3 +124,16 @@ void CircleSolution::randomize()
 
 	mChromosome.writeData(encode(mChromosome.myGene()));
 }
+
+void CircleSolution::assign(const Solution *  solution)
+{
+	CircleSolution const * c{ dynamic_cast<CircleSolution const *>(solution) };
+	if (c) {
+		Solution::assign(solution);
+		x = c->x;
+		y = c->y;
+		r = c->r;
+	}
+}
+
+

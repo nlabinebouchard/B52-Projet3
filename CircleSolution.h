@@ -27,6 +27,8 @@ public:
 	void decode(std::vector <bool> vect, std::vector<size_t> vectSize) override;
 	Solution* clone() override;
 	void randomize() override;
+
+	void assign(const Solution *  solution) override;
 };
 
 #endif // CIRCLESOLUTION_H

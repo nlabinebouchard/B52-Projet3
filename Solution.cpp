@@ -23,3 +23,9 @@ void Solution::setFitness(double num)
 {
 	mFitness = num;
 }
+
+void Solution::assign(const Solution * solution)
+{
+	mChromosome = solution->mChromosome;
+	mFitness = solution->mFitness;
+}
