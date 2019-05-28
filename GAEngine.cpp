@@ -66,6 +66,7 @@ void GAEngine::evolve() {//retourner un bool pour savoir que le evolve est finit
 
 void GAEngine::setup(GAParameters parameters) {
 
+	mEpoch = 0;
 	mParameters = parameters;
 
 	mFitnessHistory.setup(mParameters.populationCount);
