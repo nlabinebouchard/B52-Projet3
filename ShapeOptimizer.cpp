@@ -167,6 +167,7 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 	bool affichageObs{ true };
 	bool enPause{ true };
 	size_t etatSolution{ 1 };
+	int a{};
 
 	while (start != true)
 	{
@@ -209,7 +210,8 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 			mEngine.evolve();
 			int a{ 0 };
 		}
-		
+
+
 		for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
 			for (size_t j{ 0 }; j < mEngine.population(i).size();++j) {
 				static_cast<ShapeSolution const &>(mEngine.population(i)[j]).draw(curWriter);

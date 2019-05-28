@@ -16,7 +16,7 @@ public:
 
 	OrthoRectSolution(Canevas * ref);
 	OrthoRectSolution() = delete;
-	~OrthoRectSolution() = default;
+	~OrthoRectSolution() override  = default;
 
 	double area() const override;
 	double perimeter() const override;

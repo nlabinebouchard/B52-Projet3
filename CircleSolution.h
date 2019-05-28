@@ -15,7 +15,7 @@ public:
 
 	CircleSolution(Canevas * ref);
 	CircleSolution() = delete;
-	~CircleSolution() = default;
+	~CircleSolution() override = default;
 
 	double area() const override;
 	double perimeter() const override;

@@ -15,9 +15,14 @@ size_t Chromosome::sizeGene() const {
 	return mGene.size();
 }
 
-void Chromosome::resize(size_t grandeur)
+void Chromosome::resizeData(size_t gData)
 {
-	mData.resize(grandeur);
+	mData.resize(gData);
+}
+
+void Chromosome::resizeGene(size_t gGene)
+{
+	mGene.resize(gGene);
 }
 
 size_t Chromosome::read(size_t indDebut, size_t indFin) const
@@ -66,6 +71,18 @@ void Chromosome::write(size_t ind, size_t valeur)
 	if (ind >=0 && ind < mData.size()) {
 		mData[ind] = valeur;
 	}
+}
+
+void Chromosome::writeData(std::vector<bool> vectBool)
+{
+	mData.resize(vectBool.size());
+	mData = vectBool;
+}
+
+void Chromosome::writeGene(std::vector<size_t> vectSize)
+{
+	mGene.resize(vectSize.size());
+	mGene = vectSize;
 }
 
 void Chromosome::flip(size_t indice)

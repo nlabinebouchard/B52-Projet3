@@ -7,9 +7,10 @@ size_t Population::size() const
 
 void Population::set(size_t size, Solution * solutionSample)
 {
-	vectSolution.push_back(solutionSample);
-	for (size_t i{1}; i < size; ++i) {
-		vectSolution.push_back((*vectSolution[0]).clone());
+	//vectSolution.push_back(solutionSample);
+	vectSolution.resize(size);
+	for (auto & sol:vectSolution) {
+		sol = solutionSample->clone();
 	}
 }
 

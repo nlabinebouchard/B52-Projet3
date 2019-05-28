@@ -3,6 +3,14 @@
 OrthoRectSolution::OrthoRectSolution(Canevas * ref)
 	:ShapeSolution(ref)
 {
+	std::vector <size_t> vectSize(4);
+	vectSize[0] = 10; // x
+	vectSize[1] = 10; // y
+	vectSize[2] = 10; // witdh
+	vectSize[3] = 10; // height
+
+	mChromosome.writeGene(vectSize);
+	mChromosome.writeData(encode(vectSize));
 }
 
 double OrthoRectSolution::area() const { return width*heigth; }
@@ -77,25 +85,36 @@ std::vector<bool> OrthoRectSolution::encode(std::vector<size_t> vectSize)
 	size_t copieY{y};
 	size_t copieWidth{width};
 	size_t copieHeigth{heigth};
+	size_t compteur{};
 
+	for (auto & chrom : vectSize) {
+		compteur += chrom;
+	}
+
+	vectRetour.resize(compteur);
+	compteur = 0;
 	for (size_t i{}; i < vectSize[0]; ++i) {
-		vectRetour.push_back(copieX & 1);
+		vectRetour[compteur] = copieX & 1;
 		copieX >>= 1;
+		++compteur;
 	}
 
-	for (size_t i{ vectSize[0] }; i < vectSize[1]; ++i) {
-		vectRetour.push_back(copieY & 1);
+	for (size_t i{ }; i < vectSize[1]; ++i) {
+		vectRetour[compteur] = copieY & 1;
 		copieY >>= 1;
+		++compteur;
 	}
 
-	for (size_t i{ vectSize[1] }; i < vectSize[2]; ++i) {
-		vectRetour.push_back(copieWidth & 1);
+	for (size_t i{}; i < vectSize[2]; ++i) {
+		vectRetour[compteur] = copieWidth & 1;
 		copieWidth >>= 1;
+		++compteur;
 	}
 
-	for (size_t i{ vectSize[2] }; i < vectSize[3]; ++i) {
-		vectRetour.push_back(copieHeigth & 1);
+	for (size_t i{}; i < vectSize[3]; ++i) {
+		vectRetour[compteur] = copieHeigth & 1;
 		copieHeigth >>= 1;
+		++compteur;
 	}
 
 	return std::vector<bool>();
@@ -136,5 +155,7 @@ void OrthoRectSolution::randomize()
 	y = RandomUtil::randomInRange(0, refCanevas->height() - 1);
 	width = RandomUtil::randomInRange(0, refCanevas->width() - x);
 	heigth = RandomUtil::randomInRange(0, refCanevas->height() - y);
+
+	mChromosome.writeData(encode(mChromosome.myGene()));
 }
 

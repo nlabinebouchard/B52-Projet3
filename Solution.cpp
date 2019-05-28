@@ -11,12 +11,12 @@ fitness_t Solution::fitness() const
 
 Chromosome & Solution::chromosome()
 { 
-	return Solution::mChromosome; 
+	return mChromosome; 
 }
 
 Chromosome const & Solution::chromosome() const
 {
-	return Solution::mChromosome;
+	return mChromosome;
 }
 
 void Solution::setFitness(double num)
