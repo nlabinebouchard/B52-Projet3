@@ -7,7 +7,7 @@ class MutatorScrambleChromo : public Mutator
 {
 public:
 	MutatorScrambleChromo() = default;
-	~MutatorScrambleChromo() = default;
+	~MutatorScrambleChromo() override = default;
 
 	void mutate(Solution & offspring) override;
 

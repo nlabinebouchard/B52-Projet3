@@ -7,7 +7,7 @@ class MutatorChromo : public Mutator
 {
 public:
 	MutatorChromo() = default;
-	~MutatorChromo() = default;
+	~MutatorChromo() override = default;
 
 	void mutate(Solution & offspring) override;
 

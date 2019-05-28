@@ -7,7 +7,7 @@ class MutatorGene : public Mutator
 {
 public:
 	MutatorGene() = default;
-	~MutatorGene() = default;
+	~MutatorGene() override= default;
 
 	void mutate(Solution & offspring) override;
 

@@ -8,7 +8,7 @@ class SelectorTournament : public SelectorRouletteWheel
 {
 public:
 	SelectorTournament() = default;
-	~SelectorTournament() = default;
+	~SelectorTournament() override = default;
 
 	Solution & select(Population & population) override;
 

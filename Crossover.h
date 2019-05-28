@@ -7,7 +7,7 @@ class Crossover
 {
 public:
 	Crossover() = default;
-	~Crossover() = default;
+	virtual ~Crossover() = default;
 
 	virtual void breed(Solution const & genitor1, Solution const & genitor2, Solution & offspring) = 0;
 

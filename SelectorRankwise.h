@@ -8,7 +8,7 @@ class SelectorRankwise : public SelectorRouletteWheel
 {
 public:
 	SelectorRankwise() = default;
-	~SelectorRankwise() = default;
+	~SelectorRankwise() override = default;
 
 	double gamma()const;
 	void setGamma(double gamma);

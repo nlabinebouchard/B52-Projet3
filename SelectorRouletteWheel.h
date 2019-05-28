@@ -8,7 +8,7 @@ class SelectorRouletteWheel : public Selector
 {
 public:
 	SelectorRouletteWheel() = default;
-	~SelectorRouletteWheel() = default;
+	~SelectorRouletteWheel() override = default;
 
 	void prepare(Population const & population) override;
 	Solution & select(Population & population) override;

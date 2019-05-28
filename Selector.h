@@ -8,7 +8,7 @@ class Selector
 {
 public:
 	Selector() = default;
-	~Selector() = default;
+	virtual ~Selector() = default;
 
 	virtual void prepare(Population const & pop) = 0;
 	virtual Solution & select(Population & pop) = 0;

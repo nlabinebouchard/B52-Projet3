@@ -8,7 +8,7 @@ class CrossoverGeneSinglePoint : public Crossover
 {
 public:
 	CrossoverGeneSinglePoint() = default;
-	~CrossoverGeneSinglePoint() = default;
+	~CrossoverGeneSinglePoint() override = default;
 
 	void breed(Solution const & genitor1, Solution const & genitor2, Solution & offspring) override;
 
