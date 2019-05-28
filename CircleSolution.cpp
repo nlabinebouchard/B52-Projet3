@@ -121,6 +121,6 @@ void CircleSolution::randomize()
 	{
 		r /= 2;
 	}
-	encode(mChromosome.myGene());
+
 	mChromosome.writeData(encode(mChromosome.myGene()));
 }

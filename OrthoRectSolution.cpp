@@ -3,6 +3,14 @@
 OrthoRectSolution::OrthoRectSolution(Canevas * ref)
 	:ShapeSolution(ref)
 {
+	std::vector <size_t> vectSize(4);
+	vectSize[0] = 10; // x
+	vectSize[1] = 10; // y
+	vectSize[2] = 10; // witdh
+	vectSize[3] = 10; // height
+
+	mChromosome.writeGene(vectSize);
+	mChromosome.writeData(encode(vectSize));
 }
 
 double OrthoRectSolution::area() const { return width*heigth; }
@@ -147,5 +155,7 @@ void OrthoRectSolution::randomize()
 	y = RandomUtil::randomInRange(0, refCanevas->height() - 1);
 	width = RandomUtil::randomInRange(0, refCanevas->width() - x);
 	heigth = RandomUtil::randomInRange(0, refCanevas->height() - y);
+
+	mChromosome.writeData(encode(mChromosome.myGene()));
 }
 
