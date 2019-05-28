@@ -165,7 +165,7 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 {
 	bool start{ false };
 	bool affichageObs{ true };
-	bool enPause{ false };
+	bool enPause{ true };
 	size_t etatSolution{ 1 };
 
 	while (start != true)
