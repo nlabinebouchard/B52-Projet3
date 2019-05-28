@@ -101,7 +101,7 @@ void PopulationEngine::processFitness()
 void PopulationEngine::processElitism()
 {
 	mActivePopPointer->sort();
-	for (size_t i = 0; i < mElitismSize; i++)
+	for (size_t i{}; i < mElitismSize; i++)
 	{
 		(mNextPopPointer)[i];
 		(mActivePopPointer)[i];
@@ -114,7 +114,7 @@ void PopulationEngine::processElitism()
 void PopulationEngine::processOneOffspring(size_t index)
 {
 	mCrossover->breed(mSelector->select(population()), mSelector->select(population()),(*mNextPopPointer)[index]);
-	if (RandomUtil::generateEvent(mMutator->mutationRate()) == true)
+	if (RandomUtil::generateEvent(mMutator->mutationRate()))
 	{
 		(*mMutator).mutate((*mNextPopPointer)[index]);
 	}
@@ -123,7 +123,7 @@ void PopulationEngine::processOneOffspring(size_t index)
 void PopulationEngine::processOffsprings()
 {
 	mSelector->prepare(population());
-	for (size_t i = mElitismSize; i < mActivePopPointer->size(); i++)  //commence après les éléments élites
+	for (size_t i{ mElitismSize }; i < mActivePopPointer->size(); i++)  //commence après les éléments élites
 	{
 		processOneOffspring(i);
 	}
@@ -142,7 +142,7 @@ void PopulationEngine::processStatistics()
 
 
 
-	for (size_t i = 0; i < mActivePopPointer->size(); i++)
+	for (size_t i{}; i < mActivePopPointer->size(); i++)
 	{
 		mFitessStatistics.average+=(*mActivePopPointer)[i].fitness();
 
