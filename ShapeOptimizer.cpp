@@ -7,6 +7,7 @@
 #include "MutatorChromo.h"
 #include "SelectorRouletteWheel.h"
 #include "CircleSolution.h"
+#include "OrthoRectSolution.h"
 
 void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 {
@@ -24,7 +25,8 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 	GAParams.populationCount = 1;
 	GAParams.populationSize = 10;
 	GAParams.selector = new SelectorRouletteWheel;
-	GAParams.solutionSample = new CircleSolution(&mCanvas);
+	//GAParams.solutionSample = new CircleSolution(&mCanvas);
+	GAParams.solutionSample = new OrthoRectSolution(&mCanvas);
 
 
 
@@ -211,7 +213,9 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 			int a{ 0 };
 		}
 
-
+		curWriter.removeImage("Forme");
+		curWriter.createImage("Forme");
+		afficherObstacle(curWriter, canvas, affichageObs);
 		for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
 			for (size_t j{ 0 }; j < mEngine.population(i).size();++j) {
 				static_cast<ShapeSolution const &>(mEngine.population(i)[j]).draw(curWriter);
