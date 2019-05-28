@@ -12,6 +12,7 @@ private:
 
 public:
 	Solution() = default;
+	virtual ~Solution() = default;
 	Solution(std::vector <bool> const & vect, std::vector <size_t> vectBit);
 	fitness_t fitness() const;
 	Chromosome & chromosome();
