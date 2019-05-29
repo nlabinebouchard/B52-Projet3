@@ -18,7 +18,7 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 	// Params du Genetic algorithm engine
 	GAParams.convergenceRate = 10;
 	GAParams.crossover = new CrossoverChromoSinglePoint;
-	GAParams.elitismSize = 2;
+	GAParams.elitismSize = 0;
 	GAParams.maximumGenerationCount = 1000;
 	GAParams.mutationRate = 0.05;
 	GAParams.mutator = new MutatorChromo;

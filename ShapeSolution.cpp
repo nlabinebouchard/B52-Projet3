@@ -7,6 +7,14 @@ ShapeSolution::ShapeSolution(Canevas  * ref)
 
 void ShapeSolution::processFitness()
 {
-	setFitness((*this).area());
+	double fitness = (*this).area();
+	for (auto & obs : refCanevas->obstacles())
+	{
+		if ((*this).distance(obs) == -1) {
+			fitness /= 100;
+		}
+	}
+
+	setFitness(fitness);
 }
 

@@ -119,12 +119,20 @@ void CircleSolution::randomize()
 {
 	x = RandomUtil::randomInRange(1, refCanevas->width()-1);
 	y = RandomUtil::randomInRange(1, refCanevas->height()-1);
-	r = RandomUtil::randomInRange(1, refCanevas->width());
+	/*r = RandomUtil::randomInRange(1, refCanevas->width());*/
 
-	while (r + y > refCanevas->height() || r + x > refCanevas->width() || x - r < 0 || y - r  < 0)
-	{
-		r /= 2;
-	}
+	size_t droite = refCanevas->width() - x;
+	size_t bas = refCanevas->height() - y;
+
+	mListDist.clear();
+	mListDist.push_front(x);
+	mListDist.push_front(y);
+	mListDist.push_front(droite);
+	mListDist.push_front(bas);
+	mListDist.sort();
+
+	r = RandomUtil::randomInRange(1, mListDist.front()); 
+
 
 	mChromosome.writeData(encode());
 }

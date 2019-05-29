@@ -5,6 +5,7 @@
 #include <math.h>
 #include "Console\ConsoleWriter.h"
 #include "RandomUtil.h"
+#include <list>
 class CircleSolution: public ShapeSolution
 {
 public:
@@ -29,6 +30,9 @@ public:
 	void randomize() override;
 
 	void assign(const Solution *  solution) override;
+
+private:
+	std::list<size_t> mListDist;
 };
 
 #endif // CIRCLESOLUTION_H
