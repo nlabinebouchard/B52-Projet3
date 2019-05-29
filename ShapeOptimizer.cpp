@@ -5,6 +5,7 @@
 #include "Console\ConsoleKeyFilterModifiers.h"
 #include "CrossoverChromoSinglePoint.h"
 #include "MutatorChromo.h"
+#include "MutatorGene.h"
 #include "SelectorRouletteWheel.h"
 #include "CircleSolution.h"
 #include "OrthoRectSolution.h"
@@ -21,7 +22,7 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 	GAParams.elitismSize = 0;
 	GAParams.maximumGenerationCount = 1000;
 	GAParams.mutationRate = 0.05;
-	GAParams.mutator = new MutatorChromo;
+	GAParams.mutator = new MutatorGene;
 	GAParams.populationCount = 1;
 	GAParams.populationSize = 100;
 	GAParams.selector = new SelectorRouletteWheel;

@@ -24,9 +24,10 @@ double CircleSolution::perimeter() const
 
 double CircleSolution::distance(Obstacle const & obs) const
 {
-	size_t pX = static_cast<size_t>(obs.posX());
-	size_t pY = static_cast<size_t>(obs.posY());
-	double dist = sqrt(pow(pX - x, 2) + pow(pY - y, 2));
+	int calc1 = obs.posX() - x;
+	int calc2 = obs.posY() - y;
+
+	double dist = sqrt(pow(calc1, 2) + pow(calc2, 2));
 
 	if (dist - r >= 0) {
 		return dist - r;
