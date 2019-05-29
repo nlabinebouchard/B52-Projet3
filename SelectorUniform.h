@@ -14,7 +14,7 @@ public:
 	Solution & select(Population & population) override;
 
 private:
-	size_t endPop{};
+	size_t mEndPop{};
 };
 
 #endif // SELECTOR_UNIFORM_H

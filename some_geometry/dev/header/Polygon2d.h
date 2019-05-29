@@ -117,10 +117,7 @@ private:
 	std::vector<VertexSegmentInfo> mVertexSegmentInfo;
 	void updateVertexInfo();
 	bool segmentIntersection(size_t iVertexRelPos1, size_t iVertexRelPos2);
+
 };
-
-
-
-
 
 #endif // _POLYGON_H_

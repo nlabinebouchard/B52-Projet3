@@ -1,11 +1,18 @@
 #ifndef SOPARAMETERS_H
 #define SOPARAMETERS_H
 
-class PolygonSolution
+#include "ShapeSolution.h"
+#include <math.h>
+#include <vector>
+#include "Console\ConsoleWriter.h"
+#include "RandomUtil.h"
+
+class PolygonSolution:public ShapeSolution
 {
 public:
-	PolygonSolution();
-	~PolygonSolution();
+	//PolygonSolution(Canevas * ref) = default;
+	PolygonSolution() = default;
+	~PolygonSolution() override = default;
 
 
 
