@@ -16,13 +16,13 @@ void SelectorRankwise::setGamma(double gamma)
 
 void SelectorRankwise::prepare(Population const & population)
 {
-	fitness_t mProbabilities;
+	fitness_t probabilities;
 	mValueMax = 1;
 
 	mRankWeight.resize(population.size());
 	for (size_t i{}; i < population.size(); ++i) {
-		mProbabilities = (mGamma - 1) / (pow(mGamma, i + 1));
-		mRankWeight.at(i) = mProbabilities;
+		probabilities = (mGamma - 1) / (pow(mGamma, i + 1));
+		mRankWeight.at(i) = probabilities;
 	}
 }
 
