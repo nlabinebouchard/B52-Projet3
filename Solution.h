@@ -21,8 +21,8 @@ public:
 
 	virtual void processFitness()=0;
 	virtual void randomize()=0;
-	virtual std::vector <bool> encode(std::vector<size_t> vectSize)=0;
-	virtual void decode(std::vector <bool> vect, std::vector<size_t> vectSize)=0;
+	virtual std::vector <bool> encode()=0;
+	virtual void decode()=0;
 	virtual Solution* clone()=0;
 	virtual void assign(const Solution *  solution);
 

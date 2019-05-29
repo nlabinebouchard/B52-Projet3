@@ -23,8 +23,8 @@ public:
 	bool collide(Obstacle const & obs) const override;
 	void draw(ConsoleWriter &curWriter) const override;
 
-	std::vector <bool> encode(std::vector<size_t> vectSize) override;
-	void decode(std::vector <bool> vect, std::vector<size_t> vectSize) override;
+	std::vector <bool> encode() override;
+	void decode() override;
 	Solution* clone() override;
 	void randomize() override;
 

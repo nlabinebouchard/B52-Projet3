@@ -10,7 +10,7 @@ OrthoRectSolution::OrthoRectSolution(Canevas * ref)
 	vectSize[3] = 10; // height
 
 	mChromosome.writeGene(vectSize);
-	mChromosome.writeData(encode(vectSize));
+	mChromosome.writeData(encode());
 }
 
 double OrthoRectSolution::area() const { return width*heigth; }
@@ -78,7 +78,7 @@ void OrthoRectSolution::draw(ConsoleWriter &curWriter) const
 	
 }
 
-std::vector<bool> OrthoRectSolution::encode(std::vector<size_t> vectSize)
+std::vector<bool> OrthoRectSolution::encode()
 {
 	std::vector<bool> vectRetour;
 	size_t copieX{x};
@@ -87,31 +87,31 @@ std::vector<bool> OrthoRectSolution::encode(std::vector<size_t> vectSize)
 	size_t copieHeigth{heigth};
 	size_t compteur{};
 
-	for (auto & chrom : vectSize) {
+	for (auto & chrom : mChromosome.myGene()) {
 		compteur += chrom;
 	}
 
 	vectRetour.resize(compteur);
 	compteur = 0;
-	for (size_t i{}; i < vectSize[0]; ++i) {
+	for (size_t i{}; i < mChromosome.myGene()[0]; ++i) {
 		vectRetour[compteur] = copieX & 1;
 		copieX >>= 1;
 		++compteur;
 	}
 
-	for (size_t i{ }; i < vectSize[1]; ++i) {
+	for (size_t i{ }; i < mChromosome.myGene()[1]; ++i) {
 		vectRetour[compteur] = copieY & 1;
 		copieY >>= 1;
 		++compteur;
 	}
 
-	for (size_t i{}; i < vectSize[2]; ++i) {
+	for (size_t i{}; i < mChromosome.myGene()[2]; ++i) {
 		vectRetour[compteur] = copieWidth & 1;
 		copieWidth >>= 1;
 		++compteur;
 	}
 
-	for (size_t i{}; i < vectSize[3]; ++i) {
+	for (size_t i{}; i < mChromosome.myGene()[3]; ++i) {
 		vectRetour[compteur] = copieHeigth & 1;
 		copieHeigth >>= 1;
 		++compteur;
@@ -120,27 +120,32 @@ std::vector<bool> OrthoRectSolution::encode(std::vector<size_t> vectSize)
 	return std::vector<bool>();
 }
 
-void OrthoRectSolution::decode(std::vector<bool> vect, std::vector<size_t> vectSize)
+void OrthoRectSolution::decode()
 {
 	x = 0;
 	y = 0;
 	width = 0;
 	heigth = 0;
+	size_t compteur{};
 
-	for (size_t i{}; i < vectSize[0]; ++i) {
-		x += vect[i];
+	for (size_t i{}; i < mChromosome.myGene()[0]; ++i) {
+		x += mChromosome.myData()[compteur];
+		++compteur;
 	}
 
-	for (size_t i{ vectSize[0] }; i < vectSize[1]; ++i) {
-		y += vect[i];
+	for (size_t i{}; i < mChromosome.myGene()[1]; ++i) {
+		y += mChromosome.myData()[compteur];
+		++compteur;
 	}
 
-	for (size_t i{ vectSize[1] }; i < vectSize[2]; ++i) {
-		width += vect[i];
+	for (size_t i{}; i < mChromosome.myGene()[2]; ++i) {
+		width += mChromosome.myData()[compteur];
+		++compteur;
 	}
 
-	for (size_t i{ vectSize[2] }; i < vectSize[3]; ++i) {
-		heigth += vect[i];
+	for (size_t i{}; i < mChromosome.myGene()[3]; ++i) {
+		heigth += mChromosome.myData()[compteur];
+		++compteur;
 	}
 }
 
@@ -156,6 +161,6 @@ void OrthoRectSolution::randomize()
 	width = RandomUtil::randomInRange(0, refCanevas->width() - x);
 	heigth = RandomUtil::randomInRange(0, refCanevas->height() - y);
 
-	mChromosome.writeData(encode(mChromosome.myGene()));
+	mChromosome.writeData(encode());
 }
 
