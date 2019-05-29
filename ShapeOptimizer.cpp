@@ -7,6 +7,7 @@
 #include "MutatorChromo.h"
 #include "SelectorRouletteWheel.h"
 #include "CircleSolution.h"
+#include "OrthoRectSolution.h"
 
 void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 {
@@ -17,14 +18,15 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 	// Params du Genetic algorithm engine
 	GAParams.convergenceRate = 10;
 	GAParams.crossover = new CrossoverChromoSinglePoint;
-	GAParams.elitismSize = 5;
+	GAParams.elitismSize = 2;
 	GAParams.maximumGenerationCount = 1000;
 	GAParams.mutationRate = 0.05;
 	GAParams.mutator = new MutatorChromo;
 	GAParams.populationCount = 1;
-	GAParams.populationSize = 10;
+	GAParams.populationSize = 100;
 	GAParams.selector = new SelectorRouletteWheel;
 	GAParams.solutionSample = new CircleSolution(&mCanvas);
+	//GAParams.solutionSample = new OrthoRectSolution(&mCanvas);
 
 
 
@@ -115,6 +117,12 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 						curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
 					}
 
+					for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
+						for (size_t j{ 0 }; j < mEngine.population(i).size(); ++j) {
+							static_cast<ShapeSolution const &>(mEngine.population(i)[j]).draw(curWriter);
+						}
+					}
+
 					break;
 
 				case 'e':	// réinitialise les positions des obstacles
@@ -126,6 +134,12 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 					for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
 					{
 						curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
+					}
+
+					for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
+						for (size_t j{ 0 }; j < mEngine.population(i).size(); ++j) {
+							static_cast<ShapeSolution const &>(mEngine.population(i)[j]).draw(curWriter);
+						}
 					}
 
 					break;
@@ -208,10 +222,18 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 		//curWriter.createImage("Forme").drawRect(5 + keyPressed.keyA(), 5 + keyPressed.keyA(), 10, 10, ' ', ConsoleColor::bR);
 		if (!enPause) {
 			mEngine.evolve();
-			int a{ 0 };
+
+		}
+		++a;
+		if (a % 100 == 0)
+		{
+			int b{};
 		}
 
 
+		curWriter.removeImage("Forme");
+		curWriter.createImage("Forme");
+		afficherObstacle(curWriter, canvas, affichageObs);
 		for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
 			for (size_t j{ 0 }; j < mEngine.population(i).size();++j) {
 				static_cast<ShapeSolution const &>(mEngine.population(i)[j]).draw(curWriter);

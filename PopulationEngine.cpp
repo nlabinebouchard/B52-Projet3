@@ -103,9 +103,8 @@ void PopulationEngine::processElitism()
 	mActivePopPointer->sort();
 	for (size_t i{}; i < mElitismSize; i++)
 	{
-		(mNextPopPointer)[i];
-		(mActivePopPointer)[i];
-		(*mNextPopPointer)[i] = (*mActivePopPointer)[i]; ////////////////////////////////
+		//(*mNextPopPointer)[i] = (*mActivePopPointer)[i]; ////////////////////////////////
+		(*mNextPopPointer)[i].assign(&(*mActivePopPointer)[i]);
 	}
 
 
@@ -118,6 +117,8 @@ void PopulationEngine::processOneOffspring(size_t index)
 	{
 		(*mMutator).mutate((*mNextPopPointer)[index]);
 	}
+
+	(*mNextPopPointer)[index].decode();
 }
 
 void PopulationEngine::processOffsprings()

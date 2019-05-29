@@ -227,8 +227,8 @@ int ConsoleImage::height() const
 CHAR_INFO * ConsoleImage::get(int x, int y) const
 {
 #if defined WHEN_OUT_OF_RANGE_GO_TO_NEAREST
-	x = std::clamp(x, 0, (int)mConsoleWriter.mConsole.mWidth);
-	y = std::clamp(y, 0, (int)mConsoleWriter.mConsole.mHeight);
+	x = std::clamp(x, 0, (int)mConsoleWriter.mConsole.mWidth - 1);
+	y = std::clamp(y, 0, (int)mConsoleWriter.mConsole.mHeight -1 );
 	//if (x < 0) x = 0;
 	//if (y < 0) y = 0;
 	//if (x >= (int)mConsoleWriter.mConsole.mWidth) x = (int)mConsoleWriter.mConsole.mWidth - 1;

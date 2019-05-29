@@ -9,7 +9,7 @@ CircleSolution::CircleSolution(Canevas * ref)
 	vectSize[2] = 10; // r
 
 	mChromosome.writeGene(vectSize);
-	mChromosome.writeData(encode(vectSize));
+	mChromosome.writeData(encode());
 }
 
 double CircleSolution::area() const
@@ -51,56 +51,60 @@ void CircleSolution::draw(ConsoleWriter &curWriter) const
 	curWriter.image("Forme").drawCircle(x, y, r,' ', ConsoleColor::bC);
 }
 
-std::vector<bool> CircleSolution::encode(std::vector<size_t> vectSize)
+std::vector<bool> CircleSolution::encode()
 {
 	std::vector<bool> vectRetour;
-	size_t copieX{ x };
-	size_t copieY{ y };
-	size_t copieR{ r };
 	size_t compteur{};
 
-	for (auto & chrom : vectSize) {
+	for (auto & chrom : mChromosome.myGene()) {
 		compteur += chrom;
 	}
 	vectRetour.resize(compteur);
 	compteur = 0;
-	for (size_t i{}; i < vectSize[0]; ++i) {
-		vectRetour[compteur] = copieX & 1;
-		copieX >>= 1;
+	for (size_t i{ mChromosome.myGene()[0] }; i > 0; --i) {
+		size_t exposant{ static_cast<size_t>(pow(2, i)) };
+		vectRetour[compteur] = x & exposant;
 		++compteur;
 	}
 
-	for (size_t i{}; i < vectSize[1]; ++i) {
-		vectRetour[compteur] = copieY & 1;
-		copieY >>= 1;
+	for (size_t i{ mChromosome.myGene()[1] }; i > 0; --i) {
+		size_t exposant{ static_cast<size_t>(pow(2, i)) };
+		vectRetour[compteur] = y & exposant;
 		++compteur;
 	}
 
-	for (size_t i{}; i < vectSize[2]; ++i) {
-		vectRetour[compteur] = copieR & 1;
-		copieR >>= 1;
+	for (size_t i{ mChromosome.myGene()[2] }; i > 0; --i) {
+		size_t exposant{ static_cast<size_t>(pow(2, i)) };
+		vectRetour[compteur] = r & exposant;
 		++compteur;
 	}
 
 	return vectRetour;
 }
 
-void CircleSolution::decode(std::vector<bool> vect, std::vector<size_t> vectSize)
+void CircleSolution::decode()
 {
 	x = 0;
 	y = 0;
 	r = 0;
+	size_t compteur{};
 
-	for (size_t i{}; i < vectSize[0]; ++i) {
-		x += vect[i];
+	for (size_t i{}; i < mChromosome.myGene()[0]; ++i) {
+		x <<= 1;
+		x += mChromosome.myData()[compteur];
+		++compteur;
 	}
 
-	for (size_t i{ vectSize[0] }; i < vectSize[1]; ++i) {
-		y += vect[i];
+	for (size_t i{}; i < mChromosome.myGene()[1]; ++i) {
+		y <<= 1;
+		y += mChromosome.myData()[compteur];
+		++compteur;
 	}
 
-	for (size_t i{ vectSize[1] }; i < vectSize[2]; ++i) {
-		r += vect[i];
+	for (size_t i{}; i < mChromosome.myGene()[2]; ++i) {
+		r <<= 1;
+		r += mChromosome.myData()[compteur];
+		++compteur;
 	}
 
 
@@ -122,5 +126,18 @@ void CircleSolution::randomize()
 		r /= 2;
 	}
 
-	mChromosome.writeData(encode(mChromosome.myGene()));
+	mChromosome.writeData(encode());
 }
+
+void CircleSolution::assign(const Solution *  solution)
+{
+	CircleSolution const * c{ dynamic_cast<CircleSolution const *>(solution) };
+	if (c) {
+		Solution::assign(solution);
+		x = c->x;
+		y = c->y;
+		r = c->r;
+	}
+}
+
+
