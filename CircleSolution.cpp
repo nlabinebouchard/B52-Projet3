@@ -54,9 +54,6 @@ void CircleSolution::draw(ConsoleWriter &curWriter) const
 std::vector<bool> CircleSolution::encode()
 {
 	std::vector<bool> vectRetour;
-	size_t copieX{ x };
-	size_t copieY{ y };
-	size_t copieR{ r };
 	size_t compteur{};
 
 	for (auto & chrom : mChromosome.myGene()) {
@@ -64,21 +61,21 @@ std::vector<bool> CircleSolution::encode()
 	}
 	vectRetour.resize(compteur);
 	compteur = 0;
-	for (size_t i{}; i < mChromosome.myGene()[0]; ++i) {
-		vectRetour[compteur] = copieX & 1;
-		copieX >>= 1;
+	for (size_t i{ mChromosome.myGene()[0] }; i > 0; --i) {
+		size_t exposant{ static_cast<size_t>(pow(2, i)) };
+		vectRetour[compteur] = x & exposant;
 		++compteur;
 	}
 
-	for (size_t i{}; i < mChromosome.myGene()[1]; ++i) {
-		vectRetour[compteur] = copieY & 1;
-		copieY >>= 1;
+	for (size_t i{ mChromosome.myGene()[1] }; i > 0; --i) {
+		size_t exposant{ static_cast<size_t>(pow(2, i)) };
+		vectRetour[compteur] = y & exposant;
 		++compteur;
 	}
 
-	for (size_t i{}; i < mChromosome.myGene()[2]; ++i) {
-		vectRetour[compteur] = copieR & 1;
-		copieR >>= 1;
+	for (size_t i{ mChromosome.myGene()[2] }; i > 0; --i) {
+		size_t exposant{ static_cast<size_t>(pow(2, i)) };
+		vectRetour[compteur] = r & exposant;
 		++compteur;
 	}
 
@@ -93,16 +90,19 @@ void CircleSolution::decode()
 	size_t compteur{};
 
 	for (size_t i{}; i < mChromosome.myGene()[0]; ++i) {
+		x <<= 1;
 		x += mChromosome.myData()[compteur];
 		++compteur;
 	}
 
 	for (size_t i{}; i < mChromosome.myGene()[1]; ++i) {
+		y <<= 1;
 		y += mChromosome.myData()[compteur];
 		++compteur;
 	}
 
 	for (size_t i{}; i < mChromosome.myGene()[2]; ++i) {
+		r <<= 1;
 		r += mChromosome.myData()[compteur];
 		++compteur;
 	}

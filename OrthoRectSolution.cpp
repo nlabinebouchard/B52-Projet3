@@ -81,10 +81,6 @@ void OrthoRectSolution::draw(ConsoleWriter &curWriter) const
 std::vector<bool> OrthoRectSolution::encode()
 {
 	std::vector<bool> vectRetour;
-	size_t copieX{x};
-	size_t copieY{y};
-	size_t copieWidth{width};
-	size_t copieHeigth{heigth};
 	size_t compteur{};
 
 	for (auto & chrom : mChromosome.myGene()) {
@@ -93,31 +89,31 @@ std::vector<bool> OrthoRectSolution::encode()
 
 	vectRetour.resize(compteur);
 	compteur = 0;
-	for (size_t i{}; i < mChromosome.myGene()[0]; ++i) {
-		vectRetour[compteur] = copieX & 1;
-		copieX >>= 1;
+	for (size_t i{ mChromosome.myGene()[0] }; i > 0; --i) {
+		size_t exposant{ static_cast<size_t>(pow(2, i)) };
+		vectRetour[compteur] = x & exposant;
 		++compteur;
 	}
 
-	for (size_t i{ }; i < mChromosome.myGene()[1]; ++i) {
-		vectRetour[compteur] = copieY & 1;
-		copieY >>= 1;
+	for (size_t i{ mChromosome.myGene()[1] }; i > 0; --i) {
+		size_t exposant{ static_cast<size_t>(pow(2, i)) };
+		vectRetour[compteur] = y & exposant;
 		++compteur;
 	}
 
-	for (size_t i{}; i < mChromosome.myGene()[2]; ++i) {
-		vectRetour[compteur] = copieWidth & 1;
-		copieWidth >>= 1;
+	for (size_t i{ mChromosome.myGene()[2] }; i > 0; --i) {
+		size_t exposant{ static_cast<size_t>(pow(2, i)) };
+		vectRetour[compteur] = width & exposant;
 		++compteur;
 	}
 
-	for (size_t i{}; i < mChromosome.myGene()[3]; ++i) {
-		vectRetour[compteur] = copieHeigth & 1;
-		copieHeigth >>= 1;
+	for (size_t i{ mChromosome.myGene()[3] }; i > 0; --i) {
+		size_t exposant{ static_cast<size_t>(pow(2, i)) };
+		vectRetour[compteur] = heigth & exposant;
 		++compteur;
 	}
 
-	return std::vector<bool>();
+	return vectRetour;
 }
 
 void OrthoRectSolution::decode()
@@ -129,21 +125,25 @@ void OrthoRectSolution::decode()
 	size_t compteur{};
 
 	for (size_t i{}; i < mChromosome.myGene()[0]; ++i) {
+		x <<= 1;
 		x += mChromosome.myData()[compteur];
 		++compteur;
 	}
 
 	for (size_t i{}; i < mChromosome.myGene()[1]; ++i) {
+		y <<= 1;
 		y += mChromosome.myData()[compteur];
 		++compteur;
 	}
 
 	for (size_t i{}; i < mChromosome.myGene()[2]; ++i) {
+		width <<= 1;
 		width += mChromosome.myData()[compteur];
 		++compteur;
 	}
 
 	for (size_t i{}; i < mChromosome.myGene()[3]; ++i) {
+		heigth <<= 1;
 		heigth += mChromosome.myData()[compteur];
 		++compteur;
 	}
