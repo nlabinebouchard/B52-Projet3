@@ -19,6 +19,7 @@ public:
 	virtual double distance(Obstacle const & obs) const=0;
 	virtual double area() const=0;
 	virtual double perimeter() const = 0;
+	virtual bool outOfCanvas()const=0;
 
 	Canevas * refCanevas;
 private:

@@ -113,7 +113,7 @@ void PopulationEngine::processElitism()
 void PopulationEngine::processOneOffspring(size_t index)
 {
 	mCrossover->breed(mSelector->select(population()), mSelector->select(population()),(*mNextPopPointer)[index]);
-	if (RandomUtil::generateEvent(mMutator->mutationRate()))
+	if (RandomUtil::generateEvent(mMutator->mutationRate()) == true)
 	{
 		(*mMutator).mutate((*mNextPopPointer)[index]);
 	}

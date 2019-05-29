@@ -6,7 +6,9 @@
 #include "CrossoverChromoSinglePoint.h"
 #include "MutatorChromo.h"
 #include "MutatorGene.h"
+#include "MutatorSwapGene.h"
 #include "SelectorRouletteWheel.h"
+#include "SelectorTournament.h"
 #include "CircleSolution.h"
 #include "OrthoRectSolution.h"
 
@@ -21,10 +23,11 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 	GAParams.crossover = new CrossoverChromoSinglePoint;
 	GAParams.elitismSize = 0;
 	GAParams.maximumGenerationCount = 1000;
-	GAParams.mutationRate = 0.05;
-	GAParams.mutator = new MutatorGene;
-	GAParams.populationCount = 1;
-	GAParams.populationSize = 100;
+	GAParams.mutationRate = 0.10;
+	GAParams.mutator = new MutatorChromo;
+	GAParams.mutator->setMutationRate(GAParams.mutationRate);
+	GAParams.populationCount = 2;
+	GAParams.populationSize = 10;
 	GAParams.selector = new SelectorRouletteWheel;
 	GAParams.solutionSample = new CircleSolution(&mCanvas);
 	//GAParams.solutionSample = new OrthoRectSolution(&mCanvas);

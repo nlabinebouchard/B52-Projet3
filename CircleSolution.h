@@ -30,6 +30,7 @@ public:
 	void randomize() override;
 
 	void assign(const Solution *  solution) override;
+	bool outOfCanvas() const override;
 
 private:
 	std::list<size_t> mListDist;
