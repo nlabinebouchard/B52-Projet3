@@ -117,6 +117,8 @@ void PopulationEngine::processOneOffspring(size_t index)
 	{
 		(*mMutator).mutate((*mNextPopPointer)[index]);
 	}
+
+	(*mNextPopPointer)[index].decode();
 }
 
 void PopulationEngine::processOffsprings()
