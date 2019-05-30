@@ -8,19 +8,19 @@ ShapeSolution::ShapeSolution(Canevas  * ref)
 void ShapeSolution::processFitness()
 {
 
-	if ((*this).outOfCanvas()) {
-		setFitness(0);
+	if (outOfCanvas()) {
+		setFitness(0.0);
 	}
 	else {
-		double fitness = (*this).area();
+		double fitness = area();
 		for (auto & obs : refCanevas->obstacles())
 		{
-			if ((*this).distance(obs) == -1) {
-				fitness /= 100;
+			if (distance(obs) == -1) {
+				fitness /= 100.0;
 			}
 		}
 
-		setFitness(fitness);
+		setFitness(pow(fitness,2));
 	}
 }
 

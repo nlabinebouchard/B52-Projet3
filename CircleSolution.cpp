@@ -142,7 +142,7 @@ void CircleSolution::assign(const Solution *  solution)
 {
 	CircleSolution const * c{ dynamic_cast<CircleSolution const *>(solution) };
 	if (c) {
-		Solution::assign(solution);
+		Solution::assign(c);
 		x = c->x;
 		y = c->y;
 		r = c->r;
@@ -151,10 +151,12 @@ void CircleSolution::assign(const Solution *  solution)
 
 bool CircleSolution::outOfCanvas() const
 {
-	if ((x-r) < 0|| (x + r) > refCanevas->width()|| (y-r) < 0 || (y + r) > refCanevas->height()) {
-		return true;
-	}
-	return false;
+	int mX{ static_cast<int>(x) };
+	int mY{ static_cast<int>(y) };
+	int mR{ static_cast<int>(r) };
+
+	return (mX - mR) < 0 || (mX + mR) >= static_cast<int>(refCanevas->width()) || (mY - mR) < 0 || (mY + mR) >= static_cast<int>(refCanevas->height());
+
 }
 
 

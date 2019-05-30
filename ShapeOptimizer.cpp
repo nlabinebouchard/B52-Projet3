@@ -9,7 +9,8 @@
 #include "MutatorGene.h"
 #include "MutatorSwapGene.h"
 #include "SelectorRouletteWheel.h"
-#include "SelectorTournament.h"#include "CircleSolution.h"
+#include "SelectorTournament.h"
+#include "CircleSolution.h"
 #include "OrthoRectSolution.h"
 
 void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
@@ -17,17 +18,18 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 	// Params du canevas
 	SOParams.height = 400;
 	SOParams.width = 400;
-	SOParams.obstacleCount = 50;
+	SOParams.obstacleCount = 1;
 	// Params du Genetic algorithm engine
 	GAParams.convergenceRate = 10;
 	GAParams.crossover = new CrossoverChromoSinglePoint;
 	GAParams.elitismSize = 2;
-
-	GAParams.elitismSize = 2;	GAParams.maximumGenerationCount = 1000;
+	GAParams.maximumGenerationCount = 1000;
 	GAParams.mutationRate = 0.10;
-	GAParams.mutator = new MutatorChromo;
-	//GAParams.selector = new SelectorRouletteWheel;
-	GAParams.selector = new SelectorUniform;
+	GAParams.mutator = new MutatorGene;
+	GAParams.mutator->setMutationRate(GAParams.mutationRate);
+	GAParams.populationCount = 1;
+	GAParams.populationSize = 10;
+	GAParams.selector = new SelectorTournament;
 
 	GAParams.solutionSample = new CircleSolution(&mCanvas);
 	//GAParams.solutionSample = new OrthoRectSolution(&mCanvas);
@@ -49,20 +51,12 @@ void ShapeOptimizer::run()
 
 	mEngine.setup(GAparam);
 
-
-
 	ConsoleContext myContext(mCanvas.width(), mCanvas.height(), "Projet-3 B52", 2, 2, L"Consolas");
 	Console::defineContext(myContext);
 	ConsoleWriter &curWriter{ Console::getInstance().writer() };
 	std::vector<Obstacle> const &vectObstacle{ mCanvas.obstacles() };
 
 	curWriter.createImage("Forme");
-	for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
-	{
-		curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
-	}
-
-
 
 	bool start{ false };
 
@@ -71,15 +65,24 @@ void ShapeOptimizer::run()
 	curReader.installFilter(new ConsoleKeyFilterDown);
 	curReader.installFilter(new ConsoleKeyFilterModifiers);
 
-	evolution(curReader, curWriter, keys, mCanvas);
+	accueil(curReader, curWriter, keys, mCanvas);
 
 }
 
 void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys, Canevas &canvas)
 {
 	bool start{ false };
+	bool affichageObs{ true };
 
 	std::vector<Obstacle> const &vectObstacle{ canvas.obstacles() };
+
+	//Affichage de base
+	afficherObstacle(curWriter, canvas, affichageObs);
+	for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
+		for (size_t j{ 0 }; j < mEngine.population(i).size(); ++j) {
+			static_cast<ShapeSolution const &>(mEngine.population(i)[j]).draw(curWriter);
+		}
+	}
 
 	while (start != true)
 	{ 
@@ -101,7 +104,7 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 					}
 					for (size_t i{ vectObstacle.size()-10 }; i < vectObstacle.size(); ++i)
 					{
-						curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
+						curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bW);
 					}
 					break;
 
@@ -116,7 +119,7 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 
 					for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
 					{
-						curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
+						curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bW);
 					}
 
 					for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
@@ -135,7 +138,7 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 
 					for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
 					{
-						curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);
+						curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bW);
 					}
 
 					for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
@@ -181,7 +184,7 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 {
 	bool start{ false };
 	bool affichageObs{ true };
-	bool enPause{ true };
+	bool enPause{ false };
 	size_t etatSolution{ 1 };
 	int a{};
 
@@ -212,6 +215,9 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 					if (etatSolution == 3) { etatSolution = 0; }
 					ShapeOptimizer::afficherSolution(curWriter, canvas, etatSolution);
 					break;
+				case 'k':
+					++a;
+					break;
 				case 27: 
 					ShapeOptimizer::accueil(curReader, curWriter, keys,canvas);
 					break;
@@ -221,8 +227,6 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 				case 't':	//Changement de CrossOver
 					//GAParams.crossover = new CrossoverChromoSinglePoint;
 					//GAParams.crossover = new CrossoverGeneSinglePoint;
-
-
 					break;
 				case 'g':	//Changement de Mutator
 					//GAParams.mutator = new MutatorChromo;
@@ -232,7 +236,7 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 				case 'h':	//Changement de Selector
 					//GAParams.selector = new SelectorRouletteWheel;
 					//GAParams.selector = new SelectorUniform;
-					mEngine.getParameters().selector = new SelectorUniform;
+					//mEngine.getParameters().selector = new SelectorUniform;
 
 					break;
 				}
@@ -243,12 +247,6 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 			mEngine.evolve();
 
 		}
-		++a;
-		if (a % 100 == 0)
-		{
-			int b{};
-		}
-
 
 		curWriter.removeImage("Forme");
 		curWriter.createImage("Forme");
@@ -288,7 +286,7 @@ void ShapeOptimizer::afficherObstacle(ConsoleWriter & curWriter,Canevas &canvas,
 	if (affichageObs) {
 		for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
 		{
-			curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bc);;
+			curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bW);;
 		}
 	}
 	else {
