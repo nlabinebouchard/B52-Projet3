@@ -9,7 +9,8 @@
 #include "MutatorGene.h"
 #include "MutatorSwapGene.h"
 #include "SelectorRouletteWheel.h"
-#include "SelectorTournament.h"#include "CircleSolution.h"
+#include "SelectorTournament.h"
+#include "CircleSolution.h"
 #include "OrthoRectSolution.h"
 
 void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
@@ -205,7 +206,7 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 					if (etatSolution == 3) { etatSolution = 0; }
 					ShapeOptimizer::afficherSolution(curWriter, canvas, etatSolution);
 					break;
-				case 't':
+				case 'k':
 					++a;
 					break;
 				case 27: 
@@ -217,8 +218,6 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 				case 't':	//Changement de CrossOver
 					//GAParams.crossover = new CrossoverChromoSinglePoint;
 					//GAParams.crossover = new CrossoverGeneSinglePoint;
-
-
 					break;
 				case 'g':	//Changement de Mutator
 					//GAParams.mutator = new MutatorChromo;
@@ -228,7 +227,7 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 				case 'h':	//Changement de Selector
 					//GAParams.selector = new SelectorRouletteWheel;
 					//GAParams.selector = new SelectorUniform;
-					mEngine.getParameters().selector = new SelectorUniform;
+					//mEngine.getParameters().selector = new SelectorUniform;
 
 					break;
 				}
