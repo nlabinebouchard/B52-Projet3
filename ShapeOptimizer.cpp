@@ -9,9 +9,7 @@
 #include "MutatorGene.h"
 #include "MutatorSwapGene.h"
 #include "SelectorRouletteWheel.h"
-#include "SelectorUniform.h"
-#include "SelectorTournament.h"
-#include "CircleSolution.h"
+#include "SelectorTournament.h"#include "CircleSolution.h"
 #include "OrthoRectSolution.h"
 
 void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
@@ -23,14 +21,11 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 	// Params du Genetic algorithm engine
 	GAParams.convergenceRate = 10;
 	GAParams.crossover = new CrossoverChromoSinglePoint;
-
 	GAParams.elitismSize = 2;
-	GAParams.maximumGenerationCount = 1000;
-	GAParams.mutationRate = 0.05;
-	GAParams.mutator = new MutatorChromo;
 
-	GAParams.populationCount = 1;
-	GAParams.populationSize = 100;
+	GAParams.elitismSize = 2;	GAParams.maximumGenerationCount = 1000;
+	GAParams.mutationRate = 0.10;
+	GAParams.mutator = new MutatorChromo;
 	//GAParams.selector = new SelectorRouletteWheel;
 	GAParams.selector = new SelectorUniform;
 

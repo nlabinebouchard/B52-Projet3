@@ -24,9 +24,10 @@ double CircleSolution::perimeter() const
 
 double CircleSolution::distance(Obstacle const & obs) const
 {
-	size_t pX = static_cast<size_t>(obs.posX());
-	size_t pY = static_cast<size_t>(obs.posY());
-	double dist = sqrt(pow(pX - x, 2) + pow(pY - y, 2));
+	int calc1 = obs.posX() - x;
+	int calc2 = obs.posY() - y;
+
+	double dist = sqrt(pow(calc1, 2) + pow(calc2, 2));
 
 	if (dist - r >= 0) {
 		return dist - r;
@@ -119,12 +120,20 @@ void CircleSolution::randomize()
 {
 	x = RandomUtil::randomInRange(1, refCanevas->width()-1);
 	y = RandomUtil::randomInRange(1, refCanevas->height()-1);
-	r = RandomUtil::randomInRange(1, refCanevas->width());
+	/*r = RandomUtil::randomInRange(1, refCanevas->width());*/
 
-	while (r + y > refCanevas->height() || r + x > refCanevas->width() || x - r < 0 || y - r  < 0)
-	{
-		r /= 2;
-	}
+	size_t droite = refCanevas->width() - x;
+	size_t bas = refCanevas->height() - y;
+
+	mListDist.clear();
+	mListDist.push_front(x);
+	mListDist.push_front(y);
+	mListDist.push_front(droite);
+	mListDist.push_front(bas);
+	mListDist.sort();
+
+	r = RandomUtil::randomInRange(1, mListDist.front()); 
+
 
 	mChromosome.writeData(encode());
 }
@@ -138,6 +147,14 @@ void CircleSolution::assign(const Solution *  solution)
 		y = c->y;
 		r = c->r;
 	}
+}
+
+bool CircleSolution::outOfCanvas() const
+{
+	if ((x-r) < 0|| (x + r) > refCanevas->width()|| (y-r) < 0 || (y + r) > refCanevas->height()) {
+		return true;
+	}
+	return false;
 }
 
 

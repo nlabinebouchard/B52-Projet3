@@ -164,3 +164,8 @@ void OrthoRectSolution::randomize()
 	mChromosome.writeData(encode());
 }
 
+bool OrthoRectSolution::outOfCanvas() const
+{
+	return false; // TODO
+}
+

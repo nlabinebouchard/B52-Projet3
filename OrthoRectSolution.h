@@ -29,6 +29,8 @@ public:
 	void decode() override;
 	Solution* clone() override;
 	void randomize() override;
+
+	bool outOfCanvas() const override;
 };
 
 #endif // ORTHORECTSOLUTION_H
