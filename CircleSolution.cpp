@@ -142,7 +142,7 @@ void CircleSolution::assign(const Solution *  solution)
 {
 	CircleSolution const * c{ dynamic_cast<CircleSolution const *>(solution) };
 	if (c) {
-		Solution::assign(solution);
+		Solution::assign(c);
 		x = c->x;
 		y = c->y;
 		r = c->r;
