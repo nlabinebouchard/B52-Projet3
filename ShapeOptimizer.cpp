@@ -74,7 +74,8 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 {
 	bool start{ false };
 	bool affichageObs{ true };
-	size_t etatForme{};
+	size_t etatSolution{ 1 };
+
 
 	std::vector<Obstacle> const &vectObstacle{ canvas.obstacles() };
 
@@ -84,11 +85,7 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 
 	//Affichage de base
 	afficherObstacle(curWriter, canvas, affichageObs);
-	for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
-		for (size_t j{ 0 }; j < mEngine.population(i).size(); ++j) {
-			static_cast<ShapeSolution const &>(mEngine.population(i)[j]).draw(curWriter);
-		}
-	}
+	afficherSolution(curWriter, canvas, etatSolution);
 
 	while (start != true)
 	{ 
@@ -238,31 +235,12 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 				case 'x': // Bascule l'affichage des solution ( aucune - toutes - la meilleurs).
 					++etatSolution;
 					if (etatSolution == 3) { etatSolution = 0; }
-					ShapeOptimizer::afficherSolution(curWriter, canvas, etatSolution);
-					break;
-				case 'k':
-					++a;
 					break;
 				case 27: 
 					ShapeOptimizer::accueil(curReader, curWriter, keys,canvas);
 					break;
 				case 32: // barre d'espace // met sur pause
 					enPause = !enPause;
-					break;
-				case 't':	//Changement de CrossOver
-					//GAParams.crossover = new CrossoverChromoSinglePoint;
-					//GAParams.crossover = new CrossoverGeneSinglePoint;
-					break;
-				case 'g':	//Changement de Mutator
-					//GAParams.mutator = new MutatorChromo;
-					//GAParams.mutator = new MutatorSwapGene;
-
-					break;
-				case 'h':	//Changement de Selector
-					//GAParams.selector = new SelectorRouletteWheel;
-					//GAParams.selector = new SelectorUniform;
-					//mEngine.getParameters().selector = new SelectorUniform;
-
 					break;
 				}
 			}
@@ -276,11 +254,7 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 		curWriter.removeImage("Forme");
 		curWriter.createImage("Forme");
 		afficherObstacle(curWriter, canvas, affichageObs);
-		for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
-			for (size_t j{ 0 }; j < mEngine.population(i).size();++j) {
-				static_cast<ShapeSolution const &>(mEngine.population(i)[j]).draw(curWriter);
-			}
-		}
+		afficherSolution(curWriter, canvas, etatSolution);
 
 		curWriter.write("Forme"); // affiche l'image
 	}
@@ -293,13 +267,18 @@ void ShapeOptimizer::afficherSolution(ConsoleWriter & curWriter, Canevas & canva
 	switch (etat)
 	{
 	case 0:
-		curWriter.createImage("Forme").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bk); // a changer pour une boucle qui passe a travers la population pou rfaire afficher les solution avec la methode draw dans les obj
 		break;
 	case 1:
-		curWriter.createImage("Forme").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bR);
+		for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
+			for (size_t j{ 0 }; j < mEngine.population(i).size(); ++j) {
+				static_cast<ShapeSolution const &>(mEngine.population(i)[j]).draw(curWriter);
+			}
+		}
 		break;
 	case 2:
-		curWriter.createImage("Forme").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bC);
+		for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
+			static_cast<ShapeSolution const &>(mEngine.population(i)[0]).draw(curWriter);
+		}
 		break;
 	}
 }
