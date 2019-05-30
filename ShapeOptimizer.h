@@ -21,7 +21,7 @@ public:
 
 	void run();
 
-	//void accueil(ConsoleKeyReader &curReader, ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys);
+	void setupMidRun(GAParameters & GAParams);
 
 	void accueil(ConsoleKeyReader &curReader, ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys, Canevas &canvas);
 

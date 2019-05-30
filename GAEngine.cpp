@@ -123,6 +123,4 @@ GAParameters  const & GAEngine::getParameters() const
 {
 	return mParameters;
 }
-
-
 //calcul écart type des maximums de exemple 10 derniers statistics, si le rate de convergence est atteint, on arrête en comparant les écart types
