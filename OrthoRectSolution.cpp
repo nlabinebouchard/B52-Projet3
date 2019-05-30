@@ -166,6 +166,6 @@ void OrthoRectSolution::randomize()
 
 bool OrthoRectSolution::outOfCanvas() const
 {
-	return false; // TODO
+	return (x + width) >= refCanevas->width() || (y + heigth) >= refCanevas->height();
 }
 

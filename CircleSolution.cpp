@@ -151,8 +151,11 @@ void CircleSolution::assign(const Solution *  solution)
 
 bool CircleSolution::outOfCanvas() const
 {
-	
-	return ((int)x - (int)r) < 0 || ((int)x + (int)r) >= (int)refCanevas->width() || ((int)y - (int)r) < 0 || ((int)y + (int)r) >= (int)refCanevas->height();
+	int mX{ static_cast<int>(x) };
+	int mY{ static_cast<int>(y) };
+	int mR{ static_cast<int>(r) };
+
+	return (mX - mR) < 0 || (mX + mR) >= static_cast<int>(refCanevas->width()) || (mY - mR) < 0 || (mY + mR) >= static_cast<int>(refCanevas->height());
 
 }
 

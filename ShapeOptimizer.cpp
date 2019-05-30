@@ -31,8 +31,8 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 	GAParams.populationSize = 10;
 	GAParams.selector = new SelectorTournament;
 
-	GAParams.solutionSample = new CircleSolution(&mCanvas);
-	//GAParams.solutionSample = new OrthoRectSolution(&mCanvas);
+	//GAParams.solutionSample = new CircleSolution(&mCanvas);
+	GAParams.solutionSample = new OrthoRectSolution(&mCanvas);
 
 }
 
