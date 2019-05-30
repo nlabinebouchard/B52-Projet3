@@ -20,6 +20,12 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 	SOParams.width = 400;
 	SOParams.obstacleCount = 1;
 	// Params du Genetic algorithm engine
+	setupMidRun(GAParams);
+
+}
+
+void ShapeOptimizer::setupMidRun(GAParameters & GAParams)
+{
 	GAParams.convergenceRate = 10;
 	GAParams.crossover = new CrossoverChromoSinglePoint;
 	GAParams.elitismSize = 1;
@@ -33,17 +39,13 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 
 	//GAParams.solutionSample = new CircleSolution(&mCanvas);
 	GAParams.solutionSample = new OrthoRectSolution(&mCanvas);
-
 }
 
 
 void ShapeOptimizer::run()
 {
-	//Canevas canvas;
-	//GAEngine engine;
 	SOParameters SOparams;
 	GAParameters GAparam;
-	//ShapeOptimizer main;
 
 	setup(SOparams, GAparam);
 
@@ -58,14 +60,12 @@ void ShapeOptimizer::run()
 
 	curWriter.createImage("Forme");
 
-	bool start{ false };
-
 	ConsoleKeyReader::KeyEvents keys;
 	ConsoleKeyReader &curReader{ Console::getInstance().keyReader() };
 	curReader.installFilter(new ConsoleKeyFilterDown);
 	curReader.installFilter(new ConsoleKeyFilterModifiers);
 
-	evolution(curReader, curWriter, keys, mCanvas);
+	accueil(curReader, curWriter, keys, mCanvas);
 
 }
 
@@ -74,6 +74,11 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 	bool start{ false };
 
 	std::vector<Obstacle> const &vectObstacle{ canvas.obstacles() };
+
+	GAParameters GAparam;
+
+	setupMidRun(GAparam);
+
 
 	while (start != true)
 	{ 
@@ -140,16 +145,16 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 
 					break;
 				case '1':	// Détermine le nombre de population
-
+					GAparam.populationCount = 1;
 					break; 
 				case '2':	// Détermine le nombre de population:
-
+					GAparam.populationCount = 2;
 					break;
 				case '3':	// Détermine le nombre de population:
-
+					GAparam.populationCount = 3;
 					break;
 				case '4':	// Détermine le nombre de population:
-
+					GAparam.populationCount = 4;
 					break;
 				case 'a':	// bascule forme a traiter ( cercle - rectangle - polygone)
 					break;
@@ -157,15 +162,16 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 					break;
 				case 'x':	// cache ou affiche la forme géométrique
 					break;
-				case 32: ShapeOptimizer::evolution(curReader, curWriter, keys, canvas); // barre d'espace // debute l'évolution
+				case 32: 
 					
+					mEngine.setup(GAparam);
+					ShapeOptimizer::evolution(curReader, curWriter, keys, canvas); // barre d'espace // debute l'évolution
+
 					break;
 				}
 			}
 		}
 
-		
-		//curWriter.createImage("Forme").drawRect(5 + keyPressed.keyA(), 5 + keyPressed.keyA(), 10, 10, ' ', ConsoleColor::bR);
 		curWriter.write("Forme"); // affiche l'image
 		
 	}
@@ -175,7 +181,7 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 {
 	bool start{ false };
 	bool affichageObs{ true };
-	bool enPause{ true };
+	bool enPause{ false };
 	size_t etatSolution{ 1 };
 	int a{};
 
