@@ -5,5 +5,7 @@
 
 void MutatorChromo::mutate(Solution & offspring)
 {
-	offspring.chromosome().flip(RandomUtil::randomInRange(0, offspring.chromosome().size() - 1));
+	if (RandomUtil::generateEvent(mMutationRate)) {
+		offspring.chromosome().flip(RandomUtil::randomInRange(0, offspring.chromosome().size() - 1));
+	}
 }
