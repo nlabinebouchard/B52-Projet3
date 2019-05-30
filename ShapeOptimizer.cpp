@@ -28,7 +28,7 @@ void ShapeOptimizer::setupMidRun(GAParameters & GAParams)
 {
 	GAParams.convergenceRate = 10;
 	GAParams.crossover = new CrossoverChromoSinglePoint;
-	GAParams.elitismSize = 1;
+	GAParams.elitismSize = 2;
 	GAParams.maximumGenerationCount = 1000;
 	GAParams.mutationRate = 0.10;
 	GAParams.mutator = new MutatorGene;
@@ -36,9 +36,10 @@ void ShapeOptimizer::setupMidRun(GAParameters & GAParams)
 	GAParams.populationCount = 1;
 	GAParams.populationSize = 10;
 	GAParams.selector = new SelectorTournament;
+	GAParams.solutionSample = new CircleSolution(&mCanvas);
+	//GAParams.solutionSample = new OrthoRectSolution(&mCanvas);
 
-	//GAParams.solutionSample = new CircleSolution(&mCanvas);
-	GAParams.solutionSample = new OrthoRectSolution(&mCanvas);
+
 }
 
 
@@ -72,6 +73,7 @@ void ShapeOptimizer::run()
 void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWriter, ConsoleKeyReader::KeyEvents &keys, Canevas &canvas)
 {
 	bool start{ false };
+	bool affichageObs{ true };
 
 	std::vector<Obstacle> const &vectObstacle{ canvas.obstacles() };
 
@@ -79,6 +81,13 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 
 	setupMidRun(GAparam);
 
+	//Affichage de base
+	afficherObstacle(curWriter, canvas, affichageObs);
+	for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
+		for (size_t j{ 0 }; j < mEngine.population(i).size(); ++j) {
+			static_cast<ShapeSolution const &>(mEngine.population(i)[j]).draw(curWriter);
+		}
+	}
 
 	while (start != true)
 	{ 
