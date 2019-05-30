@@ -4,12 +4,12 @@
 #include "Console\ConsoleKeyFilterDown.h"
 #include "Console\ConsoleKeyFilterModifiers.h"
 #include "CrossoverChromoSinglePoint.h"
+#include "CrossoverGeneSinglePoint.h"
 #include "MutatorChromo.h"
 #include "MutatorGene.h"
 #include "MutatorSwapGene.h"
 #include "SelectorRouletteWheel.h"
-#include "SelectorTournament.h"
-#include "CircleSolution.h"
+#include "SelectorTournament.h"#include "CircleSolution.h"
 #include "OrthoRectSolution.h"
 
 void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
@@ -29,10 +29,9 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 	GAParams.populationCount = 1;
 	GAParams.populationSize = 10;
 	GAParams.selector = new SelectorTournament;
+
 	GAParams.solutionSample = new CircleSolution(&mCanvas);
 	//GAParams.solutionSample = new OrthoRectSolution(&mCanvas);
-
-
 
 }
 
@@ -214,6 +213,23 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 					break;
 				case 32: // barre d'espace // met sur pause
 					enPause = !enPause;
+					break;
+				case 't':	//Changement de CrossOver
+					//GAParams.crossover = new CrossoverChromoSinglePoint;
+					//GAParams.crossover = new CrossoverGeneSinglePoint;
+
+
+					break;
+				case 'g':	//Changement de Mutator
+					//GAParams.mutator = new MutatorChromo;
+					//GAParams.mutator = new MutatorSwapGene;
+
+					break;
+				case 'h':	//Changement de Selector
+					//GAParams.selector = new SelectorRouletteWheel;
+					//GAParams.selector = new SelectorUniform;
+					mEngine.getParameters().selector = new SelectorUniform;
+
 					break;
 				}
 			}

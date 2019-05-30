@@ -1,9 +1,8 @@
-#pragma once
+#ifndef FITNESS_HISTORY_H
+#define FITNESS_HISTORY_H
 
 #include "FitnessStatistics.h"
 #include <vector>
-
-
 
 class FitnessHistory
 {
@@ -27,5 +26,5 @@ private:
 
 	std::vector<std::vector<FitnessStatistics>> mStatisticsHistory;
 
-
 };
+#endif // FITNESS_HISTORY_H
