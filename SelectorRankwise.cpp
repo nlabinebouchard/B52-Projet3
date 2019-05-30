@@ -22,7 +22,7 @@ void SelectorRankwise::prepare(Population const & population)
 	mRankWeight.resize(population.size());
 	for (size_t i{}; i < population.size(); ++i) {
 		probabilities = (mGamma - 1) / (pow(mGamma, i + 1));
-		mRankWeight.at(i) = probabilities;
+		mRankWeight[i] = probabilities;
 	}
 }
 
