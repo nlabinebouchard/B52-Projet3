@@ -74,6 +74,7 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 {
 	bool start{ false };
 	bool affichageObs{ true };
+	size_t etatForme{};
 
 	std::vector<Obstacle> const &vectObstacle{ canvas.obstacles() };
 
@@ -166,13 +167,31 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 					GAparam.populationCount = 4;
 					break;
 				case 'a':	// bascule forme a traiter ( cercle - rectangle - polygone)
+					
+					if (dynamic_cast<CircleSolution const *>(GAparam.solutionSample))
+					{
+						delete GAparam.solutionSample;
+						GAparam.solutionSample =  new OrthoRectSolution(&mCanvas);
+					}
+					else if (dynamic_cast<OrthoRectSolution const *>(GAparam.solutionSample))
+					{
+						//placeholder for solution
+						delete GAparam.solutionSample;
+						GAparam.solutionSample = new CircleSolution(&mCanvas);
+					}
+					else {
+						delete GAparam.solutionSample;
+						GAparam.solutionSample = new CircleSolution(&mCanvas);
+					}
+
 					break;
 				case 'z':	// bascule obstacle entre 0 et tous
+					start = false;
 					break;
 				case 'x':	// cache ou affiche la forme géométrique
 					break;
 				case 32: 
-					
+					mEngine = GAEngine();
 					mEngine.setup(GAparam);
 					ShapeOptimizer::evolution(curReader, curWriter, keys, canvas); // barre d'espace // debute l'évolution
 
