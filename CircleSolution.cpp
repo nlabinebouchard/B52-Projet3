@@ -151,10 +151,9 @@ void CircleSolution::assign(const Solution *  solution)
 
 bool CircleSolution::outOfCanvas() const
 {
-	if ((x-r) < 0|| (x + r) > refCanevas->width()|| (y-r) < 0 || (y + r) > refCanevas->height()) {
-		return true;
-	}
-	return false;
+	
+	return ((int)x - (int)r) < 0 || ((int)x + (int)r) >= (int)refCanevas->width() || ((int)y - (int)r) < 0 || ((int)y + (int)r) >= (int)refCanevas->height();
+
 }
 
 
