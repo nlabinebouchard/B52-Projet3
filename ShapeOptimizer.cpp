@@ -3,13 +3,27 @@
 #include "Console\ConsoleContext.h"
 #include "Console\ConsoleKeyFilterDown.h"
 #include "Console\ConsoleKeyFilterModifiers.h"
+
 #include "CrossoverChromoSinglePoint.h"
 #include "CrossoverGeneSinglePoint.h"
+
 #include "MutatorChromo.h"
 #include "MutatorGene.h"
+#include "MutatorInversionChromo.h"
+#include "MutatorInversionGene.h"
+#include "MutatorScrambleChromo.h"
+#include "MutatorScrambleGene.h"
+#include "MutatorSwapChromo.h"
 #include "MutatorSwapGene.h"
+#include "MutatorGeneLeastSignificant.h"
+#include "MutatorExtreme.h"
+#include "MutatorUltime.h"
+
 #include "SelectorRouletteWheel.h"
 #include "SelectorTournament.h"
+#include "SelectorRankwise.h"
+#include "SelectorUniform.h"
+
 #include "CircleSolution.h"
 #include "OrthoRectSolution.h"
 
@@ -75,7 +89,9 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 	bool start{ false };
 	bool affichageObs{ true };
 	size_t etatSolution{ 1 };
-
+	size_t pressedCrossover{};
+	size_t pressedMutator{};
+	size_t pressedSelector{};
 
 	std::vector<Obstacle> const &vectObstacle{ canvas.obstacles() };
 
@@ -191,7 +207,33 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 					mEngine = GAEngine();
 					mEngine.setup(GAparam);
 					ShapeOptimizer::evolution(curReader, curWriter, keys, canvas); // barre d'espace // debute l'évolution
-
+					break;
+				case 'h':	//Changement CrossOver
+					if (pressedCrossover >= 2) {
+						pressedCrossover = 0;
+					}
+					else {
+						++pressedCrossover;
+					}
+					////changeCrossover(GAparam, pressedCrossover);	//toute casse quand je le mets et je ne comprends pas pk...Charles
+					break;
+				case 'k':	//Chagement Mutator
+					if (pressedMutator >= 11) {
+						pressedMutator = 0;
+					}
+					else {
+						++pressedMutator;
+					}
+					changeMutator(GAparam, pressedMutator);
+					break;
+				case 'l':	//Changement Selector
+					if (pressedSelector >= 4) {
+						pressedSelector = 0;
+					}
+					else {
+						++pressedSelector;
+					}
+					changeSelector(GAparam, pressedSelector);
 					break;
 				}
 			}
@@ -300,6 +342,97 @@ void ShapeOptimizer::afficherObstacle(ConsoleWriter & curWriter,Canevas &canvas,
 		}
 	}
 }
+
+void ShapeOptimizer::changeCrossover(GAParameters GAEparam, size_t pressed)
+{
+	delete GAEparam.crossover;
+
+	switch (pressed) {
+	case 0:
+		GAEparam.crossover = new CrossoverChromoSinglePoint;
+		break;
+	case 1:
+		GAEparam.crossover = new CrossoverGeneSinglePoint;
+		break;
+	}
+}
+
+void ShapeOptimizer::changeMutator(GAParameters GAEparam, size_t pressed)
+{
+	delete GAEparam.mutator;
+
+	switch (pressed){
+		case 0:
+			GAEparam.mutator = new MutatorChromo;
+			break;
+		case 1:
+			GAEparam.mutator = new MutatorGene;
+			break;
+		case 2:
+			GAEparam.mutator = new MutatorInversionChromo;
+			break;
+		case 3:
+			GAEparam.mutator = new MutatorInversionGene;
+			break;
+		case 4:
+			GAEparam.mutator = new MutatorScrambleChromo;
+			break;
+		case 5:
+			GAEparam.mutator = new MutatorScrambleGene;
+			break;
+		case 6:
+			GAEparam.mutator = new MutatorSwapChromo;
+			break;
+		case 7:
+			GAEparam.mutator = new MutatorSwapChromo;
+			break;
+		case 8:
+			GAEparam.mutator = new MutatorGeneLeastSignificant;
+			break;
+		case 9:
+			GAEparam.mutator = new MutatorExtreme;
+			
+			//Faire dinamic cast
+
+			// Faire l'ajout des mutator ici
+			//GAEparam.mutator.add(MutatorGene, 10);
+			//GAEparam.mutator.add(MutatorSwapChromo, 3);
+			//GAEparam.mutator.add(MutatorInversionGene, 6);
+			//GAEparam.mutator.add(MutatorScrambleGene, 8);
+			break;
+		case 10:
+			GAEparam.mutator = new MutatorUltime;
+			//Faire dinamic cast
+
+			// Faire l'ajout des mutator ici
+			//GAEparam.mutator.add(MutatorGene);
+			//GAEparam.mutator.add(MutatorSwapChromo);
+			//GAEparam.mutator.add(MutatorInversionGene);
+			//GAEparam.mutator.add(MutatorScrambleGene);
+			break;
+	}
+}
+
+void ShapeOptimizer::changeSelector(GAParameters GAEparam, size_t pressed)
+{
+	delete GAEparam.selector;
+	switch (pressed) {
+		case 0:
+			GAEparam.selector = new SelectorRouletteWheel;
+			break;
+		case 1:
+			GAEparam.selector = new SelectorRankwise;
+			break;
+		case 2:
+			GAEparam.selector = new SelectorTournament;
+			break;
+		case 3:
+			GAEparam.selector = new SelectorUniform;
+			break;
+	}
+}
+
+
 
 
 int main()
