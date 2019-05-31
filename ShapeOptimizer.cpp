@@ -20,6 +20,12 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 	SOParams.width = 400;
 	SOParams.obstacleCount = 1;
 	// Params du Genetic algorithm engine
+	setupMidRun(GAParams);
+
+}
+
+void ShapeOptimizer::setupMidRun(GAParameters & GAParams)
+{
 	GAParams.convergenceRate = 10;
 	GAParams.crossover = new CrossoverChromoSinglePoint;
 	GAParams.elitismSize = 2;
@@ -30,20 +36,17 @@ void ShapeOptimizer::setup(SOParameters & SOParams, GAParameters & GAParams)
 	GAParams.populationCount = 1;
 	GAParams.populationSize = 10;
 	GAParams.selector = new SelectorTournament;
-
 	GAParams.solutionSample = new CircleSolution(&mCanvas);
 	//GAParams.solutionSample = new OrthoRectSolution(&mCanvas);
+
 
 }
 
 
 void ShapeOptimizer::run()
 {
-	//Canevas canvas;
-	//GAEngine engine;
 	SOParameters SOparams;
 	GAParameters GAparam;
-	//ShapeOptimizer main;
 
 	setup(SOparams, GAparam);
 
@@ -58,8 +61,6 @@ void ShapeOptimizer::run()
 
 	curWriter.createImage("Forme");
 
-	bool start{ false };
-
 	ConsoleKeyReader::KeyEvents keys;
 	ConsoleKeyReader &curReader{ Console::getInstance().keyReader() };
 	curReader.installFilter(new ConsoleKeyFilterDown);
@@ -73,16 +74,18 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 {
 	bool start{ false };
 	bool affichageObs{ true };
+	size_t etatSolution{ 1 };
+
 
 	std::vector<Obstacle> const &vectObstacle{ canvas.obstacles() };
 
+	GAParameters GAparam;
+
+	setupMidRun(GAparam);
+
 	//Affichage de base
 	afficherObstacle(curWriter, canvas, affichageObs);
-	for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
-		for (size_t j{ 0 }; j < mEngine.population(i).size(); ++j) {
-			static_cast<ShapeSolution const &>(mEngine.population(i)[j]).draw(curWriter);
-		}
-	}
+	afficherSolution(curWriter, canvas, etatSolution);
 
 	while (start != true)
 	{ 
@@ -149,32 +152,51 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 
 					break;
 				case '1':	// Détermine le nombre de population
-
+					GAparam.populationCount = 1;
 					break; 
 				case '2':	// Détermine le nombre de population:
-
+					GAparam.populationCount = 2;
 					break;
 				case '3':	// Détermine le nombre de population:
-
+					GAparam.populationCount = 3;
 					break;
 				case '4':	// Détermine le nombre de population:
-
+					GAparam.populationCount = 4;
 					break;
 				case 'a':	// bascule forme a traiter ( cercle - rectangle - polygone)
+					
+					if (dynamic_cast<CircleSolution const *>(GAparam.solutionSample))
+					{
+						delete GAparam.solutionSample;
+						GAparam.solutionSample =  new OrthoRectSolution(&mCanvas);
+					}
+					else if (dynamic_cast<OrthoRectSolution const *>(GAparam.solutionSample))
+					{
+						//placeholder for solution
+						delete GAparam.solutionSample;
+						GAparam.solutionSample = new CircleSolution(&mCanvas);
+					}
+					else {
+						delete GAparam.solutionSample;
+						GAparam.solutionSample = new CircleSolution(&mCanvas);
+					}
+
 					break;
 				case 'z':	// bascule obstacle entre 0 et tous
+					start = false;
 					break;
 				case 'x':	// cache ou affiche la forme géométrique
 					break;
-				case 32: ShapeOptimizer::evolution(curReader, curWriter, keys, canvas); // barre d'espace // debute l'évolution
-					
+				case 32: 
+					mEngine = GAEngine();
+					mEngine.setup(GAparam);
+					ShapeOptimizer::evolution(curReader, curWriter, keys, canvas); // barre d'espace // debute l'évolution
+
 					break;
 				}
 			}
 		}
 
-		
-		//curWriter.createImage("Forme").drawRect(5 + keyPressed.keyA(), 5 + keyPressed.keyA(), 10, 10, ' ', ConsoleColor::bR);
 		curWriter.write("Forme"); // affiche l'image
 		
 	}
@@ -213,31 +235,12 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 				case 'x': // Bascule l'affichage des solution ( aucune - toutes - la meilleurs).
 					++etatSolution;
 					if (etatSolution == 3) { etatSolution = 0; }
-					ShapeOptimizer::afficherSolution(curWriter, canvas, etatSolution);
-					break;
-				case 'k':
-					++a;
 					break;
 				case 27: 
 					ShapeOptimizer::accueil(curReader, curWriter, keys,canvas);
 					break;
 				case 32: // barre d'espace // met sur pause
 					enPause = !enPause;
-					break;
-				case 't':	//Changement de CrossOver
-					//GAParams.crossover = new CrossoverChromoSinglePoint;
-					//GAParams.crossover = new CrossoverGeneSinglePoint;
-					break;
-				case 'g':	//Changement de Mutator
-					//GAParams.mutator = new MutatorChromo;
-					//GAParams.mutator = new MutatorSwapGene;
-
-					break;
-				case 'h':	//Changement de Selector
-					//GAParams.selector = new SelectorRouletteWheel;
-					//GAParams.selector = new SelectorUniform;
-					//mEngine.getParameters().selector = new SelectorUniform;
-
 					break;
 				}
 			}
@@ -251,11 +254,7 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 		curWriter.removeImage("Forme");
 		curWriter.createImage("Forme");
 		afficherObstacle(curWriter, canvas, affichageObs);
-		for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
-			for (size_t j{ 0 }; j < mEngine.population(i).size();++j) {
-				static_cast<ShapeSolution const &>(mEngine.population(i)[j]).draw(curWriter);
-			}
-		}
+		afficherSolution(curWriter, canvas, etatSolution);
 
 		curWriter.write("Forme"); // affiche l'image
 	}
@@ -268,13 +267,18 @@ void ShapeOptimizer::afficherSolution(ConsoleWriter & curWriter, Canevas & canva
 	switch (etat)
 	{
 	case 0:
-		curWriter.createImage("Forme").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bk); // a changer pour une boucle qui passe a travers la population pou rfaire afficher les solution avec la methode draw dans les obj
 		break;
 	case 1:
-		curWriter.createImage("Forme").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bR);
+		for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
+			for (size_t j{ 0 }; j < mEngine.population(i).size(); ++j) {
+				static_cast<ShapeSolution const &>(mEngine.population(i)[j]).draw(curWriter);
+			}
+		}
 		break;
 	case 2:
-		curWriter.createImage("Forme").drawRect(5, 5, 10, 10, ' ', ConsoleColor::bC);
+		for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
+			static_cast<ShapeSolution const &>(mEngine.population(i)[0]).draw(curWriter);
+		}
 		break;
 	}
 }
