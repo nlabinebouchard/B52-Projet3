@@ -11,16 +11,16 @@ void MutatorGeneLeastSignificant::mutate(Solution & offspring)
 
 		for (size_t i{}; i < offspring.chromosome().sizeGene(); ++i) {
 
-			size_t mostSignificant{ offspring.chromosome().readGene(i) };
+			size_t leastSignificant{ offspring.chromosome().readGene(i) };
 			posBit += offspring.chromosome().readGene(i) - 1;
-			if (mostSignificant % 2 == 0) {
-				mostSignificant = mostSignificant / 2;
+			if (leastSignificant % 2 == 0) {
+				leastSignificant = leastSignificant / 2;
 			}
 			else {
-				mostSignificant = (mostSignificant - 1) / 2;
+				leastSignificant = (leastSignificant - 1) / 2;
 			}
 
-			offspring.chromosome().flip(RandomUtil::randomInRange(lastPosBit + mostSignificant, posBit));
+			offspring.chromosome().flip(RandomUtil::randomInRange(lastPosBit + leastSignificant, posBit));
 			++posBit;
 			lastPosBit = posBit;
 		}
