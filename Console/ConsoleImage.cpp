@@ -15,7 +15,7 @@ ConsoleImage::ConsoleImage(ConsoleWriter & consoleWriter, char outputChar, Conso
 	mBuffer(mConsoleWriter.mConsole.mBufferLinearSize)
 {
 	if (mConsoleWriter.mConsole.mBufferLinearSize == 0) {
-		throw std::invalid_argument("Invalid argument in ConsoleImage::ConsoleImage : console must be initialized.");
+		//throw std::invalid_argument("Invalid argument in ConsoleImage::ConsoleImage : console must be initialized.");
 	}
 	fill(outputChar, color);
 }

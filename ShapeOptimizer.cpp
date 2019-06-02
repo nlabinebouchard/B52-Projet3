@@ -121,10 +121,10 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 					if (vectObstacle.size() <= 245){
 						canvas.setObstacleCount(vectObstacle.size() + 10);
 					}
-					for (size_t i{ vectObstacle.size()-10 }; i < vectObstacle.size(); ++i)
-					{
-						curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bW);
-					}
+					//for (size_t i{ vectObstacle.size()-10 }; i < vectObstacle.size(); ++i)
+					//{
+					//	curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bW);
+					//}
 					break;
 
 
@@ -136,10 +136,10 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 					curWriter.removeImage("Forme");
 					curWriter.createImage("Forme");
 
-					for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
-					{
-						curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bW);
-					}
+					//for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
+					//{
+					//	curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bW);
+					//}
 
 					for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
 						for (size_t j{ 0 }; j < mEngine.population(i).size(); ++j) {
@@ -155,10 +155,11 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 					curWriter.removeImage("Forme");
 					curWriter.createImage("Forme");
 
-					for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
-					{
-						curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bW);
-					}
+					// call fonction apres switch
+					//for (size_t i{ 0 }; i < vectObstacle.size(); ++i)
+					//{
+					//	curWriter.image("Forme").drawPoint(vectObstacle[i].posX(), vectObstacle[i].posY(), ' ', ConsoleColor::bW);
+					//}
 
 					for (size_t i{ 0 }; i < mEngine.getParameters().populationCount; ++i) {
 						for (size_t j{ 0 }; j < mEngine.population(i).size(); ++j) {
@@ -188,20 +189,25 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 					}
 					else if (dynamic_cast<OrthoRectSolution const *>(GAparam.solutionSample))
 					{
-						//placeholder for solution
+						//placeholder for polygone
 						delete GAparam.solutionSample;
 						GAparam.solutionSample = new CircleSolution(&mCanvas);
 					}
-					else {
+					else { // if (dynamic_cast<PolygoneSolution const *>(GAparam.solutionSample))
 						delete GAparam.solutionSample;
 						GAparam.solutionSample = new CircleSolution(&mCanvas);
 					}
 
 					break;
-				case 'z':	// bascule obstacle entre 0 et tous
-					start = false;
+				case 'z':	// bascule obstacle entre affichage 0 et tous
+					
+					affichageObs = !affichageObs;
+
 					break;
 				case 'x':	// cache ou affiche la forme géométrique
+
+					etatSolution = !etatSolution;
+
 					break;
 				case 32: 
 					mEngine = GAEngine();
@@ -238,8 +244,9 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 				}
 			}
 		}
-
-		curWriter.write("Forme"); // affiche l'image
+		afficherObstacle(curWriter, canvas, affichageObs);
+		afficherSolution(curWriter, canvas, etatSolution);
+		//curWriter.write("Forme"); // affiche l'image
 		
 	}
 }
@@ -250,7 +257,6 @@ void ShapeOptimizer::evolution(ConsoleKeyReader & curReader, ConsoleWriter & cur
 	bool affichageObs{ true };
 	bool enPause{ false };
 	size_t etatSolution{ 1 };
-	int a{};
 
 	while (start != true)
 	{
