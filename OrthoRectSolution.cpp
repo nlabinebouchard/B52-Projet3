@@ -13,9 +13,9 @@ OrthoRectSolution::OrthoRectSolution(Canevas * ref)
 	mChromosome.writeData(encode());
 }
 
-double OrthoRectSolution::area() const { return width*heigth; }
+double OrthoRectSolution::area() const { return static_cast<double>(width*heigth); }
 
-double OrthoRectSolution::perimeter() const { return 2*width+2*heigth; }
+double OrthoRectSolution::perimeter() const { return static_cast<double>( 2 * width) + static_cast<double>(2 * heigth); }
 
 double OrthoRectSolution::distance(Obstacle const & obs) const
 {
@@ -74,7 +74,7 @@ bool OrthoRectSolution::collide(Obstacle const & obs) const
 
 void OrthoRectSolution::draw(ConsoleWriter &curWriter) const
 {
-	curWriter.image("Forme").drawRect(x, y, (int)width, heigth, ' ', ConsoleColor::bC);
+	curWriter.image("Forme").drawRect(static_cast<int>(x), static_cast<int>(y), static_cast<int>(width), static_cast<int>(heigth), ' ', ConsoleColor::bC);
 	
 }
 

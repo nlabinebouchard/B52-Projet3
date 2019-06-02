@@ -24,8 +24,8 @@ double CircleSolution::perimeter() const
 
 double CircleSolution::distance(Obstacle const & obs) const
 {
-	int calc1 = obs.posX() - x;
-	int calc2 = obs.posY() - y;
+	int calc1 = obs.posX() - static_cast<int>(x);
+	int calc2 = obs.posY() - static_cast<int>(y);
 
 	double dist = sqrt(pow(calc1, 2) + pow(calc2, 2));
 
@@ -49,7 +49,7 @@ bool CircleSolution::collide(Obstacle const & obs) const
 
 void CircleSolution::draw(ConsoleWriter &curWriter) const
 {
-	curWriter.image("Forme").drawCircle(x, y, r,' ', ConsoleColor::bC);
+	curWriter.image("Forme").drawCircle(static_cast<int>(x), static_cast<int>(y), static_cast<int>(r),' ', ConsoleColor::bC);
 }
 
 std::vector<bool> CircleSolution::encode()
