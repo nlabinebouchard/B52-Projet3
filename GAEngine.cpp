@@ -36,30 +36,28 @@ void GAEngine::evolve() {//retourner un bool pour savoir que le evolve est finit
 	if (mParameters.maximumGenerationCount >= mEpoch)
 	{
 
-
 		mPopEngIt = mPopulationEngines.begin();
 		size_t indice = 0;
 
 		while (mPopEngIt!=mPopulationEngines.end())
 		{
-			//condition if pour ne pas faire le evolve si la converge d'une pop est atteinte
-
 			mFitnessHistory.insertNewStatistics(indice, mPopEngIt->statistics());
 
-			mPopEngIt->evolve();
+			//condition if pour ne pas faire le evolve si la converge d'une pop est atteinte
+			//if (mFitnessHistory.standardDeviation(mParameters.convergenceEpochNb, indice)>mParameters.convergenceRate)
+			//{
+				mPopEngIt->evolve();
+			//}
+
 
 			++mPopEngIt;
 			++indice;
 		}
-
-
 	
 	}
 
 	++mEpoch;
 
-//vérifier les condtions de sorties pour arrêter de faire les evolve, avec une variable bool
-	//convergencerate, maximumGeneration, 
 }
 
 void GAEngine::setup(GAParameters parameters) {
@@ -91,32 +89,7 @@ void GAEngine::setup(GAParameters parameters) {
 	
 }
 
-void GAEngine::standardDeviation(size_t epochNumber, size_t popEngine)
-{
-	fitness_t mean{0};
-	fitness_t variance{ 0 };
-	fitness_t standardDeviation{ 0 };
-
-
-	for (size_t i = mEpoch; i > mEpoch-epochNumber; i++)
-	{
-		mean+=mFitnessHistory.getStatistics(popEngine, i).maximum;
-	}
-
-	mean /= epochNumber;
-
-	for (size_t i = mEpoch; i > mEpoch - epochNumber; i++)
-	{
-		variance += sqrt(mFitnessHistory.getStatistics(popEngine, i).maximum - mean);
-	}
-
-	standardDeviation = sqrt(variance / epochNumber);
-
-	
-}
-
 GAParameters  const & GAEngine::getParameters() const
 {
 	return mParameters;
 }
-//calcul écart type des maximums de exemple 10 derniers statistics, si le rate de convergence est atteint, on arrête en comparant les écart types

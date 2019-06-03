@@ -15,7 +15,7 @@ PopulationEngine::PopulationEngine()
 {
 }
 
-bool PopulationEngine::isReady() const//à voir!!!!!!!!!!!!!
+bool PopulationEngine::isReady() const  //non utilisé
 {
 	return true;
 }
@@ -25,7 +25,7 @@ size_t PopulationEngine::elitismSize() const
 	return mElitismSize;
 }
 
-const Population & PopulationEngine::population() const //à vérifier pour le const bug pour l'utilisation du mSelector sinon
+const Population & PopulationEngine::population() const 
 {
 	return *mActivePopPointer;
 }
@@ -52,6 +52,8 @@ void PopulationEngine::setPopulation(size_t size, Solution* solutionSample)
 
 	processFitness();
 	processStatistics();
+
+	delete solutionSample;
 }
 
 void PopulationEngine::setSelector(Selector * selector)
@@ -75,7 +77,7 @@ void PopulationEngine::setMutator(Mutator * mutator)
 	mMutator = mutator;
 }
 
-void PopulationEngine::randomize() //randomize active population??
+void PopulationEngine::randomize() 
 {
 	mActivePopPointer->randomize();
 	mNextPopPointer->randomize();
@@ -103,7 +105,6 @@ void PopulationEngine::processElitism()
 	mActivePopPointer->sort();
 	for (size_t i{}; i < mElitismSize; i++)
 	{
-		//(*mNextPopPointer)[i] = (*mActivePopPointer)[i]; ////////////////////////////////
 		(*mNextPopPointer)[i].assign(&(*mActivePopPointer)[i]);
 	}
 

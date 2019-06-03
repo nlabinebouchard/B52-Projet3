@@ -17,4 +17,5 @@
 		Selector * selector;
 		Crossover * crossover;
 		Mutator * mutator;
+		//size_t convergenceEpochNb;
 	};

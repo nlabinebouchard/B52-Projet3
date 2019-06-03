@@ -21,6 +21,8 @@ public:
 
 	void clearHistory(const size_t & popNumber);
 
+	fitness_t standardDeviation(size_t epochNumber, size_t popEngine);
+
 
 private:
 
