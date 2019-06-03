@@ -42,7 +42,8 @@ void GAEngine::evolve() {//retourner un bool pour savoir que le evolve est finit
 
 		while (mPopEngIt!=mPopulationEngines.end())
 		{
-			//rajouter une condition if pour ne pas faire le evolve si la converge d'une pop est atteinte
+			//condition if pour ne pas faire le evolve si la converge d'une pop est atteinte
+
 			mFitnessHistory.insertNewStatistics(indice, mPopEngIt->statistics());
 
 			mPopEngIt->evolve();
@@ -53,11 +54,6 @@ void GAEngine::evolve() {//retourner un bool pour savoir que le evolve est finit
 
 
 	
-	}
-
-	else
-	{
-
 	}
 
 	++mEpoch;
