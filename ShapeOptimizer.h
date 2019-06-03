@@ -34,9 +34,9 @@ private:
 	Canevas mCanvas;
 	GAEngine mEngine;
 
-	void changeCrossover(GAParameters GAEparam, size_t pressed);
-	void changeMutator(GAParameters GAEparam, size_t pressed);
-	void changeSelector(GAParameters GAEparam, size_t pressed);
+	void changeCrossover(GAParameters & GAEparam, size_t pressed);
+	void changeMutator(GAParameters & GAEparam, size_t pressed);
+	void changeSelector(GAParameters & GAEparam, size_t pressed);
 };
 
 #endif // SHAPEOPTIMIZER_H

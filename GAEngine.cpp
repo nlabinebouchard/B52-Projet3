@@ -84,7 +84,7 @@ void GAEngine::setup(GAParameters parameters) {
 	parameters.crossover = nullptr;
 	parameters.mutator = nullptr;
 	parameters.selector = nullptr;
-
+	delete parameters.solutionSample;
 
 	
 }

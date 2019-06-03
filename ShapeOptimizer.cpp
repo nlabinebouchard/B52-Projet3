@@ -201,16 +201,16 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 					ShapeOptimizer::evolution(curReader, curWriter, keys, canvas); // barre d'espace // debute l'évolution
 					break;
 				case 'h':	//Changement CrossOver
-					if (pressedCrossover >= 2) {
+					if (pressedCrossover >= 1) {
 						pressedCrossover = 0;
 					}
 					else {
 						++pressedCrossover;
 					}
-					////changeCrossover(GAparam, pressedCrossover);	//toute casse quand je le mets et je ne comprends pas pk...Charles
+					changeCrossover(GAparam, pressedCrossover);	//toute casse quand je le mets et je ne comprends pas pk...Charles
 					break;
 				case 'k':	//Chagement Mutator
-					if (pressedMutator >= 11) {
+					if (pressedMutator >= 10) {
 						pressedMutator = 0;
 					}
 					else {
@@ -219,7 +219,7 @@ void ShapeOptimizer::accueil(ConsoleKeyReader &curReader,ConsoleWriter &curWrite
 					changeMutator(GAparam, pressedMutator);
 					break;
 				case 'l':	//Changement Selector
-					if (pressedSelector >= 4) {
+					if (pressedSelector >= 3) {
 						pressedSelector = 0;
 					}
 					else {
@@ -335,7 +335,7 @@ void ShapeOptimizer::afficherObstacle(ConsoleWriter & curWriter,Canevas &canvas,
 	}
 }
 
-void ShapeOptimizer::changeCrossover(GAParameters GAEparam, size_t pressed)
+void ShapeOptimizer::changeCrossover(GAParameters & GAEparam, size_t pressed)
 {
 	delete GAEparam.crossover;
 
@@ -349,7 +349,7 @@ void ShapeOptimizer::changeCrossover(GAParameters GAEparam, size_t pressed)
 	}
 }
 
-void ShapeOptimizer::changeMutator(GAParameters GAEparam, size_t pressed)
+void ShapeOptimizer::changeMutator(GAParameters & GAEparam, size_t pressed)
 {
 	delete GAEparam.mutator;
 
@@ -405,7 +405,7 @@ void ShapeOptimizer::changeMutator(GAParameters GAEparam, size_t pressed)
 	}
 }
 
-void ShapeOptimizer::changeSelector(GAParameters GAEparam, size_t pressed)
+void ShapeOptimizer::changeSelector(GAParameters & GAEparam, size_t pressed)
 {
 	delete GAEparam.selector;
 	switch (pressed) {

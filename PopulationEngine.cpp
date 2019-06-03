@@ -53,7 +53,6 @@ void PopulationEngine::setPopulation(size_t size, Solution* solutionSample)
 	processFitness();
 	processStatistics();
 
-	delete solutionSample;
 }
 
 void PopulationEngine::setSelector(Selector * selector)
